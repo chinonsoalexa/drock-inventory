@@ -1,5 +1,5 @@
 // Menu data
-const menuData = [
+const menuCategories = [
   { name: "Drinks", img: "assets/images/food-icon/pos1.png" },
   { name: "Wine", img: "assets/images/food-icon/pos2.png" },
   { name: "Liqueur", img: "assets/images/food-icon/pos3.png" },
@@ -32,15 +32,15 @@ const ITEMS_PER_PAGE = 9;
 const track = document.getElementById("menuTrack");
 
 // Render menu pages
-function renderMenu() {
-  for (let i = 0; i < menuData.length; i += ITEMS_PER_PAGE) {
+function renderCategories() {
+  for (let i = 0; i < menuCategories.length; i += ITEMS_PER_PAGE) {
     const page = document.createElement("div");
     page.className = "menu-page";
 
     const row = document.createElement("div");
     row.className = "row";
 
-    menuData.slice(i, i + ITEMS_PER_PAGE).forEach(item => {
+    menuCategories.slice(i, i + ITEMS_PER_PAGE).forEach(item => {
       row.innerHTML += `
         <div class="col-xl-4 col-lg-4 col-md-6">
           <div class="card">
@@ -67,7 +67,7 @@ function renderMenu() {
   }
 }
 
-renderMenu();
+renderCategories();
 
 // Slider logic
 let currentPage = 0;
@@ -128,6 +128,10 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 });
 
+// Cart data and rendering
+// Cart data and rendering
+// Cart data and rendering
+// Cart data and rendering
 const cartData = [
   {
     id: 1,
@@ -161,56 +165,82 @@ const cartData = [
 const cartContainer = document.getElementById("cartItems");
 const totalItemsEl = document.getElementById("totalItems");
 
+const CART_KEY = "e3_cart";
+
+let cartState = loadCart();
+
+function loadCart() {
+  try {
+    return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+  } catch {
+    return [];
+  }
+}
+
+function saveCart() {
+  localStorage.setItem(CART_KEY, JSON.stringify(cartState));
+}
+
+function addToCart(product) {
+  const existing = cartState.find(i => i.id === product.id);
+
+  if (existing) {
+    existing.qty++;
+  } else {
+    cartState.push({ ...product, qty: 1 });
+  }
+
+  saveCart();
+  renderCart();
+}
+
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".add-to-cart");
+  if (!btn) return;
+
+  const id = Number(btn.dataset.id);
+  const product = menuData.find(p => p.id === id);
+
+  addToCart(product);
+});
+
 function renderCart() {
   cartContainer.innerHTML = "";
 
-  if (cartData.length === 0) {
+  if (!cartState.length) {
     cartContainer.innerHTML = `
       <div class="text-center py-5">
         <i class="ri-shopping-cart-line fs-1 text-muted"></i>
-        <p class="mt-2 text-muted fw-semibold">Your cart is empty</p>
+        <p class="mt-2 fw-semibold text-muted">Your cart is empty</p>
       </div>
     `;
-    renderSummary(); // still update totals
+    renderSummary();
     return;
   }
 
-  cartData.forEach(item => {
+  cartState.forEach(item => {
     cartContainer.innerHTML += `
-      <div class="mt-3 border border-light p-2 rounded" data-id="${item.id}">
-        <div class="d-flex flex-wrap align-items-center gap-3">
-
-          <div class="rounded bg-light avatar-xl d-flex align-items-center justify-content-center">
-            <img src="${item.image}" class="avatar-xl" alt="">
-          </div>
-
+      <div class="mt-3 border rounded p-2" data-id="${item.id}">
+        <div class="d-flex gap-3 align-items-center">
+          <img src="${item.image}" class="avatar-xl rounded bg-light">
           <div>
-            <a href="#!" class="text-dark fs-15 fw-bold">${item.name}</a>
-            <p class="fs-14 my-1">${item.size}</p>
+            <strong>${item.name}</strong>
+            <p class="mb-1">${item.size}</p>
           </div>
 
-          <div class="ms-lg-auto">
-            <div class="input-step border bg-body-secondary p-1 mt-1 rounded d-inline-flex">
-              <button class="minus bg-light border-0 fs-20" data-id="${item.id}">-</button>
-              <input type="number" value="${item.qty}" readonly class="text-center border-0 bg-body-secondary">
-              <button class="plus bg-light border-0 fs-20" data-id="${item.id}">+</button>
-            </div>
+          <div class="ms-auto input-step d-flex">
+            <button class="minus btn btn-light" data-id="${item.id}">-</button>
+            <input value="${item.qty}" readonly class="form-control text-center mx-1">
+            <button class="plus btn btn-light" data-id="${item.id}">+</button>
           </div>
-
         </div>
 
         <hr>
 
-        <div class="d-flex align-items-center justify-content-between px-1">
-          <p class="fw-semibold fs-16 mb-0">
-            $${(item.price * item.qty).toFixed(2)}
-            <small class="text-decoration-line-through text-muted ms-1">
-              $${item.oldPrice.toFixed(2)}
-            </small>
-          </p>
-
-          <button class="btn btn-soft-danger avatar-sm remove-item" data-id="${item.id}">
-            <i class="ri-delete-bin-5-line fs-20"></i>
+        <div class="d-flex justify-content-between">
+          <strong>₦${(item.price * item.qty).toFixed(2)}</strong>
+          <button class="btn btn-soft-danger remove-item" data-id="${item.id}">
+            <i class="ri-delete-bin-5-line"></i>
           </button>
         </div>
       </div>
@@ -219,6 +249,24 @@ function renderCart() {
 
   renderSummary();
 }
+
+document.addEventListener("click", e => {
+  const id = Number(e.target.dataset.id);
+  if (!id) return;
+
+  const item = cartState.find(i => i.id === id);
+  if (!item) return;
+
+  if (e.target.classList.contains("plus")) item.qty++;
+  if (e.target.classList.contains("minus") && item.qty > 1) item.qty--;
+
+  if (e.target.classList.contains("remove-item")) {
+    cartState = cartState.filter(i => i.id !== id);
+  }
+
+  saveCart();
+  renderCart();
+});
 
 const TAX_RATE = 0.125;
 const DELIVERY_FEE = 0;
@@ -245,58 +293,158 @@ function renderSummary() {
     `₦${total.toFixed(2)}`;
 }
 
-document.addEventListener("click", e => {
-  const id = Number(e.target.dataset.id);
-
-  if (e.target.classList.contains("plus")) {
-    const item = cartData.find(i => i.id === id);
-    item.qty++;
-  }
-
-  if (e.target.classList.contains("minus")) {
-    const item = cartData.find(i => i.id === id);
-    if (item.qty > 1) item.qty--;
-  }
-
-  if (e.target.closest(".remove-item")) {
-    cartData = cartData.filter(i => i.id !== id);
-  }
-
-  renderCart();
-});
-
 document.getElementById("cancelCart").addEventListener("click", () => {
-  if (!cartData.length) return;
+  if (!cartState.length) return;
 
-  if (confirm("Are you sure you want to clear the cart?")) {
-    cartData = [];
-    renderCart();
-  }
-});
-
-document.addEventListener("click", e => {
-  const id = Number(e.target.dataset.id);
-
-  // Increase qty
-  if (e.target.classList.contains("plus")) {
-    const item = cartData.find(i => i.id === id);
-    item.qty++;
-    renderCart();
-  }
-
-  // Decrease qty
-  if (e.target.classList.contains("minus")) {
-    const item = cartData.find(i => i.id === id);
-    if (item.qty > 1) item.qty--;
-    renderCart();
-  }
-
-  // Remove item
-  if (e.target.closest(".remove-item")) {
-    const index = cartData.findIndex(i => i.id === id);
-    cartData.splice(index, 1);
+  if (confirm("Clear cart?")) {
+    cartState = [];
+    saveCart();
     renderCart();
   }
 });
 
 renderCart();
+
+const menuData = [
+  {
+    id: 1,
+    name: "Italian Burata Pizza",
+    size: "12-Inch",
+    image: "assets/images/food-icon/pic12.png",
+    rating: 4.3,
+    veg: false,
+    price: 12,
+    oldPrice: 15,
+    badge: "Best Seller"
+  },
+  {
+    id: 2,
+    name: "Shanghai Noodles",
+    size: "Large bowl",
+    image: "assets/images/food-icon/pic13.png",
+    rating: 4.1,
+    veg: true,
+    price: 13,
+    oldPrice: 15
+  },
+  {
+    id: 3,
+    name: "Veg Indian Thali",
+    size: "Single Person",
+    image: "assets/images/food-icon/pic19.png",
+    rating: 4.5,
+    veg: true,
+    price: 14,
+    oldPrice: 15
+  },
+  {
+    id: 4,
+    name: "Meat Tacos",
+    size: "3 tacos",
+    image: "assets/images/food-icon/pic15.png",
+    rating: 4.3,
+    veg: false,
+    price: 15,
+    oldPrice: 17,
+    badge: "Best Seller"
+  },
+  {
+    id: 5,
+    name: "Spaghetti",
+    size: "Large bowl",
+    image: "assets/images/food-icon/pic16.png",
+    rating: 4.2,
+    veg: true,
+    price: 13,
+    oldPrice: 15,
+    badge: "Best Seller"
+  },
+  {
+    id: 6,
+    name: "Chocolate Cake",
+    size: "Single",
+    image: "assets/images/food-icon/pic17.png",
+    rating: 4.2,
+    veg: false,
+    price: 10,
+    oldPrice: 12
+  }
+];
+
+const menuContainer = document.getElementById("menuContainer");
+
+function renderMenu(data) {
+  menuContainer.innerHTML = "";
+
+  data.forEach(item => {
+    menuContainer.innerHTML += `
+      <div class="col-xl-4 col-lg-6 col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="position-relative text-center bg-light">
+              <img src="${item.image}" class="img-fluid rounded" alt="${item.name}">
+
+              ${item.badge ? `
+                <span class="position-absolute top-0 start-0 p-2">
+                  <span class="badge bg-danger fs-11">${item.badge}</span>
+                </span>
+              ` : ""}
+            </div>
+
+            <div class="d-flex align-items-center justify-content-between gap-2 mt-3">
+              <div>
+                <a href="#!" class="text-dark fs-16 fw-semibold">${item.name}</a>
+                <p class="fs-5 fw-normal mb-0">${item.size}</p>
+              </div>
+
+              <div class="text-end">
+                <p class="badge bg-light fs-13 mb-1 text-dark py-1 px-2">
+                  <i class="ri-star-fill text-warning me-1"></i>${item.rating}/5
+                </p>
+                <p class="mb-0">
+                  <i class="ri-circle-fill ${item.veg ? "text-success" : "text-danger"} me-1 fs-12"></i>
+                  ${item.veg ? "Veg" : "Non veg"}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <p class="text-primary mb-1 fs-14">Regular Price</p>
+                <p class="text-dark fw-semibold fs-16 mb-0">
+                  $${item.price.toFixed(2)}
+                  <small class="text-decoration-line-through text-muted ms-1">
+                    $${item.oldPrice.toFixed(2)}
+                  </small>
+                </p>
+              </div>
+
+              <div class="d-flex gap-1">
+                <button class="btn btn-soft-primary avatar-sm add-to-cart" data-id="${item.id}">
+                  <i class="ri-shopping-basket-2-line fs-20"></i>
+                </button>
+                <button class="btn btn-soft-danger avatar-sm">
+                  <i class="ri-heart-2-line fs-20"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+renderMenu(menuData);
+
+document.addEventListener("click", e => {
+  if (e.target.closest(".add-to-cart")) {
+    const id = Number(e.target.closest(".add-to-cart").dataset.id);
+    const product = menuData.find(p => p.id === id);
+
+    console.log("Add to cart:", product);
+    // integrate with your cartData here
+  }
+});

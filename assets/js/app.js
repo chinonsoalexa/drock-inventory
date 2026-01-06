@@ -1,6 +1,6 @@
 /**
 * Theme: Metor- Responsive Bootstrap 5 Admin Dashboard
-* Author: FoxPixel
+* Author:E3
 * Module/App: Main Js
 **/
 
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
 });
 /**
 * Theme: Metor- Responsive Bootstrap 5 Admin Dashboard
-* Author: FoxPixel
+* Author:E3
 * Module/App: Theme Layout Customizer Js
 */
 
