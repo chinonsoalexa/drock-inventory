@@ -272,13 +272,13 @@ const TAX_RATE = 0.125;
 const DELIVERY_FEE = 0;
 
 function renderSummary() {
-  const totalItems = cartData.reduce((sum, i) => sum + i.qty, 0);
-  const subtotal = cartData.reduce((sum, i) => sum + i.price * i.qty, 0);
+  const items = cartState.reduce((s, i) => s + i.qty, 0);
+  const subtotal = cartState.reduce((s, i) => s + i.price * i.qty, 0);
   const tax = subtotal * TAX_RATE;
   const total = subtotal + tax + DELIVERY_FEE;
 
   document.getElementById("summary-items").textContent =
-    `${totalItems} Item${totalItems !== 1 ? "s" : ""}`;
+    `${items} Item${items !== 1 ? "s" : ""}`;
 
   document.getElementById("summary-subtotal").textContent =
     `₦${subtotal.toFixed(2)}`;
