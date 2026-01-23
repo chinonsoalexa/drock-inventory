@@ -2878,6 +2878,7 @@ async function addToCart(product) {
 
   // 3️⃣ Update the “Added: X” badge live
   updateAddedQty(product.id);
+  updateCartItemPrice(product.id);
 
   // 4️⃣ Update the cart sidebar UI
   renderCart();
@@ -2936,7 +2937,9 @@ function renderCart() {
         <hr>
 
         <div class="d-flex justify-content-between">
-          <strong>${formatNumberToNaira((item.price * item.qty))}</strong>
+          <strong class="cart-item-price" data-id="${item.id}">
+            ${formatNumberToNaira(item.price * item.qty)}
+          </strong>
           <button class="btn btn-soft-danger remove-item" data-id="${item.id}">
             <i class="ri-delete-bin-5-line"></i>
           </button>
@@ -2954,27 +2957,48 @@ document.addEventListener("click", e => {
 
   const item = cartState.find(i => i.id === id);
 
-  // Remove item
   if (e.target.classList.contains("remove-item")) {
     cartState = cartState.filter(i => i.id !== id);
+    saveCart();
+    renderCart();
+    return;
   }
 
-  // Adjust quantity
-  if (item) {
-    if (e.target.classList.contains("plus")) item.qty++;
-    if (e.target.classList.contains("minus") && item.qty > 1) item.qty--;
-  }
+  if (!item) return;
 
-  // 1️⃣ Save cart after updating state
+  if (e.target.classList.contains("plus")) item.qty++;
+  if (e.target.classList.contains("minus") && item.qty > 1) item.qty--;
+
   saveCart();
-
-  // 2️⃣ Update the badge for this product only
   updateAddedQty(id);
+  updateCartItemPrice(id);
 
-  // 3️⃣ Re-render cart sidebar
-  renderCart();
+  // Update input value directly without re-rendering
+  const input = document.querySelector(`.cart-qty-input[data-id="${id}"]`);
+  if (input) input.value = item.qty;
+
+  renderSummary(); // update totals
 });
 
+document.addEventListener("input", e => {
+  const input = e.target.closest(".cart-qty-input");
+  if (!input) return;
+
+  const id = Number(input.dataset.id);
+  let value = parseInt(input.value);
+
+  if (isNaN(value) || value < 1) value = 1;
+
+  const item = cartState.find(i => i.id === id);
+  if (!item) return;
+
+  item.qty = value;
+
+  saveCart();
+  updateAddedQty(id); // update "Added: X" badge
+  renderSummary();    // update total items & totals
+  updateCartItemPrice(id);
+});
 
 const TAX_RATE = 0.125;
 const DELIVERY_FEE = 0;
@@ -3016,6 +3040,19 @@ function formatNumberToNaira(number) {
     }).format(number);
 }
 
+function updateCartItemPrice(id) {
+  const item = cartState.find(i => i.id === id);
+  if (!item) return;
+
+  const priceEl = document.querySelector(
+    `.cart-item-price[data-id="${id}"]`
+  );
+
+  if (priceEl) {
+    priceEl.textContent = formatNumberToNaira(item.price * item.qty);
+  }
+}
+
 function updateAddedQty(productId) {
   // Loop through all rendered cards
   document.querySelectorAll('.card[data-id]').forEach(card => {
@@ -3027,12 +3064,13 @@ function updateAddedQty(productId) {
 
     if (cartItem) {
       qtyEl.textContent = `Added: ${cartItem.qty}`;
+      // 🔥 update item price
+      updateCartItemPrice(cartItem.id);
     } else {
       qtyEl.textContent = ''; // hide if removed
     }
   });
 }
-
 
 function renderMenu(products, category = "all", reset = false) {
   // 1️⃣ Filter by category
