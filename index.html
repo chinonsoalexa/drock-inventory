@@ -40,6 +40,23 @@
                cursor: pointer;
                user-select: none;
           }
+
+          #view-more-btn {
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            background: #2b55ff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        #view-more-btn:hover {
+            background: #b2925b;
+            transform: translateY(-2px);
+        }
      </style>
 </head>
 
@@ -360,21 +377,9 @@
                                    <!-- Menu items will be dynamically inserted here -->
                               </div>
 
-                              <div class="mb-3">
-                                   <nav aria-label="Page navigation example">
-                                        <ul class="pagination justify-content-end mb-0">
-                                             <li class="page-item"><a class="page-link" href="javascript:void(0);"><i
-                                                            class="ri-arrow-left-s-line"></i></a></li>
-                                             <li class="page-item active"><a class="page-link"
-                                                       href="javascript:void(0);">1</a></li>
-                                             <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a>
-                                             </li>
-                                             <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a>
-                                             </li>
-                                             <li class="page-item"><a class="page-link" href="javascript:void(0);"><i
-                                                            class="ri-arrow-right-s-line"></i></a></li>
-                                        </ul>
-                                   </nav>
+                              <!-- View More button -->
+                              <div class="view-more-container">
+                                   <button id="view-more-btn">View More</button>
                               </div>
                          </div>
                          <div class="col-lg-4">

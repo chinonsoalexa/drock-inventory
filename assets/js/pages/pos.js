@@ -28,350 +28,7 @@ const menuCategories = [
   { name: "Cereals", img: "assets/images/food-icon/pos26.png" },
 ];
 
-const ITEMS_PER_PAGE = 9;
-const track = document.getElementById("menuTrack");
-
-// Render menu pages
-function renderCategories() {
-  for (let i = 0; i < menuCategories.length; i += ITEMS_PER_PAGE) {
-    const page = document.createElement("div");
-    page.className = "menu-page";
-
-    const row = document.createElement("div");
-    row.className = "row";
-
-    menuCategories.slice(i, i + ITEMS_PER_PAGE).forEach(item => {
-      row.innerHTML += `
-        <div class="col-xl-4 col-lg-4 col-md-6">
-          <div class="card">
-            <div class="card-body p-2">
-              <div class="d-flex align-items-center justify-content-between gap-2">
-                <div class="d-flex align-items-center gap-2">
-                  <div class="rounded bg-warning-subtle border avatar d-flex align-items-center justify-content-center">
-                    <img src="${item.img}" alt="">
-                  </div>
-                  <span class="fw-semibold fs-16">${item.name}</span>
-                </div>
-                <a href="#!" class="menu-eye" data-name="${item.name}">
-                  <i class="ri-eye-line fs-16"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-    });
-
-    page.appendChild(row);
-    track.appendChild(page);
-  }
-}
-
-renderCategories();
-
-// Slider logic
-let currentPage = 0;
-const pages = document.querySelectorAll(".menu-page");
-
-function updateSlide() {
-  track.style.transform = `translateX(-${currentPage * 100}%)`;
-}
-
-// Arrow buttons
-document.getElementById("nextBtn").addEventListener("click", () => {
-  if (currentPage < pages.length - 1) {
-    currentPage++;
-    updateSlide();
-  }
-});
-
-document.getElementById("prevBtn").addEventListener("click", () => {
-  if (currentPage > 0) {
-    currentPage--;
-    updateSlide();
-  }
-});
-
-// Eye click event
-document.addEventListener("click", e => {
-  const eye = e.target.closest(".menu-eye");
-  if (!eye) return;
-
-  const name = eye.dataset.name;
-  console.log("Clicked:", name);
-
-  // Example API call
-  // fetch(`/api/menu?category=${encodeURIComponent(name)}`)
-  //   .then(res => res.json())
-  //   .then(data => console.log(data));
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-    var e = document.querySelectorAll(".plus"),
-        n = document.querySelectorAll(".minus");
-
-    function i(e, n) {
-        var i = 1 === n ? e.previousElementSibling : e.nextElementSibling,
-            t = parseInt(i.value),
-            s = parseInt(i.min),
-            e = parseInt(i.max);
-        s <= (n = t + n) && n <= e && (i.value = n)
-    }
-    e.forEach(function(e) {
-        e.addEventListener("click", function() {
-            i(e, 1)
-        })
-    }), n.forEach(function(e) {
-        e.addEventListener("click", function() {
-            i(e, -1)
-        })
-    })
-});
-
-// Cart data and rendering
-// Cart data and rendering
-// Cart data and rendering
-// Cart data and rendering
-// const cartData = [
-//   {
-//     id: 1,
-//     name: "Italian Burata Pizza",
-//     size: "12-Inch",
-//     image: "assets/images/food-icon/pic12.png",
-//     price: 12,
-//     oldPrice: 15,
-//     qty: 1
-//   },
-//   {
-//     id: 2,
-//     name: "Meat Tacos",
-//     size: "3 tacos",
-//     image: "assets/images/food-icon/pic15.png",
-//     price: 30,
-//     oldPrice: 34,
-//     qty: 2
-//   },
-//   {
-//     id: 3,
-//     name: "Veg Indian Thali",
-//     size: "Single Person",
-//     image: "assets/images/food-icon/pic19.png",
-//     price: 38,
-//     oldPrice: 30,
-//     qty: 2
-//   }
-// ];
-
-const cartContainer = document.getElementById("cartItems");
-const totalItemsEl = document.getElementById("totalItems");
-
-const CART_KEY = "e3_cart";
-
-let cartState = loadCart();
-
-function loadCart() {
-  try {
-    return JSON.parse(localStorage.getItem(CART_KEY)) || [];
-  } catch {
-    return [];
-  }
-}
-
-function saveCart() {
-  localStorage.setItem(CART_KEY, JSON.stringify(cartState));
-}
-
-function addToCart(product) {
-  const existing = cartState.find(i => i.id === product.id);
-
-  if (existing) {
-    existing.qty++;
-  } else {
-    cartState.push({ ...product, qty: 1 });
-  }
-
-  saveCart();
-  renderCart();
-}
-
-document.addEventListener("click", e => {
-  const btn = e.target.closest(".add-to-cart");
-  if (!btn) return;
-
-  const id = Number(btn.dataset.id);
-  const product = menuData.find(p => p.id === id);
-
-  addToCart(product);
-});
-
-function renderCart() {
-  cartContainer.innerHTML = "";
-
-  if (!cartState.length) {
-    cartContainer.innerHTML = `
-      <div class="text-center py-5">
-        <i class="ri-shopping-cart-line fs-1 text-muted"></i>
-        <p class="mt-2 fw-semibold text-muted">Your cart is empty</p>
-      </div>
-    `;
-    renderSummary();
-    return;
-  }
-
-  cartState.forEach(item => {
-    cartContainer.innerHTML += `
-      <div class="mt-3 border rounded p-2" data-id="${item.id}">
-        <div class="d-flex gap-3 align-items-center">
-          <img src="${item.image}" class="avatar-xl rounded bg-light">
-          <div>
-            <strong>${item.name}</strong>
-            <p class="mb-1">${item.size}</p>
-          </div>
-
-          <div class="ms-auto input-step d-flex">
-            <button class="minus btn btn-light" data-id="${item.id}">-</button>
-            <input value="${item.qty}" readonly class="form-control text-center mx-1">
-            <button class="plus btn btn-light" data-id="${item.id}">+</button>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="d-flex justify-content-between">
-          <strong>₦${(item.price * item.qty).toFixed(2)}</strong>
-          <button class="btn btn-soft-danger remove-item" data-id="${item.id}">
-            <i class="ri-delete-bin-5-line"></i>
-          </button>
-        </div>
-      </div>
-    `;
-  });
-
-  renderSummary();
-}
-
-document.addEventListener("click", e => {
-  const id = Number(e.target.dataset.id);
-  if (!id) return;
-
-  const item = cartState.find(i => i.id === id);
-  if (!item) return;
-
-  if (e.target.classList.contains("plus")) item.qty++;
-  if (e.target.classList.contains("minus") && item.qty > 1) item.qty--;
-
-  if (e.target.classList.contains("remove-item")) {
-    cartState = cartState.filter(i => i.id !== id);
-  }
-
-  saveCart();
-  renderCart();
-});
-
-const TAX_RATE = 0.125;
-const DELIVERY_FEE = 0;
-
-function renderSummary() {
-  const items = cartState.reduce((s, i) => s + i.qty, 0);
-  const subtotal = cartState.reduce((s, i) => s + i.price * i.qty, 0);
-  const tax = subtotal * TAX_RATE;
-  const total = subtotal + tax + DELIVERY_FEE;
-
-  document.getElementById("summary-items").textContent =
-    `${items} Item${items !== 1 ? "s" : ""}`;
-
-  document.getElementById("summary-subtotal").textContent =
-    `₦${subtotal.toFixed(2)}`;
-
-  document.getElementById("summary-delivery").textContent =
-    `₦${DELIVERY_FEE.toFixed(2)}`;
-
-  document.getElementById("summary-tax").textContent =
-    `₦${tax.toFixed(2)}`;
-
-  document.getElementById("summary-total").textContent =
-    `₦${total.toFixed(2)}`;
-}
-
-document.getElementById("cancelCart").addEventListener("click", () => {
-  if (!cartState.length) return;
-
-  if (confirm("Clear cart?")) {
-    cartState = [];
-    saveCart();
-    renderCart();
-  }
-});
-
-renderCart();
-
-const productData = [
-  {
-    id: 1,
-    name: "Italian Burata Pizza",
-    size: "12-Inch",
-    image: "assets/images/food-icon/pic12.png",
-    rating: 4.3,
-    veg: false,
-    price: 12,
-    oldPrice: 15,
-    badge: "Best Seller"
-  },
-  {
-    id: 2,
-    name: "Shanghai Noodles",
-    size: "Large bowl",
-    image: "assets/images/food-icon/pic13.png",
-    rating: 4.1,
-    veg: true,
-    price: 13,
-    oldPrice: 15
-  },
-  {
-    id: 3,
-    name: "Veg Indian Thali",
-    size: "Single Person",
-    image: "assets/images/food-icon/pic19.png",
-    rating: 4.5,
-    veg: true,
-    price: 14,
-    oldPrice: 15
-  },
-  {
-    id: 4,
-    name: "Meat Tacos",
-    size: "3 tacos",
-    image: "assets/images/food-icon/pic15.png",
-    rating: 4.3,
-    veg: false,
-    price: 15,
-    oldPrice: 17,
-    badge: "Best Seller"
-  },
-  {
-    id: 5,
-    name: "Spaghetti",
-    size: "Large bowl",
-    image: "assets/images/food-icon/pic16.png",
-    rating: 4.2,
-    veg: true,
-    price: 13,
-    oldPrice: 15,
-    badge: "Best Seller"
-  },
-  {
-    id: 6,
-    name: "Chocolate Cake",
-    size: "Single",
-    image: "assets/images/food-icon/pic17.png",
-    rating: 4.2,
-    veg: false,
-    price: 10,
-    oldPrice: 12
-  }
-];
-
-const menuData = [
+const products = [
   {
     "id": 1,
     "name": "Gizzard Sauce",
@@ -4064,12 +3721,309 @@ const menuData = [
   }
 ]
 
+let currentCategory = "all";
+let productsToShow = [];
+let batchSize = 9; // 3 rows of 3 items
+let lastIndex = 0;
+
+const ITEMS_PER_PAGE = 12;
+const track = document.getElementById("menuTrack");
+
+// Render menu pages
+function renderCategories() {
+  for (let i = 0; i < menuCategories.length; i += ITEMS_PER_PAGE) {
+    const page = document.createElement("div");
+    page.className = "menu-page";
+
+    const row = document.createElement("div");
+    row.className = "row";
+
+    menuCategories.slice(i, i + ITEMS_PER_PAGE).forEach(item => {
+      row.innerHTML += `
+        <div class="col-xl-4 col-lg-4 col-md-6">
+          <div class="card">
+            <div class="card-body p-2">
+              <div class="d-flex align-items-center justify-content-between gap-2">
+                <div class="d-flex align-items-center gap-2">
+                  <div class="rounded bg-warning-subtle border avatar d-flex align-items-center justify-content-center">
+                    <img src="${item.img}" alt="">
+                  </div>
+                  <span class="fw-semibold fs-16">${item.name}</span>
+                </div>
+                <a href="#!" class="menu-eye" data-name="${item.name}">
+                  <i class="ri-eye-line fs-16"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    page.appendChild(row);
+    track.appendChild(page);
+  }
+}
+
+renderCategories();
+
+// Slider logic
+let currentPage = 0;
+const pages = document.querySelectorAll(".menu-page");
+
+function updateSlide() {
+  track.style.transform = `translateX(-${currentPage * 100}%)`;
+}
+
+// Arrow buttons
+document.getElementById("nextBtn").addEventListener("click", () => {
+  if (currentPage < pages.length - 1) {
+    currentPage++;
+    updateSlide();
+  }
+});
+
+document.getElementById("prevBtn").addEventListener("click", () => {
+  if (currentPage > 0) {
+    currentPage--;
+    updateSlide();
+  }
+});
+
+// Eye click event
+document.addEventListener("click", e => {
+  const eye = e.target.closest(".menu-eye");
+  if (!eye) return;
+
+  const name = eye.dataset.name;
+  console.log("Clicked:", name);
+  renderMenu(products, name, true);
+
+  // Example API call
+  // fetch(`/api/menu?category=${encodeURIComponent(name)}`)
+  //   .then(res => res.json())
+  //   .then(data => console.log(data));
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    var e = document.querySelectorAll(".plus"),
+        n = document.querySelectorAll(".minus");
+
+    function i(e, n) {
+        var i = 1 === n ? e.previousElementSibling : e.nextElementSibling,
+            t = parseInt(i.value),
+            s = parseInt(i.min),
+            e = parseInt(i.max);
+        s <= (n = t + n) && n <= e && (i.value = n)
+    }
+    e.forEach(function(e) {
+        e.addEventListener("click", function() {
+            i(e, 1)
+        })
+    }), n.forEach(function(e) {
+        e.addEventListener("click", function() {
+            i(e, -1)
+        })
+    })
+});
+
+// Cart data and rendering
+// Cart data and rendering
+// Cart data and rendering
+// Cart data and rendering
+// const cartData = [
+//   {
+//     id: 1,
+//     name: "Italian Burata Pizza",
+//     size: "12-Inch",
+//     image: "assets/images/food-icon/pic12.png",
+//     price: 12,
+//     oldPrice: 15,
+//     qty: 1
+//   },
+//   {
+//     id: 2,
+//     name: "Meat Tacos",
+//     size: "3 tacos",
+//     image: "assets/images/food-icon/pic15.png",
+//     price: 30,
+//     oldPrice: 34,
+//     qty: 2
+//   },
+//   {
+//     id: 3,
+//     name: "Veg Indian Thali",
+//     size: "Single Person",
+//     image: "assets/images/food-icon/pic19.png",
+//     price: 38,
+//     oldPrice: 30,
+//     qty: 2
+//   }
+// ];
+
+const cartContainer = document.getElementById("cartItems");
+const totalItemsEl = document.getElementById("totalItems");
+
+const CART_KEY = "e3_cart";
+
+let cartState = loadCart();
+
+function loadCart() {
+  try {
+    return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+  } catch {
+    return [];
+  }
+}
+
+function saveCart() {
+  localStorage.setItem(CART_KEY, JSON.stringify(cartState));
+}
+
+function addToCart(product) {
+  const existing = cartState.find(i => i.id === product.id);
+
+  if (existing) {
+    existing.qty++;
+  } else {
+    cartState.push({ ...product, qty: 1 });
+  }
+
+  saveCart();
+  renderCart();
+}
+
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".add-to-cart");
+  if (!btn) return;
+
+  const id = Number(btn.dataset.id);
+  const product = menuData.find(p => p.id === id);
+
+  addToCart(product);
+});
+
+function renderCart() {
+  cartContainer.innerHTML = "";
+
+  if (!cartState.length) {
+    cartContainer.innerHTML = `
+      <div class="text-center py-5">
+        <i class="ri-shopping-cart-line fs-1 text-muted"></i>
+        <p class="mt-2 fw-semibold text-muted">Your cart is empty</p>
+      </div>
+    `;
+    renderSummary();
+    return;
+  }
+
+  cartState.forEach(item => {
+    cartContainer.innerHTML += `
+      <div class="mt-3 border rounded p-2" data-id="${item.id}">
+        <div class="d-flex gap-3 align-items-center">
+          <img src="${item.image}" class="avatar-xl rounded bg-light">
+          <div>
+            <strong>${item.name}</strong>
+            <p class="mb-1">${item.size}</p>
+          </div>
+
+          <div class="ms-auto input-step d-flex">
+            <button class="minus btn btn-light" data-id="${item.id}">-</button>
+            <input value="${item.qty}" readonly class="form-control text-center mx-1">
+            <button class="plus btn btn-light" data-id="${item.id}">+</button>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="d-flex justify-content-between">
+          <strong>₦${(item.price * item.qty).toFixed(2)}</strong>
+          <button class="btn btn-soft-danger remove-item" data-id="${item.id}">
+            <i class="ri-delete-bin-5-line"></i>
+          </button>
+        </div>
+      </div>
+    `;
+  });
+
+  renderSummary();
+}
+
+document.addEventListener("click", e => {
+  const id = Number(e.target.dataset.id);
+  if (!id) return;
+
+  const item = cartState.find(i => i.id === id);
+  if (!item) return;
+
+  if (e.target.classList.contains("plus")) item.qty++;
+  if (e.target.classList.contains("minus") && item.qty > 1) item.qty--;
+
+  if (e.target.classList.contains("remove-item")) {
+    cartState = cartState.filter(i => i.id !== id);
+  }
+
+  saveCart();
+  renderCart();
+});
+
+const TAX_RATE = 0.125;
+const DELIVERY_FEE = 0;
+
+function renderSummary() {
+  const items = cartState.reduce((s, i) => s + i.qty, 0);
+  const subtotal = cartState.reduce((s, i) => s + i.price * i.qty, 0);
+  const tax = subtotal * TAX_RATE;
+  const total = subtotal + tax + DELIVERY_FEE;
+
+  document.getElementById("summary-items").textContent =
+    `${items} Item${items !== 1 ? "s" : ""}`;
+
+  document.getElementById("summary-subtotal").textContent =
+    `₦${subtotal.toFixed(2)}`;
+
+  document.getElementById("summary-delivery").textContent =
+    `₦${DELIVERY_FEE.toFixed(2)}`;
+
+  document.getElementById("summary-tax").textContent =
+    `₦${tax.toFixed(2)}`;
+
+  document.getElementById("summary-total").textContent =
+    `₦${total.toFixed(2)}`;
+}
+
+document.getElementById("cancelCart").addEventListener("click", () => {
+  if (!cartState.length) return;
+
+  if (confirm("Clear cart?")) {
+    cartState = [];
+    saveCart();
+    renderCart();
+  }
+});
+
+renderCart();
+
 const menuContainer = document.getElementById("menuContainer");
 
-function renderMenu(data) {
-  menuContainer.innerHTML = "";
+function renderMenu(products, category = "all", reset = false) {
+  // menuContainer.innerHTML = "";
 
-  data.forEach(item => {
+    // Filter by category
+  productsToShow =
+    category === "all"
+      ? products
+      : products.filter(p => p.category === category);
+
+  if (reset) {
+    lastIndex = 0;
+    menuContainer.innerHTML = "";
+  }
+
+  // Get next batch
+  const nextBatch = productsToShow.slice(lastIndex, lastIndex + batchSize);
+
+  nextBatch.forEach(item => {
     menuContainer.innerHTML += `
       <div class="col-xl-4 col-lg-6 col-md-6 mb-4">
         <div class="card h-100">
@@ -4124,9 +4078,21 @@ function renderMenu(data) {
       </div>
     `;
   });
+
+  lastIndex += batchSize;
+
+  // Toggle View More button visibility
+  const btn = document.getElementById("view-more-btn");
+  btn.style.display = lastIndex >= productsToShow.length ? "none" : "inline-block";
 }
 
-renderMenu(menuData);
+// Handle View More button click
+document.getElementById("view-more-btn").addEventListener("click", () => {
+  renderMenu(products, currentCategory, false);
+});
+
+// Initial load
+renderMenu(products, "all", true);
 
 document.addEventListener("click", e => {
   if (e.target.closest(".add-to-cart")) {
