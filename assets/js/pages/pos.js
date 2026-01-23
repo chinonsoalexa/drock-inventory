@@ -3898,7 +3898,7 @@ document.addEventListener("click", e => {
   if (!btn) return;
 
   const id = Number(btn.dataset.id);
-  const product = menuData.find(p => p.id === id);
+  const product = products.find(p => p.id === id);
 
   addToCart(product);
 });
@@ -3924,7 +3924,7 @@ function renderCart() {
           <img src="${item.image}" class="avatar-xl rounded bg-light">
           <div>
             <strong>${item.name}</strong>
-            <p class="mb-1">${item.size}</p>
+            <p class="mb-1">${item.category}</p>
           </div>
 
           <div class="ms-auto input-step d-flex">
@@ -3937,7 +3937,7 @@ function renderCart() {
         <hr>
 
         <div class="d-flex justify-content-between">
-          <strong>₦${(item.price * item.qty).toFixed(2)}</strong>
+          <strong>${formatNumberToNaira((item.price * item.qty))}</strong>
           <button class="btn btn-soft-danger remove-item" data-id="${item.id}">
             <i class="ri-delete-bin-5-line"></i>
           </button>
@@ -4006,6 +4006,14 @@ renderCart();
 
 const menuContainer = document.getElementById("menuContainer");
 
+function formatNumberToNaira(number) {
+    return new Intl.NumberFormat('en-NG', {
+        style: 'currency',
+        currency: 'NGN',
+        minimumFractionDigits: 2
+    }).format(number);
+}
+
 function renderMenu(products, category = "all", reset = false) {
   // menuContainer.innerHTML = "";
 
@@ -4060,7 +4068,7 @@ function renderMenu(products, category = "all", reset = false) {
               <div>
                 <p class="text-primary mb-1 fs-14">Regular Price</p>
                 <p class="text-dark fw-semibold fs-16 mb-0">
-                  ₦${item.price.toFixed(2)}
+                  ${formatNumberToNaira(item.price)}
                 </p>
               </div>
 
@@ -4094,12 +4102,12 @@ document.getElementById("view-more-btn").addEventListener("click", () => {
 // Initial load
 renderMenu(products, "all", true);
 
-document.addEventListener("click", e => {
-  if (e.target.closest(".add-to-cart")) {
-    const id = Number(e.target.closest(".add-to-cart").dataset.id);
-    const product = menuData.find(p => p.id === id);
+// document.addEventListener("click", e => {
+//   if (e.target.closest(".add-to-cart")) {
+//     const id = Number(e.target.closest(".add-to-cart").dataset.id);
+//     const product = products.find(p => p.id === id);
 
-    console.log("Add to cart:", product);
-    // integrate with your cartData here
-  }
-});
+//     console.log("Add to cart:", product);
+//     // integrate with your cartData here
+//   }
+// });
