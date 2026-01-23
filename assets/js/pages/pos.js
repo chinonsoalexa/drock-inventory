@@ -2875,20 +2875,6 @@ async function addToCart(product) {
   saveCart();
   renderCart();
 
-  // 1️⃣ Update the “Added: X” in the product card
-  const card = document.querySelector(`.add-to-cart[data-id="${product.id}"]`)?.closest('.card');
-  if (card) {
-    let addedEl = card.querySelector('.added-qty');
-    if (!addedEl) {
-      addedEl = document.createElement('p');
-      addedEl.className = 'text-success fw-semibold mb-0 added-qty';
-      const priceEl = card.querySelector('.card-footer');
-      priceEl.parentNode.insertBefore(addedEl, priceEl); // place above price/footer
-    }
-    const cartItem = cartState.find(c => c.id === product.id);
-    addedEl.textContent = `Added: ${cartItem.qty}`;
-  }
-
   // Try server sync
   try {
     await uploadCartItem(product);
@@ -2961,41 +2947,19 @@ document.addEventListener("click", e => {
   if (!id) return;
 
   const item = cartState.find(i => i.id === id);
+  if (!item) return;
 
-  // plus/minus buttons
-  if (e.target.classList.contains("plus")) {
-    if (item) item.qty++;
-  }
-  if (e.target.classList.contains("minus")) {
-    if (item && item.qty > 1) item.qty--;
-  }
+if (e.target.classList.contains("plus") || e.target.classList.contains("minus") || e.target.classList.contains("remove-item")) {
+  updateAddedQtyUI(id);
+}
 
-  // remove item
+
   if (e.target.classList.contains("remove-item")) {
     cartState = cartState.filter(i => i.id !== id);
   }
 
   saveCart();
   renderCart();
-
-  // Update menu card “Added: X” live
-  const card = document.querySelector(`.add-to-cart[data-id="${id}"]`)?.closest('.card');
-  if (card) {
-    const addedEl = card.querySelector('.added-qty');
-    const cartItem = cartState.find(c => c.id === id);
-    if (cartItem) {
-      if (addedEl) addedEl.textContent = `Added: ${cartItem.qty}`;
-      else {
-        const newEl = document.createElement('p');
-        newEl.className = 'text-success fw-semibold mb-0 added-qty';
-        newEl.textContent = `Added: ${cartItem.qty}`;
-        const priceEl = card.querySelector('.card-footer');
-        priceEl.parentNode.insertBefore(newEl, priceEl);
-      }
-    } else {
-      if (addedEl) addedEl.remove();
-    }
-  }
 });
 
 const TAX_RATE = 0.125;
@@ -3036,6 +3000,21 @@ function formatNumberToNaira(number) {
         currency: 'NGN',
         minimumFractionDigits: 2
     }).format(number);
+}
+
+function updateAddedQtyUI(productId) {
+  const card = document.querySelector(`.add-to-cart[data-id="${productId}"]`)?.closest('.card');
+  if (!card) return;
+
+  const addedEl = card.querySelector('.added-qty');
+  const cartItem = cartState.find(c => c.id === productId);
+
+  if (cartItem) {
+    addedEl.style.display = 'block';
+    addedEl.textContent = `Added: ${cartItem.qty}`;
+  } else {
+    addedEl.style.display = 'none'; // hide if removed
+  }
 }
 
 function renderMenu(products, category = "all", reset = false) {
@@ -3080,53 +3059,44 @@ function renderMenu(products, category = "all", reset = false) {
   }
 
   // 6️⃣ Render items
-  nextBatch.forEach(item => {
-    const cartItem = cartState.find(c => c.id === item.id);
-    const qtyInCart = cartItem ? cartItem.qty : 0;
+nextBatch.forEach(item => {
+  const qtyInCart = cartState.find(c => c.id === item.id)?.qty || 0;
 
-    menuContainer.innerHTML += `
-      <div class="col-xl-4 col-lg-6 col-md-6 mb-4">
-        <div class="card h-100">
-          
-          <div class="card-body">
-            <div class="menu-image-wrapper position-relative rounded bg-light">
-                <img
-                  src="${item.image}"
-                  alt="${item.name}"
-                  loading="lazy"
-                  class="img-fluid"
-                >
-                ${item.badge ? `
-                  <span class="position-absolute top-0 start-0 p-2">
-                    <span class="badge bg-danger fs-11">${item.badge}</span>
-                  </span>
-                ` : ""}
-            </div>
-
-            <div class="d-flex align-items-center justify-content-between gap-2 mt-3">
-              <div>
-                <a href="#!" class="text-dark fs-16 fw-semibold">
-                  ${highlightMatch(item.name, searchQuery)}
-                </a>
-                <p class="fs-5 fw-normal mb-0">
-                  ${highlightMatch(item.category, searchQuery)}
-                </p>
-                ${qtyInCart ? `<p class="text-success fw-semibold mb-0">Added: ${qtyInCart}</p>` : ""}
-              </div>
-            </div>
+  menuContainer.innerHTML += `
+    <div class="col-xl-4 col-lg-6 col-md-6 mb-4">
+      <div class="card h-100">
+        
+        <div class="card-body">
+          <div class="menu-image-wrapper position-relative rounded bg-light">
+            <img src="${item.image}" alt="${item.name}" loading="lazy">
+            ${item.badge ? `<span class="position-absolute top-0 start-0 p-2"><span class="badge bg-danger fs-11">${item.badge}</span></span>` : ""}
           </div>
 
-          <div class="card-footer d-flex justify-content-between">
-            <span>${formatNumberToNaira(item.price)}</span>
-            <button class="btn btn-soft-primary add-to-cart" data-id="${item.id}">
-              <i class="ri-shopping-basket-2-line"></i>
-            </button>
-          </div>
+          <div class="d-flex align-items-center justify-content-between gap-2 mt-3">
+            <div>
+              <a href="#!" class="text-dark fs-16 fw-semibold">${highlightMatch(item.name, searchQuery)}</a>
+              <p class="fs-5 fw-normal mb-0">${highlightMatch(item.category, searchQuery)}</p>
 
+              <!-- Added quantity -->
+              <p class="text-success fw-semibold mb-0 added-qty" style="display: ${qtyInCart ? 'block' : 'none'}">
+                Added: ${qtyInCart}
+              </p>
+            </div>
+          </div>
         </div>
+
+        <div class="card-footer d-flex justify-content-between">
+          <span>${formatNumberToNaira(item.price)}</span>
+          <button class="btn btn-soft-primary add-to-cart" data-id="${item.id}">
+            <i class="ri-shopping-basket-2-line"></i>
+          </button>
+        </div>
+
       </div>
-    `;
-  });
+    </div>
+  `;
+});
+
 
   lastIndex += batchSize;
 
