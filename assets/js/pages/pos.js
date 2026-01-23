@@ -3278,6 +3278,19 @@ document.addEventListener("DOMContentLoaded", () => {
   startRetryLoop();
 });
 
+const NOTIFICATION_KEY = "notification_permission_asked";
+
+if (
+  "Notification" in window &&
+  Notification.permission === "default" &&
+  !localStorage.getItem(NOTIFICATION_KEY)
+) {
+  Notification.requestPermission().finally(() => {
+    // Mark that we've asked — regardless of yes/no
+    localStorage.setItem(NOTIFICATION_KEY, "true");
+  });
+}
+
 (function () {
   let banner = null;
 
@@ -3326,9 +3339,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Online
   window.addEventListener("online", () => {
-    if ("Notification" in window && Notification.permission === "default") {
-      Notification.requestPermission();
-    }
     playRestoreSound();
 
     showDesktopNotification(
