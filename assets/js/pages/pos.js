@@ -34,14 +34,10 @@ const products = [
     "name": "Gizzard Sauce",
     "price": 5500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_1.jpg"
   },
   {
@@ -49,14 +45,10 @@ const products = [
     "name": "BBQ Chicken",
     "price": 5000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_2.jpg"
   },
   {
@@ -64,14 +56,10 @@ const products = [
     "name": "Steamed veggies",
     "price": 4000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_4.jpg"
   },
   {
@@ -79,14 +67,10 @@ const products = [
     "name": "Tomato Sauce",
     "price": 4000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_5.jpg"
   },
   {
@@ -94,14 +78,10 @@ const products = [
     "name": "Spicy Chicken (Fried)",
     "price": 4000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_6.jpg"
   },
   {
@@ -109,14 +89,10 @@ const products = [
     "name": "Stew (Alone)",
     "price": 3500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_7.jpg"
   },
   {
@@ -124,14 +100,10 @@ const products = [
     "name": "Veggies Sauce",
     "price": 3500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_8.jpg"
   },
   {
@@ -139,14 +111,10 @@ const products = [
     "name": "Chicken Nuggets with Sauce",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Breakfast",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_9.jpg"
   },
   {
@@ -154,14 +122,10 @@ const products = [
     "name": "Chicken Nuggets",
     "price": 6500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Breakfast",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_10.jpg"
   },
   {
@@ -169,14 +133,10 @@ const products = [
     "name": "Scrambled Eggs",
     "price": 3000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Egg Dishes",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_11.jpg"
   },
   {
@@ -184,14 +144,10 @@ const products = [
     "name": "Sauteed potatoes with steamed veggie",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Breakfast",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_12.jpg"
   },
   {
@@ -199,14 +155,10 @@ const products = [
     "name": "Popcorn Chicken",
     "price": 5500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Breakfast",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_13.jpg"
   },
   {
@@ -214,14 +166,10 @@ const products = [
     "name": "Indomie - Plain",
     "price": 5000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Breakfast",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_14.jpg"
   },
   {
@@ -229,14 +177,10 @@ const products = [
     "name": "Chips (French fries)",
     "price": 4500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Breakfast",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_15.jpg"
   },
   {
@@ -244,14 +188,10 @@ const products = [
     "name": "Pancakes",
     "price": 4000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Breakfast",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_16.jpg"
   },
   {
@@ -259,14 +199,10 @@ const products = [
     "name": "Gizzard Dish",
     "price": 3000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Breakfast",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_17.jpg"
   },
   {
@@ -274,14 +210,10 @@ const products = [
     "name": "Boiled or Fried Plantain",
     "price": 3000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Breakfast",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_18.jpg"
   },
   {
@@ -289,14 +221,10 @@ const products = [
     "name": "Boiled Yam",
     "price": 3000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Breakfast",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_19.jpg"
   },
   {
@@ -304,14 +232,10 @@ const products = [
     "name": "Moi Moi",
     "price": 3000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Breakfast",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_20.jpg"
   },
   {
@@ -319,14 +243,10 @@ const products = [
     "name": "Tea, Coffee, Hot Chocolate/Cream",
     "price": 3000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Breakfast",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_21.jpg"
   },
   {
@@ -334,14 +254,10 @@ const products = [
     "name": "Caesar Salad",
     "price": 8000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Coffee",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_22.jpg"
   },
   {
@@ -349,14 +265,10 @@ const products = [
     "name": "Yam Chips",
     "price": 3000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Breakfast",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_23.jpg"
   },
   {
@@ -364,14 +276,10 @@ const products = [
     "name": "Waffles",
     "price": 3000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Breakfast",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_24.jpg"
   },
   {
@@ -379,14 +287,10 @@ const products = [
     "name": "Boiled Potatoes",
     "price": 2500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Breakfast",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_25.jpg"
   },
   {
@@ -394,14 +298,10 @@ const products = [
     "name": "Sliced bread or Dinner roll",
     "price": 1500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Breakfast",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_26.jpg"
   },
   {
@@ -409,14 +309,10 @@ const products = [
     "name": "Croaker fish pepper Soup",
     "price": 1200,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Pepper Soup",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_27.jpg"
   },
   {
@@ -424,14 +320,10 @@ const products = [
     "name": "Fresh Fish Pepper Soup",
     "price": 8500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Pepper Soup",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_28.jpg"
   },
   {
@@ -439,14 +331,10 @@ const products = [
     "name": "Turkey pepper soup",
     "price": 8500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Pepper Soup",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_29.jpg"
   },
   {
@@ -454,14 +342,10 @@ const products = [
     "name": "Dry fish pepper soup",
     "price": 7500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Pepper Soup",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_30.jpg"
   },
   {
@@ -469,14 +353,10 @@ const products = [
     "name": "Assorted meat pepper soup",
     "price": 7000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Pepper Soup",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_31.jpg"
   },
   {
@@ -484,14 +364,10 @@ const products = [
     "name": "Cow leg pepper soup",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Pepper Soup",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_32.jpg"
   },
   {
@@ -499,14 +375,10 @@ const products = [
     "name": "Hawaiian Salad",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Salad",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_33.jpg"
   },
   {
@@ -514,14 +386,10 @@ const products = [
     "name": "Cow Tail Pepper Soup",
     "price": 7000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Pepper Soup",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_34.jpg"
   },
   {
@@ -529,14 +397,10 @@ const products = [
     "name": "Chicken pepper soup",
     "price": 6500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Pepper Soup",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_35.jpg"
   },
   {
@@ -544,14 +408,10 @@ const products = [
     "name": "Stock Fish pepper soup",
     "price": 6500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Pepper Soup",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_36.jpg"
   },
   {
@@ -559,14 +419,10 @@ const products = [
     "name": "Snail pepper soup",
     "price": 6000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Pepper Soup",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_37.jpg"
   },
   {
@@ -574,14 +430,10 @@ const products = [
     "name": "Goat Meat Pepper Soup",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Pepper Soup",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_38.jpg"
   },
   {
@@ -589,14 +441,10 @@ const products = [
     "name": "Dried Fish",
     "price": 3000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Pepper Soup",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_39.jpg"
   },
   {
@@ -604,14 +452,10 @@ const products = [
     "name": "Croaker Fish",
     "price": 20000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_40.jpg"
   },
   {
@@ -619,14 +463,10 @@ const products = [
     "name": "Croaker Fish",
     "price": 9000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_41.jpg"
   },
   {
@@ -634,14 +474,10 @@ const products = [
     "name": "Prawns",
     "price": 9000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_42.jpg"
   },
   {
@@ -649,14 +485,10 @@ const products = [
     "name": "Shredded Beef",
     "price": 9000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_43.jpg"
   },
   {
@@ -664,14 +496,10 @@ const products = [
     "name": "Chicken Salad",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Salad",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_44.jpg"
   },
   {
@@ -679,14 +507,10 @@ const products = [
     "name": "Fresh Fish",
     "price": 8000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_45.jpg"
   },
   {
@@ -694,14 +518,10 @@ const products = [
     "name": "Turkey",
     "price": 8000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_46.jpg"
   },
   {
@@ -709,14 +529,10 @@ const products = [
     "name": "Cow tail",
     "price": 7500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_47.jpg"
   },
   {
@@ -724,14 +540,10 @@ const products = [
     "name": "Cow Leg",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_48.jpg"
   },
   {
@@ -739,14 +551,10 @@ const products = [
     "name": "Dry Fish",
     "price": 7000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_49.jpg"
   },
   {
@@ -754,14 +562,10 @@ const products = [
     "name": "Goat Meat",
     "price": 6500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_50.jpg"
   },
   {
@@ -769,14 +573,10 @@ const products = [
     "name": "Popcorn Chicken",
     "price": 6500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_51.jpg"
   },
   {
@@ -784,14 +584,10 @@ const products = [
     "name": "Curried Chicken",
     "price": 6500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_52.jpg"
   },
   {
@@ -799,14 +595,10 @@ const products = [
     "name": "Assorted Meat",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_53.jpg"
   },
   {
@@ -814,14 +606,10 @@ const products = [
     "name": "Stock Fish",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_54.jpg"
   },
   {
@@ -829,14 +617,10 @@ const products = [
     "name": "E3 Special Salad",
     "price": 7000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Salad",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_55.jpg"
   },
   {
@@ -844,14 +628,10 @@ const products = [
     "name": "Snail",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_56.jpg"
   },
   {
@@ -859,14 +639,10 @@ const products = [
     "name": "Chicken",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_57.jpg"
   },
   {
@@ -874,14 +650,10 @@ const products = [
     "name": "Shrimps",
     "price": 5000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_58.jpg"
   },
   {
@@ -889,14 +661,10 @@ const products = [
     "name": "Beef",
     "price": 5000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Protein",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_59.jpg"
   },
   {
@@ -904,14 +672,10 @@ const products = [
     "name": "ICED CAFFE MOCHA",
     "price": 4000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Soup",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_60.jpg"
   },
   {
@@ -919,14 +683,10 @@ const products = [
     "name": "Fisherman Soup",
     "price": 6500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Soup",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_61.jpg"
   },
   {
@@ -934,14 +694,10 @@ const products = [
     "name": "Bitter Leaf Soup",
     "price": 6500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Soup",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_62.jpg"
   },
   {
@@ -949,14 +705,10 @@ const products = [
     "name": "Banga Soup (Abak)",
     "price": 6500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Soup",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_63.jpg"
   },
   {
@@ -964,14 +716,10 @@ const products = [
     "name": "Oha Soup",
     "price": 6500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Soup",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_64.jpg"
   },
   {
@@ -979,14 +727,10 @@ const products = [
     "name": "White soup",
     "price": 6500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Soup",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_65.jpg"
   },
   {
@@ -994,14 +738,10 @@ const products = [
     "name": "Greek Salad",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Salad",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_66.jpg"
   },
   {
@@ -1009,14 +749,10 @@ const products = [
     "name": "Egusi Soup",
     "price": 6500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Soup",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_67.jpg"
   },
   {
@@ -1024,14 +760,10 @@ const products = [
     "name": "Okro Soup",
     "price": 6500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Soup",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_68.jpg"
   },
   {
@@ -1039,14 +771,10 @@ const products = [
     "name": "Vegetable Soup",
     "price": 6500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Soup",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_69.jpg"
   },
   {
@@ -1054,14 +782,10 @@ const products = [
     "name": "Afang Soup",
     "price": 6500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Soup",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_70.jpg"
   },
   {
@@ -1069,14 +793,10 @@ const products = [
     "name": "Ogbono Soup",
     "price": 6500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Soup",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_71.jpg"
   },
   {
@@ -1084,14 +804,10 @@ const products = [
     "name": "Special Pounded Yam",
     "price": 4000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Swallow",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_72.jpg"
   },
   {
@@ -1099,14 +815,10 @@ const products = [
     "name": "Special Plantain Flour",
     "price": 4000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Swallow",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_73.jpg"
   },
   {
@@ -1114,14 +826,10 @@ const products = [
     "name": "Plantain Flour",
     "price": 3000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Swallow",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_74.jpg"
   },
   {
@@ -1129,14 +837,10 @@ const products = [
     "name": "Wheat",
     "price": 2500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Swallow",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_75.jpg"
   },
   {
@@ -1144,14 +848,10 @@ const products = [
     "name": "Special Fufu",
     "price": 2500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Swallow",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_76.jpg"
   },
   {
@@ -1159,14 +859,10 @@ const products = [
     "name": "Tuna Salad",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Salad",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_77.jpg"
   },
   {
@@ -1174,14 +870,10 @@ const products = [
     "name": "Oatmeal",
     "price": 2500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Swallow",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_78.jpg"
   },
   {
@@ -1189,14 +881,10 @@ const products = [
     "name": "Special Garri",
     "price": 2000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Swallow",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_79.jpg"
   },
   {
@@ -1204,14 +892,10 @@ const products = [
     "name": "Garri",
     "price": 2000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Swallow",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_80.jpg"
   },
   {
@@ -1219,14 +903,10 @@ const products = [
     "name": "Pina Colada",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Cocktails",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_81.jpg"
   },
   {
@@ -1234,14 +914,10 @@ const products = [
     "name": "Long Island Ice Tea",
     "price": 6000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Cocktails",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_82.jpg"
   },
   {
@@ -1249,14 +925,10 @@ const products = [
     "name": "Sex On The Beach",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Cocktails",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_83.jpg"
   },
   {
@@ -1264,14 +936,10 @@ const products = [
     "name": "Chapman with Vodka",
     "price": 4000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Cocktails",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_84.jpg"
   },
   {
@@ -1279,14 +947,10 @@ const products = [
     "name": "Heineken",
     "price": 2300,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Beer",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_85.jpg"
   },
   {
@@ -1294,14 +958,10 @@ const products = [
     "name": "Smooth Stout",
     "price": 2200,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Beer",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_86.jpg"
   },
   {
@@ -1309,14 +969,10 @@ const products = [
     "name": "Budweiser",
     "price": 2200,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Beer",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_87.jpg"
   },
   {
@@ -1324,14 +980,10 @@ const products = [
     "name": "Russian Salad",
     "price": 7000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Salad",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_88.jpg"
   },
   {
@@ -1339,14 +991,10 @@ const products = [
     "name": "Hero",
     "price": 2200,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Beer",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_89.jpg"
   },
   {
@@ -1354,14 +1002,10 @@ const products = [
     "name": "Desperados",
     "price": 2200,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Beer",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_90.jpg"
   },
   {
@@ -1369,14 +1013,10 @@ const products = [
     "name": "Legend stout",
     "price": 2000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Beer",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_91.jpg"
   },
   {
@@ -1384,14 +1024,10 @@ const products = [
     "name": "Tiger",
     "price": 2000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Beer",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_92.jpg"
   },
   {
@@ -1399,14 +1035,10 @@ const products = [
     "name": "Stout (Medium)",
     "price": 2000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Beer",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_93.jpg"
   },
   {
@@ -1414,14 +1046,10 @@ const products = [
     "name": "Gulder",
     "price": 2000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Beer",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_94.jpg"
   },
   {
@@ -1429,14 +1057,10 @@ const products = [
     "name": "Star",
     "price": 2000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Beer",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_95.jpg"
   },
   {
@@ -1444,14 +1068,10 @@ const products = [
     "name": "Star Radler",
     "price": 2000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Beer",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_96.jpg"
   },
   {
@@ -1459,14 +1079,10 @@ const products = [
     "name": "Smirn Off",
     "price": 2000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Beer",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_97.jpg"
   },
   {
@@ -1474,14 +1090,10 @@ const products = [
     "name": '"33"',
     "price": 2000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Beer",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_98.jpg"
   },
   {
@@ -1489,14 +1101,10 @@ const products = [
     "name": "Avocado Salad",
     "price": 6500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Salad",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_99.jpg"
   },
   {
@@ -1504,14 +1112,10 @@ const products = [
     "name": "Life",
     "price": 2000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Beer",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_100.jpg"
   },
   {
@@ -1519,14 +1123,10 @@ const products = [
     "name": "Tots (Vodka, Tequila, Jameson, Hennessy, Whiskey, Glass of Wine)",
     "price": 4000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Tots",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_101.jpg"
   },
   {
@@ -1534,14 +1134,10 @@ const products = [
     "name": "Dom Perignon",
     "price": 1000000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Champagne",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_102.jpg"
   },
   {
@@ -1549,14 +1145,10 @@ const products = [
     "name": "Moet Rose",
     "price": 180000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Champagne",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_103.jpg"
   },
   {
@@ -1564,14 +1156,10 @@ const products = [
     "name": "Moet Brut",
     "price": 150000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Champagne",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_104.jpg"
   },
   {
@@ -1579,14 +1167,10 @@ const products = [
     "name": "Veuve Clicquot",
     "price": 95000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Champagne",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_105.jpg"
   },
   {
@@ -1594,14 +1178,10 @@ const products = [
     "name": "Andre",
     "price": 50000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Champagne",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_106.jpg"
   },
   {
@@ -1609,14 +1189,10 @@ const products = [
     "name": "Blue Nun 24k",
     "price": 40000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Champagne",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_107.jpg"
   },
   {
@@ -1624,14 +1200,10 @@ const products = [
     "name": "Absolut Vodka",
     "price": 100000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Vodka",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_108.jpg"
   },
   {
@@ -1639,14 +1211,10 @@ const products = [
     "name": "Magic Moments",
     "price": 60000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Vodka",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_109.jpg"
   },
   {
@@ -1654,14 +1222,10 @@ const products = [
     "name": "Vegetable Salad",
     "price": 5000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Salad",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_110.jpg"
   },
   {
@@ -1669,14 +1233,10 @@ const products = [
     "name": "Cornflakes| Oat Meal | Custard | with Milk",
     "price": 3000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Cereals",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_111.jpg"
   },
   {
@@ -1684,14 +1244,10 @@ const products = [
     "name": "Smirnoff Red",
     "price": 40000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Vodka",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_112.jpg"
   },
   {
@@ -1699,14 +1255,10 @@ const products = [
     "name": "Flirt vodka",
     "price": 35000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Vodka",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_113.jpg"
   },
   {
@@ -1714,14 +1266,10 @@ const products = [
     "name": "Gordon’s",
     "price": 30000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Vodka",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_114.jpg"
   },
   {
@@ -1729,14 +1277,10 @@ const products = [
     "name": "Blue Label",
     "price": 800000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Whisky",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_115.jpg"
   },
   {
@@ -1744,14 +1288,10 @@ const products = [
     "name": "Glenfiddich Grand CRU",
     "price": 800000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Whisky",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_116.jpg"
   },
   {
@@ -1759,14 +1299,10 @@ const products = [
     "name": "Glenfiddich 21 years",
     "price": 400000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Whisky",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_117.jpg"
   },
   {
@@ -1774,14 +1310,10 @@ const products = [
     "name": "Glenfiddich 18 years",
     "price": 300000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Whisky",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_118.jpg"
   },
   {
@@ -1789,14 +1321,10 @@ const products = [
     "name": "Singleton 18 years",
     "price": 250000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Whisky",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_119.jpg"
   },
   {
@@ -1804,14 +1332,10 @@ const products = [
     "name": "Bruichladdich",
     "price": 200000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Whisky",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_120.jpg"
   },
   {
@@ -1819,14 +1343,10 @@ const products = [
     "name": "Glenfiddich 15 years",
     "price": 200000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Whisky",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_121.jpg"
   },
   {
@@ -1834,14 +1354,10 @@ const products = [
     "name": "Coleslaw",
     "price": 4000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Salad",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_122.jpg"
   },
   {
@@ -1849,14 +1365,10 @@ const products = [
     "name": "Singleton 15 years",
     "price": 180000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Whisky",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_123.jpg"
   },
   {
@@ -1864,14 +1376,10 @@ const products = [
     "name": "Gold Label",
     "price": 150000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Whisky",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_124.jpg"
   },
   {
@@ -1879,14 +1387,10 @@ const products = [
     "name": "Glenfiddich 12 years",
     "price": 150000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Whisky",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_125.jpg"
   },
   {
@@ -1894,14 +1398,10 @@ const products = [
     "name": "Singleton 12 years",
     "price": 130000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Whisky",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_126.jpg"
   },
   {
@@ -1909,14 +1409,10 @@ const products = [
     "name": "Jameson Black Barrel",
     "price": 130000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Whisky",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_127.jpg"
   },
   {
@@ -1924,14 +1420,10 @@ const products = [
     "name": "Black Label",
     "price": 100000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Whisky",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_128.jpg"
   },
   {
@@ -1939,14 +1431,10 @@ const products = [
     "name": "Jameson Irish",
     "price": 80000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Whisky",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_129.jpg"
   },
   {
@@ -1954,14 +1442,10 @@ const products = [
     "name": "Red Label",
     "price": 60000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Whisky",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_130.jpg"
   },
   {
@@ -1969,14 +1453,10 @@ const products = [
     "name": "Ballantines",
     "price": 40000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Whisky",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_131.jpg"
   },
   {
@@ -1984,14 +1464,10 @@ const products = [
     "name": "William Lawson",
     "price": 40000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Whisky",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_132.jpg"
   },
   {
@@ -1999,14 +1475,10 @@ const products = [
     "name": "Seafood Rice",
     "price": 7000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_133.jpg"
   },
   {
@@ -2014,14 +1486,10 @@ const products = [
     "name": "Hennessy VSOP",
     "price": 200000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Brandy",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_134.jpg"
   },
   {
@@ -2029,14 +1497,10 @@ const products = [
     "name": "Hennessy V.S",
     "price": 150000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Brandy",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_135.jpg"
   },
   {
@@ -2044,14 +1508,10 @@ const products = [
     "name": "Remy Martins (Cognac)",
     "price": 120000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Brandy",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_136.jpg"
   },
   {
@@ -2059,14 +1519,10 @@ const products = [
     "name": "Martell (Doc)",
     "price": 45000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Brandy",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_137.jpg"
   },
   {
@@ -2074,14 +1530,10 @@ const products = [
     "name": "Baileys",
     "price": 25000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Liqueur",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_138.jpg"
   },
   {
@@ -2089,14 +1541,10 @@ const products = [
     "name": "Ivory Cream",
     "price": 25000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Liqueur",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_139.jpg"
   },
   {
@@ -2104,14 +1552,10 @@ const products = [
     "name": "Dirty bottle",
     "price": 70000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Coffee",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_140.jpg"
   },
   {
@@ -2119,14 +1563,10 @@ const products = [
     "name": "Thomas Barton",
     "price": 70000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Wine",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_141.jpg"
   },
   {
@@ -2134,14 +1574,10 @@ const products = [
     "name": "Escudo Rojo",
     "price": 40000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Wine",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_142.jpg"
   },
   {
@@ -2149,14 +1585,10 @@ const products = [
     "name": "B&G Reserve",
     "price": 38000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Wine",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_143.jpg"
   },
   {
@@ -2164,14 +1596,10 @@ const products = [
     "name": "Chopped Chicken Fried Rice",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_144.jpg"
   },
   {
@@ -2179,14 +1607,10 @@ const products = [
     "name": "Casillero Del Diablo",
     "price": 32000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Wine",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_145.jpg"
   },
   {
@@ -2194,14 +1618,10 @@ const products = [
     "name": "Carlo Rossi",
     "price": 23000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Wine",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_146.jpg"
   },
   {
@@ -2209,14 +1629,10 @@ const products = [
     "name": "Carlum",
     "price": 23000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Wine",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_147.jpg"
   },
   {
@@ -2224,14 +1640,10 @@ const products = [
     "name": "Martinellis",
     "price": 23000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Wine",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_148.jpg"
   },
   {
@@ -2239,14 +1651,10 @@ const products = [
     "name": "Four Cousins",
     "price": 21000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Wine",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_149.jpg"
   },
   {
@@ -2254,14 +1662,10 @@ const products = [
     "name": "La Merit",
     "price": 19000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Wine",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_150.jpg"
   },
   {
@@ -2269,14 +1673,10 @@ const products = [
     "name": "Chamdor",
     "price": 17000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Wine",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_151.jpg"
   },
   {
@@ -2284,14 +1684,10 @@ const products = [
     "name": "4th Street",
     "price": 17000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Wine",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_152.jpg"
   },
   {
@@ -2299,14 +1695,10 @@ const products = [
     "name": "Toma",
     "price": 16000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Wine",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_153.jpg"
   },
   {
@@ -2314,14 +1706,10 @@ const products = [
     "name": "Veleta",
     "price": 15000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Wine",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_154.jpg"
   },
   {
@@ -2329,14 +1717,10 @@ const products = [
     "name": "Asun Rice",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_155.jpg"
   },
   {
@@ -2344,14 +1728,10 @@ const products = [
     "name": "Eva",
     "price": 10000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Wine",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_156.jpg"
   },
   {
@@ -2359,14 +1739,10 @@ const products = [
     "name": "Yoghurt",
     "price": 7000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Drinks",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_157.jpg"
   },
   {
@@ -2374,14 +1750,10 @@ const products = [
     "name": "Exotic Juice",
     "price": 5000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Drinks",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_158.jpg"
   },
   {
@@ -2389,14 +1761,10 @@ const products = [
     "name": "5 Alive",
     "price": 4000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Drinks",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_159.jpg"
   },
   {
@@ -2404,14 +1772,10 @@ const products = [
     "name": "Pack of Juice",
     "price": 5000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Drinks",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_160.jpg"
   },
   {
@@ -2419,14 +1783,10 @@ const products = [
     "name": "Mineral",
     "price": 1200,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Drinks",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_161.jpg"
   },
   {
@@ -2434,14 +1794,10 @@ const products = [
     "name": "Malt (can & bottle)",
     "price": 1500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Drinks",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_162.jpg"
   },
   {
@@ -2449,14 +1805,10 @@ const products = [
     "name": "Bottle of Water",
     "price": 800,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Drinks",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_163.jpg"
   },
   {
@@ -2464,14 +1816,10 @@ const products = [
     "name": "Oriental Rice (Basmati)",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_165.jpg"
   },
   {
@@ -2479,14 +1827,10 @@ const products = [
     "name": "Rice Pilaf (Basmati)",
     "price": 7000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_166.jpg"
   },
   {
@@ -2494,14 +1838,10 @@ const products = [
     "name": "E3 Special Fried Rice (Basmati)",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_167.jpg"
   },
   {
@@ -2509,14 +1849,10 @@ const products = [
     "name": "Jambalaya Jollof",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_168.jpg"
   },
   {
@@ -2524,14 +1860,10 @@ const products = [
     "name": "Jambalaya Fried",
     "price": 7000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_169.jpg"
   },
   {
@@ -2539,14 +1871,10 @@ const products = [
     "name": "Chinese Fried Rice (Basmati)",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_170.jpg"
   },
   {
@@ -2554,14 +1882,10 @@ const products = [
     "name": "Chapman",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Mocktails",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_171.jpg"
   },
   {
@@ -2569,14 +1893,10 @@ const products = [
     "name": "Arroz Rojo Rice",
     "price": 7000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_172.jpg"
   },
   {
@@ -2584,14 +1904,10 @@ const products = [
     "name": "Coconut Rice",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_173.jpg"
   },
   {
@@ -2599,14 +1915,10 @@ const products = [
     "name": "Basmati Fried Rice",
     "price": 6500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_174.jpg"
   },
   {
@@ -2614,14 +1926,10 @@ const products = [
     "name": "Mixed Beef Fried Rice",
     "price": 6000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_175.jpg"
   },
   {
@@ -2629,14 +1937,10 @@ const products = [
     "name": "Native Rice",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_176.jpg"
   },
   {
@@ -2644,14 +1948,10 @@ const products = [
     "name": "Ketchup Fried Rice",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_177.jpg"
   },
   {
@@ -2659,14 +1959,10 @@ const products = [
     "name": "Pineapple Fried Rice",
     "price": 6000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_178.jpg"
   },
   {
@@ -2674,14 +1970,10 @@ const products = [
     "name": "Basmati Egg Rice",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_179.jpg"
   },
   {
@@ -2689,14 +1981,10 @@ const products = [
     "name": "Fried Rice",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_180.jpg"
   },
   {
@@ -2704,14 +1992,10 @@ const products = [
     "name": "Jollof Rice",
     "price": 5500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_181.jpg"
   },
   {
@@ -2719,14 +2003,10 @@ const products = [
     "name": "WHITE CHOCOLATE MOCHA",
     "price": 3500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Coffee",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_182.jpg"
   },
   {
@@ -2734,14 +2014,10 @@ const products = [
     "name": "White Basmati",
     "price": 5000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_183.jpg"
   },
   {
@@ -2749,14 +2025,10 @@ const products = [
     "name": "Jollof Rice (Basmati)",
     "price": 4500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_184.jpg"
   },
   {
@@ -2764,14 +2036,10 @@ const products = [
     "name": "White Rice (Alone)",
     "price": 4000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_185.jpg"
   },
   {
@@ -2779,14 +2047,10 @@ const products = [
     "name": "Ofada Rice",
     "price": 4000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_186.jpg"
   },
   {
@@ -2794,14 +2058,10 @@ const products = [
     "name": "White Basmati Rice",
     "price": 3000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Rice",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_187.jpg"
   },
   {
@@ -2809,14 +2069,10 @@ const products = [
     "name": "Spaghetti Fettuccini",
     "price": 8500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Pasta Dishes",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_188.jpg"
   },
   {
@@ -2824,14 +2080,10 @@ const products = [
     "name": "Alfredo Pasta",
     "price": 8500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Pasta Dishes",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_189.jpg"
   },
   {
@@ -2839,14 +2091,10 @@ const products = [
     "name": "Stirred Fried Spaghetti With Chicken",
     "price": 7000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Pasta Dishes",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_190.jpg"
   },
   {
@@ -2854,14 +2102,10 @@ const products = [
     "name": "Singapore Noodles",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Pasta Dishes",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_191.jpg"
   },
   {
@@ -2869,14 +2113,10 @@ const products = [
     "name": "Spaghetti Bolognese",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Pasta Dishes",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_192.jpg"
   },
   {
@@ -2884,14 +2124,10 @@ const products = [
     "name": "Freshly Squeezed Fruit Juice (Pineapple)",
     "price": 5000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Continental Fruits",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_193.jpg"
   },
   {
@@ -2899,14 +2135,10 @@ const products = [
     "name": "Vegetable Shrimp Noodles",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Pasta Dishes",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_194.jpg"
   },
   {
@@ -2914,14 +2146,10 @@ const products = [
     "name": "Jollof Spaghetti (with Veggies)",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Pasta Dishes",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_195.jpg"
   },
   {
@@ -2929,14 +2157,10 @@ const products = [
     "name": "Fine Stirred Instant Noodles",
     "price": 4500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Pasta Dishes",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_196.jpg"
   },
   {
@@ -2944,14 +2168,10 @@ const products = [
     "name": "Macaroni",
     "price": 4000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Pasta Dishes",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_197.jpg"
   },
   {
@@ -2959,14 +2179,10 @@ const products = [
     "name": "Pasta Carbonara",
     "price": 4000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Pasta Dishes",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_198.jpg"
   },
   {
@@ -2974,14 +2190,10 @@ const products = [
     "name": "Boiled Spaghetti",
     "price": 3500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Pasta Dishes",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_199.jpg"
   },
   {
@@ -2989,14 +2201,10 @@ const products = [
     "name": "Grilled Croaker Fish",
     "price": 15000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Delicacies",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_200.jpg"
   },
   {
@@ -3004,14 +2212,10 @@ const products = [
     "name": "Grilled Jumbo Prawns",
     "price": 13000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Delicacies",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_201.jpg"
   },
   {
@@ -3019,14 +2223,10 @@ const products = [
     "name": "Jamaican Jerk Wings",
     "price": 8000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Delicacies",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_202.jpg"
   },
   {
@@ -3034,14 +2234,10 @@ const products = [
     "name": "Buffalo Wings",
     "price": 8000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Delicacies",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_203.jpg"
   },
   {
@@ -3049,14 +2245,10 @@ const products = [
     "name": "Sliced Seasoned Fruits",
     "price": 4000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Continental Fruits",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_204.jpg"
   },
   {
@@ -3064,14 +2256,10 @@ const products = [
     "name": "Chicken Strip",
     "price": 7000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Delicacies",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_205.jpg"
   },
   {
@@ -3079,14 +2267,10 @@ const products = [
     "name": "Grilled Crocker Fish",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Delicacies",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_206.jpg"
   },
   {
@@ -3094,14 +2278,10 @@ const products = [
     "name": "Peppered Chicken Wings",
     "price": 6500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Delicacies",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_207.jpg"
   },
   {
@@ -3109,14 +2289,10 @@ const products = [
     "name": "Southern Fried Chicken",
     "price": 6500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Delicacies",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_208.jpg"
   },
   {
@@ -3124,14 +2300,10 @@ const products = [
     "name": "Chicken Nuggets",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Delicacies",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_209.jpg"
   },
   {
@@ -3139,14 +2311,10 @@ const products = [
     "name": "Spicy/Grilled Chicken",
     "price": 5500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Delicacies",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_210.jpg"
   },
   {
@@ -3154,14 +2322,10 @@ const products = [
     "name": "Peppered snail",
     "price": 3500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Delicacies",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_211.jpg"
   },
   {
@@ -3169,14 +2333,10 @@ const products = [
     "name": "Prawn Crackers",
     "price": 3000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Delicacies",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_212.jpg"
   },
   {
@@ -3184,14 +2344,10 @@ const products = [
     "name": "Peppered Gizzard",
     "price": 3000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Delicacies",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_213.jpg"
   },
   {
@@ -3199,14 +2355,10 @@ const products = [
     "name": "Isi Ewu",
     "price": 10000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "E3 Special",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_214.jpg"
   },
   {
@@ -3214,14 +2366,10 @@ const products = [
     "name": "Freshly Squeezed Fruit Juice",
     "price": 4000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Continental Fruits",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_215.jpg"
   },
   {
@@ -3229,14 +2377,10 @@ const products = [
     "name": "Nkwobi",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Special",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_216.jpg"
   },
   {
@@ -3244,14 +2388,10 @@ const products = [
     "name": "Ekpang Nkukwo",
     "price": 7000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "E3 Special",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_217.jpg"
   },
   {
@@ -3259,14 +2399,10 @@ const products = [
     "name": "Porriage Yam",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Special",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_218.jpg"
   },
   {
@@ -3274,14 +2410,10 @@ const products = [
     "name": "Porridge Plantain",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Special",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_219.jpg"
   },
   {
@@ -3289,14 +2421,10 @@ const products = [
     "name": "Ukang Ukom",
     "price": 6000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "E3 Special",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_220.jpg"
   },
   {
@@ -3304,14 +2432,10 @@ const products = [
     "name": "Plantain & Cow Leg",
     "price": 3937,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Special",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_221.jpg"
   },
   {
@@ -3319,14 +2443,10 @@ const products = [
     "name": "Beans",
     "price": 3000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Special",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_222.jpg"
   },
   {
@@ -3334,14 +2454,10 @@ const products = [
     "name": "Jumbo Prawns (Oriental Sauce)",
     "price": 3000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Sea Food Dishes",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_223.jpg"
   },
   {
@@ -3349,14 +2465,10 @@ const products = [
     "name": "Prawn Sauce",
     "price": 12000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Sea Food Dishes",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_224.jpg"
   },
   {
@@ -3364,14 +2476,10 @@ const products = [
     "name": "Grilled prawns",
     "price": 12000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Sea Food Dishes",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_225.jpg"
   },
   {
@@ -3379,14 +2487,10 @@ const products = [
     "name": "Scrambled eggs (Nigerian)",
     "price": 3000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Egg Dishes",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_226.jpg"
   },
   {
@@ -3394,14 +2498,10 @@ const products = [
     "name": "Ginger Lemon Fish (white sauce)",
     "price": 10000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Sea Food Dishes",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_227.jpg"
   },
   {
@@ -3409,14 +2509,10 @@ const products = [
     "name": "Sauteed Shrimp (Steamed Veggie)",
     "price": 9000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Sea Food Dishes",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_228.jpg"
   },
   {
@@ -3424,14 +2520,10 @@ const products = [
     "name": "Crispy fish fingers",
     "price": 8500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Sea Food Dishes",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_229.jpg"
   },
   {
@@ -3439,14 +2531,10 @@ const products = [
     "name": "Seafood Stew",
     "price": 8000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Sea Food Dishes",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_230.jpg"
   },
   {
@@ -3454,14 +2542,10 @@ const products = [
     "name": "Shrimp Sauce",
     "price": 6500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Sea Food Dishes",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_231.jpg"
   },
   {
@@ -3469,14 +2553,10 @@ const products = [
     "name": "BBQ Fish (Croaker)",
     "price": 5000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Sea Food Dishes",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_232.jpg"
   },
   {
@@ -3484,14 +2564,10 @@ const products = [
     "name": "Chicken Dynamite with Irish Potatoes",
     "price": 10000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_233.jpg"
   },
   {
@@ -3499,14 +2575,10 @@ const products = [
     "name": "Fish Stew",
     "price": 10000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_234.jpg"
   },
   {
@@ -3514,14 +2586,10 @@ const products = [
     "name": "Chicken Stronganoff",
     "price": 8000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_235.jpg"
   },
   {
@@ -3529,14 +2597,10 @@ const products = [
     "name": "Mushroom Sauce",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_236.jpg"
   },
   {
@@ -3544,14 +2608,10 @@ const products = [
     "name": "Egg Omelette, Egg Sauce",
     "price": 3000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Egg Dishes",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_237.jpg"
   },
   {
@@ -3559,14 +2619,10 @@ const products = [
     "name": "Chicken Casserole",
     "price": 7000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_238.jpg"
   },
   {
@@ -3574,14 +2630,10 @@ const products = [
     "name": "Sweet and Sour Chicken",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_239.jpg"
   },
   {
@@ -3589,14 +2641,10 @@ const products = [
     "name": "Sweet and Sour Chicken",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_240.jpg"
   },
   {
@@ -3604,14 +2652,10 @@ const products = [
     "name": "Chicken Soy Sauce",
     "price": 7000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_241.jpg"
   },
   {
@@ -3619,14 +2663,10 @@ const products = [
     "name": "Shredded Beef",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_242.jpg"
   },
   {
@@ -3634,14 +2674,10 @@ const products = [
     "name": "Shredded Chicken",
     "price": 7000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_243.jpg"
   },
   {
@@ -3649,14 +2685,10 @@ const products = [
     "name": "Curried Chicken",
     "price": 7000,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_244.jpg"
   },
   {
@@ -3664,14 +2696,10 @@ const products = [
     "name": "Ofada Sauce",
     "price": 6500,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_245.jpg"
   },
   {
@@ -3679,14 +2707,10 @@ const products = [
     "name": "Thai Chilli Sauce",
     "price": 6000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "E3 Sauce",
     "availability": true,
-    "tags": [
-      "iced",
-      "mocha",
-      "cold"
-    ],
+
     "image": "products/E3_246.jpg"
   },
   {
@@ -3694,14 +2718,10 @@ const products = [
     "name": "Garden Egg Sauce",
     "price": 5500,
     "currency": "NGN",
-    "description": "Freshly prepared and full of flavor",
+    
     "category": "Coffee",
     "availability": true,
-    "tags": [
-      "espresso",
-      "milk",
-      "hot"
-    ],
+
     "image": "products/E3_247.jpg"
   },
   {
@@ -3709,14 +2729,10 @@ const products = [
     "name": "Fried Egg, Sunny Side Up, Boiled Egg",
     "price": 3000,
     "currency": "NGN",
-    "description": "Carefully prepared with great taste",
+    
     "category": "Egg Dishes",
     "availability": true,
-    "tags": [
-      "chocolate",
-      "mocha",
-      "milk"
-    ],
+
     "image": "products/E3_248.jpg"
   }
 ]
@@ -3859,6 +2875,20 @@ async function addToCart(product) {
   saveCart();
   renderCart();
 
+  // 1️⃣ Update the “Added: X” in the product card
+  const card = document.querySelector(`.add-to-cart[data-id="${product.id}"]`)?.closest('.card');
+  if (card) {
+    let addedEl = card.querySelector('.added-qty');
+    if (!addedEl) {
+      addedEl = document.createElement('p');
+      addedEl.className = 'text-success fw-semibold mb-0 added-qty';
+      const priceEl = card.querySelector('.card-footer');
+      priceEl.parentNode.insertBefore(addedEl, priceEl); // place above price/footer
+    }
+    const cartItem = cartState.find(c => c.id === product.id);
+    addedEl.textContent = `Added: ${cartItem.qty}`;
+  }
+
   // Try server sync
   try {
     await uploadCartItem(product);
@@ -3931,17 +2961,41 @@ document.addEventListener("click", e => {
   if (!id) return;
 
   const item = cartState.find(i => i.id === id);
-  if (!item) return;
 
-  if (e.target.classList.contains("plus")) item.qty++;
-  if (e.target.classList.contains("minus") && item.qty > 1) item.qty--;
+  // plus/minus buttons
+  if (e.target.classList.contains("plus")) {
+    if (item) item.qty++;
+  }
+  if (e.target.classList.contains("minus")) {
+    if (item && item.qty > 1) item.qty--;
+  }
 
+  // remove item
   if (e.target.classList.contains("remove-item")) {
     cartState = cartState.filter(i => i.id !== id);
   }
 
   saveCart();
   renderCart();
+
+  // Update menu card “Added: X” live
+  const card = document.querySelector(`.add-to-cart[data-id="${id}"]`)?.closest('.card');
+  if (card) {
+    const addedEl = card.querySelector('.added-qty');
+    const cartItem = cartState.find(c => c.id === id);
+    if (cartItem) {
+      if (addedEl) addedEl.textContent = `Added: ${cartItem.qty}`;
+      else {
+        const newEl = document.createElement('p');
+        newEl.className = 'text-success fw-semibold mb-0 added-qty';
+        newEl.textContent = `Added: ${cartItem.qty}`;
+        const priceEl = card.querySelector('.card-footer');
+        priceEl.parentNode.insertBefore(newEl, priceEl);
+      }
+    } else {
+      if (addedEl) addedEl.remove();
+    }
+  }
 });
 
 const TAX_RATE = 0.125;
@@ -3955,6 +3009,9 @@ function renderSummary() {
 
   document.getElementById("summary-items").textContent =
     `${items} Item${items !== 1 ? "s" : ""}`;
+
+  document.getElementById("totalItems").textContent =
+  `${items === 1 ? "Item" : "Items"} (${items})`;
 
   document.getElementById("summary-subtotal").textContent =
     `${formatNumberToNaira(subtotal)}`;
@@ -3982,7 +3039,6 @@ function formatNumberToNaira(number) {
 }
 
 function renderMenu(products, category = "all", reset = false) {
-
   // 1️⃣ Filter by category
   let filtered =
     category === "all"
@@ -4025,6 +3081,9 @@ function renderMenu(products, category = "all", reset = false) {
 
   // 6️⃣ Render items
   nextBatch.forEach(item => {
+    const cartItem = cartState.find(c => c.id === item.id);
+    const qtyInCart = cartItem ? cartItem.qty : 0;
+
     menuContainer.innerHTML += `
       <div class="col-xl-4 col-lg-6 col-md-6 mb-4">
         <div class="card h-100">
@@ -4035,14 +3094,14 @@ function renderMenu(products, category = "all", reset = false) {
                   src="${item.image}"
                   alt="${item.name}"
                   loading="lazy"
+                  class="img-fluid"
                 >
-
                 ${item.badge ? `
                   <span class="position-absolute top-0 start-0 p-2">
                     <span class="badge bg-danger fs-11">${item.badge}</span>
                   </span>
                 ` : ""}
-              </div>
+            </div>
 
             <div class="d-flex align-items-center justify-content-between gap-2 mt-3">
               <div>
@@ -4052,6 +3111,7 @@ function renderMenu(products, category = "all", reset = false) {
                 <p class="fs-5 fw-normal mb-0">
                   ${highlightMatch(item.category, searchQuery)}
                 </p>
+                ${qtyInCart ? `<p class="text-success fw-semibold mb-0">Added: ${qtyInCart}</p>` : ""}
               </div>
             </div>
           </div>
