@@ -4156,12 +4156,3 @@ document.getElementById("view-more-btn").addEventListener("click", () => {
 // Initial load
 renderMenu(products, "all", true);
 
-// document.addEventListener("click", e => {
-//   if (e.target.closest(".add-to-cart")) {
-//     const id = Number(e.target.closest(".add-to-cart").dataset.id);
-//     const product = products.find(p => p.id === id);
-
-//     console.log("Add to cart:", product);
-//     // integrate with your cartData here
-//   }
-// });
