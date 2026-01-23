@@ -64,6 +64,32 @@
   border-radius: 4px;
 }
 
+/* Menu image container */
+.menu-image-wrapper {
+  width: 100%;
+  height: 180px;              /* 🔥 consistent height */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Image behavior */
+.menu-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* 🔥 magic */
+  border-radius: 0.5rem;
+}
+
+.card:hover .menu-image-wrapper img {
+  transform: scale(1.05);
+  transition: transform 0.25s ease;
+}
+
+.menu-image-wrapper {
+  background: #f8f9fa;
+}
      </style>
 </head>
 
@@ -205,17 +231,6 @@
                               aria-label="Show Full Sidebar">
                               <i class="ri-menu-2-line button-sm-hover-icon text-white"></i>
                          </button>
-
-                         <div class="d-flex align-items-center gap-2">
-                              <!-- App Search-->
-                              <form class="app-search d-none d-md-block me-auto">
-                                   <div class="position-relative">
-                                        <input type="search" class="form-control" placeholder="Start typing..."
-                                             autocomplete="off" value="">
-                                        <i class="ri-search-line search-widget-icon"></i>
-                                   </div>
-                              </form>
-                         </div>
 
                          <div class="d-flex align-items-center gap-2 ms-auto">
                               <!-- Theme Color (Light/Dark) -->
@@ -412,22 +427,6 @@
                                         <!-- ITEMS WILL RENDER HERE -->
                                         <div id="cartItems"></div>
 
-                                        <div class="position-relative mt-3">
-                                             <div class="form-button">
-                                                  <form class="d-flex align-items-center justify-content-center">
-                                                       <input type="text" class="form-control border rounded"
-                                                            placeholder="Apply Coupon" required="" value="">
-                                                       <button type="button" data-toast=""
-                                                            data-toast-text="Your Promo Code Apply Successfully"
-                                                            data-toast-gravity="top" data-toast-position="center"
-                                                            data-toast-classname="success" data-toast-duration="3000"
-                                                            class="btn btn-primary ms-2 rounded-2">
-                                                            Apply
-                                                       </button>
-                                                  </form>
-                                             </div>
-                                        </div>
-
                                         <div class="mt-3">
                                              <div class="table-responsive">
                                                   <table class="table table-bordered bg-light-subtle">
@@ -523,7 +522,7 @@
                                                                  <div class="d-flex align-items-center gap-2">
                                                                       <h5 class="mb-0"><i
                                                                                 class="ri-bank-fill text-success"></i>
-                                                                           UPI</h5>
+                                                                           POS</h5>
                                                                  </div>
                                                                  <div class="ms-auto">
                                                                       <input class="form-check-input float-end"
@@ -538,9 +537,9 @@
 
                                         <div class=" gap-1 hstack mt-3">
                                              <a href="#!" id="cancelCart" class="btn btn-danger w-100"><i
-                                                       class="ri-close-circle-line"></i> Cancel</a>
-                                             <a href="#!" class="btn btn-primary w-100"><i
-                                                       class="ri-shopping-basket-2-line"></i> Order Placed</a>
+                                                       class="ri-close-circle-line"></i> Clear Cart</a>
+                                             <a href="#!" id="placeOrderBtn" class="btn btn-primary w-100"><i
+                                                       class="ri-shopping-basket-2-line"></i> Place Order</a>
                                         </div>
                                    </div>
                               </div>

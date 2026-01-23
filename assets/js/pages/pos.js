@@ -3723,9 +3723,10 @@ const products = [
 
 let currentCategory = "all";
 let productsToShow = [];
-let batchSize = 9; // 3 rows of 3 items
+let batchSize = 21; // 3 rows of 7 items
 let lastIndex = 0;
 let searchQuery = "";
+let retryInterval = null;
 
 const ITEMS_PER_PAGE = 12;
 const track = document.getElementById("menuTrack");
@@ -3797,7 +3798,6 @@ document.addEventListener("click", e => {
   if (!eye) return;
 
   const name = eye.dataset.name;
-  console.log("Clicked:", name);
   renderMenu(products, name, true);
 
   // Example API call
@@ -3828,40 +3828,6 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 });
 
-// Cart data and rendering
-// Cart data and rendering
-// Cart data and rendering
-// Cart data and rendering
-// const cartData = [
-//   {
-//     id: 1,
-//     name: "Italian Burata Pizza",
-//     size: "12-Inch",
-//     image: "assets/images/food-icon/pic12.png",
-//     price: 12,
-//     oldPrice: 15,
-//     qty: 1
-//   },
-//   {
-//     id: 2,
-//     name: "Meat Tacos",
-//     size: "3 tacos",
-//     image: "assets/images/food-icon/pic15.png",
-//     price: 30,
-//     oldPrice: 34,
-//     qty: 2
-//   },
-//   {
-//     id: 3,
-//     name: "Veg Indian Thali",
-//     size: "Single Person",
-//     image: "assets/images/food-icon/pic19.png",
-//     price: 38,
-//     oldPrice: 30,
-//     qty: 2
-//   }
-// ];
-
 const cartContainer = document.getElementById("cartItems");
 const totalItemsEl = document.getElementById("totalItems");
 
@@ -3881,9 +3847,9 @@ function saveCart() {
   localStorage.setItem(CART_KEY, JSON.stringify(cartState));
 }
 
-function addToCart(product) {
+async function addToCart(product) {
+  // Local cart (always works)
   const existing = cartState.find(i => i.id === product.id);
-
   if (existing) {
     existing.qty++;
   } else {
@@ -3892,6 +3858,16 @@ function addToCart(product) {
 
   saveCart();
   renderCart();
+
+  // Try server sync
+  try {
+    await uploadCartItem(product);
+    console.log("Uploaded to server");
+  } catch (err) {
+    console.warn("Offline, saving to IndexedDB");
+    await savePendingItem(product);
+    startRetryLoop();
+  }
 }
 
 document.addEventListener("click", e => {
@@ -3981,27 +3957,17 @@ function renderSummary() {
     `${items} Item${items !== 1 ? "s" : ""}`;
 
   document.getElementById("summary-subtotal").textContent =
-    `₦${subtotal.toFixed(2)}`;
+    `${formatNumberToNaira(subtotal)}`;
 
   document.getElementById("summary-delivery").textContent =
-    `₦${DELIVERY_FEE.toFixed(2)}`;
+    `${formatNumberToNaira(DELIVERY_FEE)}`;
 
   document.getElementById("summary-tax").textContent =
-    `₦${tax.toFixed(2)}`;
+    `${formatNumberToNaira(tax)}`;
 
   document.getElementById("summary-total").textContent =
-    `₦${total.toFixed(2)}`;
+    `${formatNumberToNaira(total)}`;
 }
-
-document.getElementById("cancelCart").addEventListener("click", () => {
-  if (!cartState.length) return;
-
-  if (confirm("Clear cart?")) {
-    cartState = [];
-    saveCart();
-    renderCart();
-  }
-});
 
 renderCart();
 
@@ -4049,7 +4015,7 @@ function renderMenu(products, category = "all", reset = false) {
       <div class="col-12 text-center py-5">
         <i class="ri-search-line fs-1 text-muted"></i>
         <p class="mt-2 fw-semibold text-muted">
-          No menu items found
+          No menu item found
         </p>
       </div>
     `;
@@ -4064,19 +4030,19 @@ function renderMenu(products, category = "all", reset = false) {
         <div class="card h-100">
           
           <div class="card-body">
-            <div class="position-relative text-center bg-light rounded">
-              <img
-                src="${item.image}"
-                class="img-fluid rounded"
-                alt="${item.name}"
-              >
+            <div class="menu-image-wrapper position-relative rounded bg-light">
+                <img
+                  src="${item.image}"
+                  alt="${item.name}"
+                  loading="lazy"
+                >
 
-              ${item.badge ? `
-                <span class="position-absolute top-0 start-0 p-2">
-                  <span class="badge bg-danger fs-11">${item.badge}</span>
-                </span>
-              ` : ""}
-            </div>
+                ${item.badge ? `
+                  <span class="position-absolute top-0 start-0 p-2">
+                    <span class="badge bg-danger fs-11">${item.badge}</span>
+                  </span>
+                ` : ""}
+              </div>
 
             <div class="d-flex align-items-center justify-content-between gap-2 mt-3">
               <div>
@@ -4090,28 +4056,11 @@ function renderMenu(products, category = "all", reset = false) {
             </div>
           </div>
 
-          <div class="card-footer">
-            <div class="d-flex align-items-center justify-content-between">
-              <div>
-                <p class="text-primary mb-1 fs-14">Regular Price</p>
-                <p class="text-dark fw-semibold fs-16 mb-0">
-                  ${formatNumberToNaira(item.price)}
-                </p>
-              </div>
-
-              <div class="d-flex gap-1">
-                <button
-                  class="btn btn-soft-primary avatar-sm add-to-cart"
-                  data-id="${item.id}"
-                >
-                  <i class="ri-shopping-basket-2-line fs-20"></i>
-                </button>
-
-                <button class="btn btn-soft-danger avatar-sm">
-                  <i class="ri-heart-2-line fs-20"></i>
-                </button>
-              </div>
-            </div>
+          <div class="card-footer d-flex justify-content-between">
+            <span>${formatNumberToNaira(item.price)}</span>
+            <button class="btn btn-soft-primary add-to-cart" data-id="${item.id}">
+              <i class="ri-shopping-basket-2-line"></i>
+            </button>
           </div>
 
         </div>
@@ -4156,3 +4105,326 @@ document.getElementById("view-more-btn").addEventListener("click", () => {
 // Initial load
 renderMenu(products, "all", true);
 
+const DB_NAME = "e3_offline_db";
+const DB_VERSION = 1;
+const STORE_NAME = "pending_cart";
+
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+    request.onupgradeneeded = e => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME, {
+          keyPath: "id",
+          autoIncrement: true
+        });
+      }
+    };
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function savePendingItem(data) {
+  const db = await openDB();
+  const tx = db.transaction(STORE_NAME, "readwrite");
+  tx.objectStore(STORE_NAME).add({
+    data,
+    createdAt: Date.now()
+  });
+}
+
+async function getPendingItems() {
+  const db = await openDB();
+  return new Promise(resolve => {
+    const tx = db.transaction(STORE_NAME, "readonly");
+    const store = tx.objectStore(STORE_NAME);
+    const req = store.getAll();
+    req.onsuccess = () => resolve(req.result);
+  });
+}
+
+async function removePendingItem(id) {
+  const db = await openDB();
+  const tx = db.transaction(STORE_NAME, "readwrite");
+  tx.objectStore(STORE_NAME).delete(id);
+}
+
+async function uploadCartItem(product) {
+  const res = await fetch("/api/cart", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(product)
+  });
+
+  if (!res.ok) throw new Error("Upload failed");
+}
+
+function startRetryLoop() {
+  if (retryInterval) return; // already running
+
+  retryInterval = setInterval(async () => {
+    const pending = await getPendingItems();
+
+    if (!pending.length) {
+      clearInterval(retryInterval);
+      retryInterval = null;
+      console.log("All pending items synced");
+      return;
+    }
+
+    for (const item of pending) {
+      try {
+        await uploadCartItem(item.data);
+        await removePendingItem(item.id);
+        console.log("Synced item:", item.id);
+      } catch {
+        console.log("Still offline...");
+        break; // stop loop early, try again later
+      }
+    }
+  }, 5000);
+}
+
+window.addEventListener("online", () => {
+  startRetryLoop();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  startRetryLoop();
+});
+
+(function () {
+  let banner = null;
+
+  function removeBanner() {
+    if (banner) {
+      banner.remove();
+      banner = null;
+    }
+  }
+
+  function showBanner({ message, bgColor, textColor }) {
+    removeBanner();
+
+    banner = document.createElement("div");
+    banner.textContent = message;
+
+    Object.assign(banner.style, {
+      position: "fixed",
+      bottom: "20px",
+      left: "50%",
+      transform: "translateX(-50%)",
+      padding: "10px 16px",
+      backgroundColor: bgColor,
+      color: textColor,
+      borderRadius: "999px",
+      fontSize: "14px",
+      fontWeight: "500",
+      boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
+      cursor: "pointer",
+      zIndex: "9999",
+      transition: "opacity 0.3s ease"
+    });
+
+    banner.addEventListener("click", removeBanner);
+    document.body.appendChild(banner);
+  }
+
+  // Offline
+  window.addEventListener("offline", () => {
+    showBanner({
+      message: "⚠️ Poor network connection. Please check your internet.",
+      bgColor: "#FFF3CD",      // soft warning yellow
+      textColor: "#664D03"
+    });
+  });
+
+  // Online
+  window.addEventListener("online", () => {
+    if ("Notification" in window && Notification.permission === "default") {
+      Notification.requestPermission();
+    }
+    playRestoreSound();
+
+    showDesktopNotification(
+      "Network restored",
+      "Connection is back. You can continue working."
+    );
+
+    showBanner({
+      message: "✅ Network restored.",
+      bgColor: "#D1E7DD",      // soft success green
+      textColor: "#0F5132"
+    });
+  });
+
+  // Optional: show warning immediately if page loads offline
+  if (!navigator.onLine) {
+    showBanner({
+      message: "⚠️ Poor network connection. Please check your internet.",
+      bgColor: "#FFF3CD",
+      textColor: "#664D03"
+    });
+  }
+})();
+
+window.addEventListener("online", () => {
+  setTimeout(() => {
+    if (networkBanner) networkBanner.remove();
+  }, 4000);
+});
+
+function playRestoreSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "sine";
+    osc.frequency.value = 880; // pleasant chime tone
+    gain.gain.value = 0.08;
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.stop(ctx.currentTime + 0.15);
+  } catch {
+    // silently fail if audio blocked
+  }
+}
+
+function showDesktopNotification(title, body) {
+  if (!("Notification" in window)) return;
+  if (Notification.permission !== "granted") return;
+
+  const n = new Notification(title, {
+    body,
+    icon: "/favicon.ico" // optional
+  });
+
+  n.onclick = () => n.close();
+}
+
+let networkBanner = null;
+
+function showNetworkBanner({ text, bg, color }) {
+  if (networkBanner) networkBanner.remove();
+
+  networkBanner = document.createElement("div");
+  networkBanner.textContent = text;
+
+  Object.assign(networkBanner.style, {
+    position: "fixed",
+    top: "20px",
+    right: "20px",
+    padding: "10px 14px",
+    background: bg,
+    color,
+    borderRadius: "8px",
+    fontSize: "14px",
+    fontWeight: "500",
+    boxShadow: "0 6px 16px rgba(0,0,0,.15)",
+    cursor: "pointer",
+    zIndex: 9999
+  });
+
+  networkBanner.onclick = () => networkBanner.remove();
+  document.body.appendChild(networkBanner);
+}
+
+// Place order for products added to cart
+// Place order for products added to cart
+// Place order for products added to cart
+// Place order for products added to cart
+
+function setButtonLoading(btn, loading) {
+  if (loading) {
+    btn.dataset.original = btn.innerHTML;
+    btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Processing...`;
+    btn.classList.add("disabled");
+  } else {
+    btn.innerHTML = btn.dataset.original;
+    btn.classList.remove("disabled");
+  }
+}
+
+document.getElementById("cancelCart").addEventListener("click", (e) => {
+  e.preventDefault();
+
+  if (!cartState.length) return;
+
+  if (confirm("Do you want to clear the cart?")) {
+    cartState = [];
+    showNetworkBanner({
+      text: "✅ Cart cleared.",
+      bg: "#E2E3E5",
+      color: "#41464B"
+    });
+    saveCart();
+    renderCart();
+  }
+});
+
+const placeOrderBtn = document.getElementById("placeOrderBtn");
+
+placeOrderBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+
+  // 1️⃣ Validate cart
+  if (!cartData.length) {
+    showNetworkBanner({
+      text: "⚠️ Your cart is empty.",
+      bg: "#F8D7DA",
+      color: "#842029"
+    });
+    return;
+  }
+
+  // 2️⃣ Check network (keep illusion)
+  if (!navigator.onLine) {
+    showNetworkBanner({
+      text: "⚠️ Poor network connection. Please try again.",
+      bg: "#FFF3CD",
+      color: "#664D03"
+    });
+    return;
+  }
+
+  // 3️⃣ Loading state
+  setButtonLoading(placeOrderBtn, true);
+
+  try {
+    // 4️⃣ Simulate API call (replace later)
+    // await fakePlaceOrderRequest(cartData);
+
+    // 5️⃣ Success
+    cartData = [];
+    updateCartUI?.();
+
+    showDesktopNotification(
+      "✅ Order placed",
+      "Your order was placed successfully."
+    );
+
+    showNetworkBanner({
+      text: "✅ Order placed successfully.",
+      bg: "#D1E7DD",
+      color: "#0F5132"
+    });
+
+  } catch (err) {
+    // 6️⃣ Failure (looks like network issue)
+    showNetworkBanner({
+      text: "⚠️ Unable to place order. Please check your network.",
+      bg: "#FFF3CD",
+      color: "#664D03"
+    });
+  } finally {
+    setButtonLoading(placeOrderBtn, false);
+  }
+});
