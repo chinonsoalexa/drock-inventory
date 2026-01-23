@@ -3725,6 +3725,7 @@ let currentCategory = "all";
 let productsToShow = [];
 let batchSize = 9; // 3 rows of 3 items
 let lastIndex = 0;
+let searchQuery = "";
 
 const ITEMS_PER_PAGE = 12;
 const track = document.getElementById("menuTrack");
@@ -4015,29 +4016,60 @@ function formatNumberToNaira(number) {
 }
 
 function renderMenu(products, category = "all", reset = false) {
-  // menuContainer.innerHTML = "";
 
-    // Filter by category
-  productsToShow =
+  // 1️⃣ Filter by category
+  let filtered =
     category === "all"
       ? products
       : products.filter(p => p.category === category);
 
+  // 2️⃣ Filter by search query
+  if (searchQuery.trim()) {
+    const q = searchQuery.toLowerCase();
+    filtered = filtered.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.category.toLowerCase().includes(q)
+    );
+  }
+
+  productsToShow = filtered;
+
+  // 3️⃣ Reset state
   if (reset) {
     lastIndex = 0;
     menuContainer.innerHTML = "";
   }
 
-  // Get next batch
+  // 4️⃣ Pagination
   const nextBatch = productsToShow.slice(lastIndex, lastIndex + batchSize);
 
+  // 5️⃣ Empty state
+  if (!nextBatch.length && reset) {
+    menuContainer.innerHTML = `
+      <div class="col-12 text-center py-5">
+        <i class="ri-search-line fs-1 text-muted"></i>
+        <p class="mt-2 fw-semibold text-muted">
+          No menu items found
+        </p>
+      </div>
+    `;
+    document.getElementById("view-more-btn").style.display = "none";
+    return;
+  }
+
+  // 6️⃣ Render items
   nextBatch.forEach(item => {
     menuContainer.innerHTML += `
       <div class="col-xl-4 col-lg-6 col-md-6 mb-4">
         <div class="card h-100">
+          
           <div class="card-body">
-            <div class="position-relative text-center bg-light">
-              <img src="${item.image}" class="img-fluid rounded" alt="${item.name}">
+            <div class="position-relative text-center bg-light rounded">
+              <img
+                src="${item.image}"
+                class="img-fluid rounded"
+                alt="${item.name}"
+              >
 
               ${item.badge ? `
                 <span class="position-absolute top-0 start-0 p-2">
@@ -4048,16 +4080,11 @@ function renderMenu(products, category = "all", reset = false) {
 
             <div class="d-flex align-items-center justify-content-between gap-2 mt-3">
               <div>
-                <a href="#!" class="text-dark fs-16 fw-semibold">${item.name}</a>
-                <p class="fs-5 fw-normal mb-0">${item.category}</p>
-              </div>
-
-              <div class="text-end">
-                <p class="badge bg-light fs-13 mb-1 text-dark py-1 px-2">
-                  
-                </p>
-                <p class="mb-0">
-                  
+                <a href="#!" class="text-dark fs-16 fw-semibold">
+                  ${highlightMatch(item.name, searchQuery)}
+                </a>
+                <p class="fs-5 fw-normal mb-0">
+                  ${highlightMatch(item.category, searchQuery)}
                 </p>
               </div>
             </div>
@@ -4073,15 +4100,20 @@ function renderMenu(products, category = "all", reset = false) {
               </div>
 
               <div class="d-flex gap-1">
-                <button class="btn btn-soft-primary avatar-sm add-to-cart" data-id="${item.id}">
+                <button
+                  class="btn btn-soft-primary avatar-sm add-to-cart"
+                  data-id="${item.id}"
+                >
                   <i class="ri-shopping-basket-2-line fs-20"></i>
                 </button>
+
                 <button class="btn btn-soft-danger avatar-sm">
                   <i class="ri-heart-2-line fs-20"></i>
                 </button>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     `;
@@ -4089,9 +4121,31 @@ function renderMenu(products, category = "all", reset = false) {
 
   lastIndex += batchSize;
 
-  // Toggle View More button visibility
+  // 7️⃣ Toggle Load More button
   const btn = document.getElementById("view-more-btn");
-  btn.style.display = lastIndex >= productsToShow.length ? "none" : "inline-block";
+  btn.style.display =
+    lastIndex >= productsToShow.length ? "none" : "inline-block";
+}
+
+document.getElementById("menuSearch").addEventListener("input", e => {
+  searchQuery = e.target.value;
+  renderMenu(products, currentCategory, true);
+});
+
+let searchTimer;
+menuSearch.addEventListener("input", e => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    searchQuery = e.target.value;
+    renderMenu(products, currentCategory, true);
+  }, 300);
+});
+
+function highlightMatch(text, query) {
+  if (!query) return text;
+
+  const regex = new RegExp(`(${query})`, "gi");
+  return text.replace(regex, `<mark class="px-1">$1</mark>`);
 }
 
 // Handle View More button click
