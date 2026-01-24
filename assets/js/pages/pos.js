@@ -2847,7 +2847,7 @@ document.addEventListener("DOMContentLoaded", function() {
 const cartContainer = document.getElementById("cartItems");
 const totalItemsEl = document.getElementById("totalItems");
 
-const CART_KEY = "e3_cart";
+const CART_KEY = "e3_cart_inventory";
 
 let cartState = loadCart();
 
