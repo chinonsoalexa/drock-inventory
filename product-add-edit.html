@@ -26,36 +26,35 @@
           }
 
           .image-upload-box {
-  border: 2px dashed #d0d5dd;
-  border-radius: 12px;
-  height: 220px;
-  cursor: pointer;
-  position: relative;
-  background: #fafafa;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 0.2s ease;
-}
+               border: 2px dashed #d0d5dd;
+               border-radius: 12px;
+               height: 220px;
+               cursor: pointer;
+               position: relative;
+               background: #fafafa;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               transition: border-color 0.2s ease;
+          }
 
-.image-upload-box:hover {
-  border-color: #556ee6;
-}
+          .image-upload-box:hover {
+               border-color: #556ee6;
+          }
 
-.image-upload-box img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  display: none;
-  border-radius: 8px;
-}
+          .image-upload-box img {
+               max-width: 100%;
+               max-height: 100%;
+               object-fit: contain;
+               display: none;
+               border-radius: 8px;
+          }
 
-.placeholder-text {
-  text-align: center;
-  color: #98a2b3;
-  font-size: 14px;
-}
-
+          .placeholder-text {
+               text-align: center;
+               color: #98a2b3;
+               font-size: 14px;
+          }
      </style>
 </head>
 
@@ -264,23 +263,19 @@
                                                   </div>
 
                                                   <div class="col-lg-6">
-  <label class="form-label">Receipt / Delivery Image</label>
+                                                       <label class="form-label">Receipt / Delivery Image</label>
 
-  <div class="image-upload-box" id="receiptBox">
-    <span class="placeholder-text">
-      Click to upload<br>
-      <small>PNG, JPG, JPEG</small>
-    </span>
+                                                       <div class="image-upload-box" id="receiptBox">
+                                                            <span class="placeholder-text">
+                                                                 Click to upload<br>
+                                                                 <small>PNG, JPG, JPEG</small>
+                                                            </span>
 
-    <img id="receiptPreview" alt="Receipt Preview">
-    <input
-      type="file"
-      id="receiptInput"
-      accept="image/*"
-      hidden
-    >
-  </div>
-</div>
+                                                            <img id="receiptPreview" alt="Receipt Preview">
+                                                            <input type="file" id="receiptInput" accept="image/*"
+                                                                 hidden>
+                                                       </div>
+                                                  </div>
 
                                              </div>
 
@@ -293,6 +288,7 @@
                                                                  <th>Category</th>
                                                                  <th>Price (₦)</th>
                                                                  <th>Available Qty</th>
+                                                                 <th>Measurement</th>
                                                                  <th>Low Stock Alert</th>
                                                                  <th style="width: 60px;"></th>
                                                             </tr>

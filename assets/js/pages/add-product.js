@@ -2754,6 +2754,28 @@ let inventoryCategories = [
   "Packaged Goods"
 ];
 
+const measurementUnits = [
+  "Unit",       // single piece
+  "Kg",         // kilogram
+  "Gram",       // grams
+  "Litre",      // liters
+  "Millilitre", // ml
+  "Pack",       // generic pack
+  "Dozen",      // 12 units
+  "Bottle",
+  "Can",
+  "Cup",
+  "Plate",
+  "Portion",
+  "Tray",
+  "Bag",
+  "Sachet",
+  "Carton",
+  "Box",
+  "Bundle",
+  "Pouch"
+];
+
 const inventoryRows = document.getElementById("inventoryRows");
 
 // Add first row on load
@@ -2769,7 +2791,7 @@ function addInventoryRow() {
 
     <td>
       <select class="form-control category" required>
-        <option value="">Select</option>
+        <option value="">Select Category</option>
         ${inventoryCategories
           .map(cat => `<option value="${cat}">${cat}</option>`)
           .join("")}
@@ -2782,6 +2804,15 @@ function addInventoryRow() {
 
     <td>
       <input type="number" class="form-control quantity" placeholder="Qty" min="0" required>
+    </td>
+
+    <td>
+      <select class="form-control measurement" required>
+        <option value="">Select Unit</option>
+        ${measurementUnits
+          .map(unit => `<option value="${unit}">${unit}</option>`)
+          .join("")}
+      </select>
     </td>
 
     <td>
@@ -2857,6 +2888,7 @@ function collectInventoryData() {
     category: row.querySelector(".category").value,
     price: Number(row.querySelector(".price").value || 0),
     quantity: Number(row.querySelector(".quantity").value),
+    measurement: row.querySelector(".measurement").value,
     lowStock: Number(row.querySelector(".low-stock").value || 0)
   }));
 
