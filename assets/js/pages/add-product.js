@@ -1,31 +1,35 @@
-// Menu data
 const menuCategories = [
-  { name: "Drinks", img: "assets/images/food-icon/pos1.png" },
-  { name: "Wine", img: "assets/images/food-icon/pos2.png" },
-  { name: "Liqueur", img: "assets/images/food-icon/pos3.png" },
-  { name: "Brandy", img: "assets/images/food-icon/pos4.png" },
-  { name: "Whisky", img: "assets/images/food-icon/pos5.png" },
-  { name: "Vodka", img: "assets/images/food-icon/pos6.png" },
-  { name: "Champagne", img: "assets/images/food-icon/pos7.png" },
-  { name: "Tots", img: "assets/images/food-icon/pos8.png" },
-  { name: "Beer", img: "assets/images/food-icon/pos9.png" },
-  { name: "Cocktails", img: "assets/images/food-icon/pos10.png" },
-  { name: "Swallow", img: "assets/images/food-icon/pos11.png" },
-  { name: "Soup", img: "assets/images/food-icon/pos12.png" },
-  { name: "Protein", img: "assets/images/food-icon/pos13.png" },
-  { name: "Pepper Soup", img: "assets/images/food-icon/pos14.png" },
-  { name: "Breakfast", img: "assets/images/food-icon/pos15.png" },
-  { name: "E3 Source", img: "assets/images/food-icon/pos16.png" },
-  { name: "Sea Food Dishes", img: "assets/images/food-icon/pos17.png" },
-  { name: "E3 Special", img: "assets/images/food-icon/pos18.png" },
-  { name: "Delicacies", img: "assets/images/food-icon/pos19.png" },
-  { name: "Pasta Dishes", img: "assets/images/food-icon/pos20.png" },
-  { name: "Rice", img: "assets/images/food-icon/pos21.png" },
-  { name: "Salad", img: "assets/images/food-icon/pos22.png" },
-  { name: "Egg Dishes", img: "assets/images/food-icon/pos23.png" },
-  { name: "Continental Fruits", img: "assets/images/food-icon/pos24.png" },
-  { name: "Mocktails", img: "assets/images/food-icon/pos25.png" },
-  { name: "Cereals", img: "assets/images/food-icon/pos26.png" },
+  // RAW FOOD
+  { name: "Grains & Cereals", img: "assets/images/inventory/grains.png" },
+  { name: "Tubers & Roots", img: "assets/images/inventory/tubers.png" },
+  { name: "Oils & Fats", img: "assets/images/inventory/oils.png" },
+  { name: "Spices & Seasonings", img: "assets/images/inventory/spices.png" },
+  { name: "Vegetables (Fresh)", img: "assets/images/inventory/vegetables.png" },
+  { name: "Fruits", img: "assets/images/inventory/fruits.png" },
+
+  // PROTEINS
+  { name: "Red Meat", img: "assets/images/inventory/meat.png" },
+  { name: "Poultry", img: "assets/images/inventory/poultry.png" },
+  { name: "Fish & Seafood", img: "assets/images/inventory/seafood.png" },
+
+  // SEMI-PROCESSED
+  { name: "Soup Bases & Sauces", img: "assets/images/inventory/soups.png" },
+
+  // DRINKS
+  { name: "Soft Drinks", img: "assets/images/inventory/softdrinks.png" },
+  { name: "Water", img: "assets/images/inventory/water.png" },
+  { name: "Beer & Stout", img: "assets/images/inventory/beer.png" },
+  { name: "Wine", img: "assets/images/inventory/wine.png" },
+  { name: "Spirits & Liquor", img: "assets/images/inventory/spirits.png" },
+
+  // PACKAGED
+  { name: "Noodles & Pasta", img: "assets/images/inventory/noodles.png" },
+  { name: "Canned & Packaged Foods", img: "assets/images/inventory/canned.png" },
+
+  // SUPPLIES
+  { name: "Packaging Materials", img: "assets/images/inventory/packaging.png" },
+  { name: "Cleaning Supplies", img: "assets/images/inventory/cleaning.png" },
+  { name: "Cooking Gas & Fuel", img: "assets/images/inventory/gas.png" }
 ];
 
 const products = [
@@ -2737,90 +2741,129 @@ const products = [
   }
 ];
 
-function renderMenuCategories() {
-  const select = document.getElementById("menuCategory");
+let inventoryCategories = [
+  "Grains & Cereals",
+  "Vegetables",
+  "Fruits",
+  "Meat",
+  "Fish & Seafood",
+  "Drinks",
+  "Alcoholic Beverages",
+  "Spices & Seasonings",
+  "Oils & Fats",
+  "Packaged Goods"
+];
 
-  if (!select) return;
+const inventoryRows = document.getElementById("inventoryRows");
 
-  select.innerHTML = `<option value="">Select Category</option>`;
+// Add first row on load
+addInventoryRow();
 
-  menuCategories.forEach(cat => {
-    const option = document.createElement("option");
-    option.value = cat.name;
-    option.textContent = cat.name;
-    select.appendChild(option);
+function addInventoryRow() {
+  const tr = document.createElement("tr");
+
+  tr.innerHTML = `
+    <td>
+      <input type="text" class="form-control product-name" placeholder="Product name" required>
+    </td>
+
+    <td>
+      <select class="form-control category" required>
+        <option value="">Select</option>
+        ${inventoryCategories
+          .map(cat => `<option value="${cat}">${cat}</option>`)
+          .join("")}
+      </select>
+    </td>
+
+    <td>
+      <input type="number" class="form-control price" placeholder="₦" min="0">
+    </td>
+
+    <td>
+      <input type="number" class="form-control quantity" placeholder="Qty" min="0" required>
+    </td>
+
+    <td>
+      <input type="number" class="form-control low-stock" placeholder="Alert" min="0">
+    </td>
+
+    <td class="text-center">
+      <button
+        type="button"
+        class="btn btn-sm btn-soft-danger remove-row"
+        onclick="removeRow(this)"
+      >
+        ✕
+      </button>
+    </td>
+  `;
+
+  inventoryRows.appendChild(tr);
+  updateRemoveButtons();
+}
+
+function removeRow(btn) {
+  const rows = inventoryRows.querySelectorAll("tr");
+
+  if (rows.length <= 1) return; // safety guard
+
+  btn.closest("tr").remove();
+  updateRemoveButtons();
+}
+
+function updateRemoveButtons() {
+  const rows = inventoryRows.querySelectorAll("tr");
+  const canRemove = rows.length > 1;
+
+  rows.forEach(row => {
+    const btn = row.querySelector(".remove-row");
+
+    btn.disabled = !canRemove;
+    btn.style.opacity = canRemove ? "1" : "0.4";
+    btn.style.cursor = canRemove ? "pointer" : "not-allowed";
   });
 }
 
-// Call once on page load
-renderMenuCategories();
+const receiptBox = document.getElementById("receiptBox");
+const receiptInput = document.getElementById("receiptInput");
+const receiptPreview = document.getElementById("receiptPreview");
+const placeholder = receiptBox.querySelector(".placeholder-text");
 
-const searchInput = document.getElementById("productSearch");
-const dropdown = document.getElementById("productDropdown");
-const previewImg = document.getElementById("productPreview");
-
-const DEFAULT_IMAGE = "assets/images/placeholder.png";
-
-searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase().trim();
-  dropdown.innerHTML = "";
-
-  if (!query) {
-    dropdown.style.display = "none";
-    return;
-  }
-
-  const matches = products.filter(p =>
-    p.name.toLowerCase().includes(query)
-  );
-
-  if (!matches.length) {
-    dropdown.style.display = "none";
-    return;
-  }
-
-  matches.forEach(product => {
-    const item = document.createElement("button");
-    item.type = "button";
-    item.className = "list-group-item list-group-item-action d-flex align-items-center gap-2";
-
-    item.innerHTML = `
-      <img src="${product.image || DEFAULT_IMAGE}"
-           style="width:40px;height:40px;object-fit:cover;border-radius:6px;">
-      <div class="text-start">
-        <div class="fw-semibold">${product.name}</div>
-        <small class="text-muted">
-          ₦${product.price.toLocaleString()}
-        </small>
-      </div>
-    `;
-
-    item.onclick = () => selectProduct(product);
-    dropdown.appendChild(item);
-  });
-
-  dropdown.style.display = "block";
+receiptBox.addEventListener("click", () => {
+  receiptInput.click();
 });
 
-function selectProduct(product) {
-  // Fill input
-  searchInput.value = product.name;
+receiptInput.addEventListener("change", () => {
+  const file = receiptInput.files[0];
+  if (!file) return;
 
-  // Show preview
-  previewImg.src = product.image || DEFAULT_IMAGE;
+  const reader = new FileReader();
+  reader.onload = () => {
+    receiptPreview.src = reader.result;
+    receiptPreview.style.display = "block";
+    placeholder.style.display = "none";
+  };
+  reader.readAsDataURL(file);
+});
 
-  // Hide dropdown
-  dropdown.style.display = "none";
+function collectInventoryData() {
+  const supplier = document.getElementById("supplierName").value;
 
-  // OPTIONAL: store selected product for submit
-  window.selectedProduct = product;
+  const rows = document.querySelectorAll("#inventoryRows tr");
 
-  console.log("Selected:", product);
+  const items = [...rows].map(row => ({
+    name: row.querySelector(".product-name").value,
+    category: row.querySelector(".category").value,
+    price: Number(row.querySelector(".price").value || 0),
+    quantity: Number(row.querySelector(".quantity").value),
+    lowStock: Number(row.querySelector(".low-stock").value || 0)
+  }));
+
+  return {
+    supplier,
+    items,
+    createdAt: new Date().toISOString()
+  };
 }
 
-document.addEventListener("click", e => {
-  if (!e.target.closest("#productSearch") &&
-      !e.target.closest("#productDropdown")) {
-    dropdown.style.display = "none";
-  }
-});
