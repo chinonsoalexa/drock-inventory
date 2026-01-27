@@ -3118,36 +3118,54 @@ function renderMenu(products, category = "all", reset = false) {
     const qtyInCart = cartState.find(c => c.id === item.id)?.qty || 0;
 
     menuContainer.innerHTML += `
-      <div class="col-xl-4 col-lg-6 col-md-6 mb-4">
-        <div class="card h-100" data-id="${item.id}">
-          <div class="card-body">
-            <div class="menu-image-wrapper position-relative rounded bg-light">
-              <img src="${item.image}" alt="${item.name}" loading="lazy">
-            </div>
+      <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-3">
+        <div class="card cardd" data-id="${item.id}">
+          
+          <div class="card-body cardd-body py-2">
 
-            <div class="d-flex align-items-center justify-content-between gap-2 mt-3">
-              <div>
-                <a href="#!" class="text-dark fs-16 fw-semibold">${highlightMatch(item.name, searchQuery)}</a>
-                <p class="fs-5 fw-normal mb-0">${highlightMatch(item.category, searchQuery)}</p>
+            <div class="d-flex gap-3 align-items-start">
 
-                <!-- ONE quantity element per card -->
+              <!-- SMALL IMAGE -->
+              <div class="menu-image-wrapper position-relative rounded bg-light flex-shrink-0 add-to-cart" data-id="${item.id}">
+                <img src="${item.image}" alt="${item.name}" loading="lazy">
+              </div>
+
+              <!-- CONTENT -->
+              <div class="flex-grow-1">
+
+                <a href="#!" class="text-dark fs-15 fw-semibold d-block mb-1 add-to-cart" data-id="${item.id}">
+                  ${highlightMatch(item.name, searchQuery)}
+                </a>
+
+                <p class="fs-6 mb-1 add-to-cart" data-id="${item.id}">
+                  ${highlightMatch(item.category, searchQuery)}
+                </p>
+
+                <div class="d-flex justify-content-between align-items-center add-to-cart" data-id="${item.id}">
+                  <span class="fw-bold fs-6">
+                    ${formatNumberToNaira(item.price)}
+                  </span>
+
+                  <button
+                    class="btn btn-soft-primary btn-sm add-to-cart"
+                    data-id="${item.id}">
+                    <i class="ri-shopping-basket-2-line"></i>
+                  </button>
+                </div>
+
                 <p class="text-success fw-semibold mb-0 added-qty">
                   ${qtyInCart ? `Added: ${qtyInCart}` : ''}
                 </p>
+
               </div>
             </div>
-          </div>
 
-          <div class="card-footer d-flex justify-content-between">
-            <span>${formatNumberToNaira(item.price)}</span>
-            <button class="btn btn-soft-primary add-to-cart" data-id="${item.id}">
-              <i class="ri-shopping-basket-2-line"></i>
-            </button>
           </div>
         </div>
       </div>
     `;
   });
+
 
   lastIndex += batchSize;
 
