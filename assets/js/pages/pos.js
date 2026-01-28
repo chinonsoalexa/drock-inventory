@@ -2917,27 +2917,40 @@ function renderCart() {
   }
 
   cartState.forEach(item => {
+    const qtyInCart = item.qty || 1; // fallback to 1 if undefined
     const { priceText, quantityText } = formatInventoryDisplay(item);
 
     cartContainer.innerHTML += `
       <div class="mt-3 border rounded p-2" data-id="${item.ID}">
         <div class="d-flex gap-3 align-items-center">
+
+          <!-- Category Icon -->
           <i class="${getCategoryIcon(item.category)} fs-2 ${getCategoryColor(item.category)}"></i>
+
+          <!-- Item Info -->
           <div>
             <strong>${item.name}</strong>
             <p class="mb-1">${item.category}</p>
           </div>
 
-          <div class="ms-auto input-step d-flex">
+          <!-- Quantity Controls -->
+          <div class="ms-auto input-step d-flex align-items-center">
             <button class="minus btn btn-light" data-id="${item.ID}">-</button>
-            <input value="1" min="1" max="${item.quantity_bal}" class="form-control text-center mx-1 cart-qty-input" data-id="${item.ID}">
+            <input 
+              type="number"
+              value="${qtyInCart}" 
+              min="1" 
+              max="${item.quantity_bal}" 
+              class="form-control text-center mx-1 cart-qty-input" 
+              data-id="${item.ID}" 
+              data-max="${item.quantity_bal}">
             <button class="plus btn btn-light" data-id="${item.ID}">+</button>
           </div>
         </div>
 
+        <!-- Stock / Divider -->
         <hr>
-
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between align-items-center">
           <strong class="cart-item-price" data-id="${item.ID}">
             ${quantityText}
           </strong>
@@ -2945,11 +2958,26 @@ function renderCart() {
             <i class="ri-delete-bin-5-line"></i>
           </button>
         </div>
+
+        <!-- Optional: Stock Info -->
+        <small class="text-muted d-block mt-1">
+          Available: ${item.quantity_bal} ${item.measurement}
+        </small>
       </div>
     `;
   });
 
   renderSummary();
+
+  // 🔹 Enforce max quantity dynamically
+  document.querySelectorAll(".cart-qty-input").forEach(input => {
+    input.addEventListener("input", e => {
+      const max = parseInt(input.dataset.max, 10);
+      let val = parseInt(input.value, 10);
+      if (isNaN(val) || val < 1) input.value = 1;
+      else if (val > max) input.value = max;
+    });
+  });
 }
 
 document.addEventListener("click", e => {
