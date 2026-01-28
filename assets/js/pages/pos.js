@@ -3037,6 +3037,17 @@ function formatNumberToNaira(number) {
     }).format(number);
 }
 
+function formatInventoryDisplay(item) {
+  const pricePerUnit = formatNumberToNaira(item.unit_price);
+  const quantity = item.quantity_bal ?? item.quantity_in;
+  const unit = item.measurement;
+
+  return {
+    priceText: `${pricePerUnit} / ${unit}`,
+    quantityText: `${quantity} ${unit} available`
+  };
+}
+
 function updateCartItemPrice(id) {
   const item = cartState.find(i => i.id === id);
   if (!item) return;
@@ -3067,6 +3078,13 @@ function updateAddedQty(productId) {
       qtyEl.textContent = ''; // hide if removed
     }
   });
+}
+
+function getStockClass(item) {
+  if (item.quantity_bal <= item.low_stock && item.low_stock > 0) {
+    return "text-danger fw-bold";
+  }
+  return "text-success";
 }
 
 function renderMenu(products, category = "all", reset = false) {
@@ -3113,6 +3131,7 @@ function renderMenu(products, category = "all", reset = false) {
   // 6️⃣ Render items
   nextBatch.forEach(item => {
     const qtyInCart = cartState.find(c => c.id === item.ID)?.qty || 0;
+    const { priceText, quantityText } = formatInventoryDisplay(item);
 
     menuContainer.innerHTML += `
       <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-3">
@@ -3138,9 +3157,9 @@ function renderMenu(products, category = "all", reset = false) {
                   ${highlightMatch(item.category, searchQuery)}
                 </p>
 
-                <div class="d-flex justify-content-between align-items-center add-to-cart" data-id="${item.ID}">
+                <div class="d-flex justify-content-between align-items-center ${getStockClass(item)} add-to-cart" data-id="${item.ID}">
                   <span class="fw-bold fs-6">
-                    ${formatNumberToNaira(item.unit_price)}
+                    ${quantityText}
                   </span>
 
                   <button
