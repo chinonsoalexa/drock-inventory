@@ -2924,7 +2924,7 @@ function validateInventoryPayload(payload) {
       return `Row ${row}: Measurement unit is required`;
     }
 
-    if (item.quantity <= 0 || isNaN(item.quantity)) {
+    if (item.quantity_in <= 0 || isNaN(item.quantity_in)) {
       return `Row ${row}: Quantity must be greater than 0`;
     }
 
