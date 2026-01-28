@@ -2744,47 +2744,6 @@ let lastIndex = 0;
 let searchQuery = "";
 let retryInterval = null;
 
-const ITEMS_PER_PAGE = 12;
-const track = document.getElementById("menuTrack");
-
-// Render menu pages
-function renderCategories() {
-  for (let i = 0; i < menuCategories.length; i += ITEMS_PER_PAGE) {
-    const page = document.createElement("div");
-    page.className = "menu-page";
-
-    const row = document.createElement("div");
-    row.className = "row";
-
-    menuCategories.slice(i, i + ITEMS_PER_PAGE).forEach(item => {
-      row.innerHTML += `
-        <div class="col-xl-4 col-lg-4 col-md-6">
-          <div class="card">
-            <div class="card-body p-2">
-              <div class="d-flex align-items-center justify-content-between gap-2">
-                <div class="d-flex align-items-center gap-2">
-                  <div class="rounded bg-warning-subtle border avatar d-flex align-items-center justify-content-center">
-                    <img src="${item.img}" alt="">
-                  </div>
-                  <span class="fw-semibold fs-16">${item.name}</span>
-                </div>
-                <a href="#!" class="menu-eye" data-name="${item.name}">
-                  <i class="ri-eye-line fs-16"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-    });
-
-    page.appendChild(row);
-    track.appendChild(page);
-  }
-}
-
-renderCategories();
-
 // Slider logic
 let currentPage = 0;
 const pages = document.querySelectorAll(".menu-page");
@@ -2792,21 +2751,6 @@ const pages = document.querySelectorAll(".menu-page");
 function updateSlide() {
   track.style.transform = `translateX(-${currentPage * 100}%)`;
 }
-
-// Arrow buttons
-document.getElementById("nextBtn").addEventListener("click", () => {
-  if (currentPage < pages.length - 1) {
-    currentPage++;
-    updateSlide();
-  }
-});
-
-document.getElementById("prevBtn").addEventListener("click", () => {
-  if (currentPage > 0) {
-    currentPage--;
-    updateSlide();
-  }
-});
 
 // Eye click event
 document.addEventListener("click", e => {
@@ -2864,7 +2808,7 @@ function saveCart() {
 }
 
 async function addToCart(product) {
-  // 1️⃣ Update cart state
+  // 1️⃣ Update Inventory state
   const existing = cartState.find(i => i.id === product.id);
 
   if (existing) {
@@ -2910,7 +2854,7 @@ function renderCart() {
     cartContainer.innerHTML = `
       <div class="text-center py-5">
         <i class="ri-shopping-cart-line fs-1 text-muted"></i>
-        <p class="mt-2 fw-semibold text-muted">Your cart is empty</p>
+        <p class="mt-2 fw-semibold text-muted">Your Inventory is empty</p>
       </div>
     `;
     renderSummary();
@@ -3470,7 +3414,7 @@ document.getElementById("cancelCart").addEventListener("click", (e) => {
   if (confirm("Do you want to clear the cart?")) {
     cartState = [];
     showNetworkBanner({
-      text: "✅ Cart cleared.",
+      text: "✅ Inventory cleared.",
       bg: "#E2E3E5",
       color: "#41464B"
     });
@@ -3485,9 +3429,9 @@ placeOrderBtn.addEventListener("click", async (e) => {
   e.preventDefault();
 
   // 1️⃣ Validate cart
-  if (!cartData.length) {
+  if (!cartState.length) {
     showNetworkBanner({
-      text: "⚠️ Your cart is empty.",
+      text: "⚠️ Your Inventory is empty.",
       bg: "#F8D7DA",
       color: "#842029"
     });
@@ -3512,8 +3456,9 @@ placeOrderBtn.addEventListener("click", async (e) => {
     // await fakePlaceOrderRequest(cartData);
 
     // 5️⃣ Success
-    cartData = [];
-    updateCartUI?.();
+    cartState = [];
+    saveCart();
+    renderCart();
 
     showDesktopNotification(
       "✅ Order placed",
@@ -3537,3 +3482,147 @@ placeOrderBtn.addEventListener("click", async (e) => {
     setButtonLoading(placeOrderBtn, false);
   }
 });
+
+const SAVED_DB_NAME = "e3_offline_inventory_save_db";
+const SAVED_DB_VERSION = 2;
+const SAVED_STORE = "saved_carts";
+
+function openSavedDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(SAVED_DB_NAME, SAVED_DB_VERSION);
+    request.onupgradeneeded = e => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains(SAVED_STORE)) {
+        db.createObjectStore(SAVED_STORE, {
+          keyPath: "id",
+          autoIncrement: true
+        });
+      }
+    };
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function saveCartLocally(cart, label = null) {
+  if (!cart.length) return;
+
+  // If no label provided, ask the user
+  if (!label) {
+    label = prompt("Enter Table / Customer Name for this cart:", `Table ${new Date().toLocaleTimeString()}`);
+    if (!label) {
+      label = `Saved at ${new Date().toLocaleTimeString()}`; // fallback
+    }
+  }
+
+  const db = await openSavedDB();
+  const tx = db.transaction(SAVED_STORE, "readwrite");
+  tx.objectStore(SAVED_STORE).add({
+    cart,
+    label,
+    createdAt: Date.now()
+  });
+  tx.oncomplete = () => renderSavedCarts();
+}
+
+async function getSavedCarts() {
+  const db = await openSavedDB();
+  return new Promise(resolve => {
+    const tx = db.transaction(SAVED_STORE, "readonly");
+    const store = tx.objectStore(SAVED_STORE);
+    const req = store.getAll();
+    req.onsuccess = () => resolve(req.result);
+  });
+}
+
+async function removeSavedCart(id) {
+  const db = await openSavedDB();
+  const tx = db.transaction(SAVED_STORE, "readwrite");
+  tx.objectStore(SAVED_STORE).delete(id);
+  tx.oncomplete = () => renderSavedCarts();
+}
+
+async function renderSavedCarts() {
+  const container = document.getElementById("savedCartsMenu");
+  const carts = await getSavedCarts();
+
+  container.innerHTML = "";
+
+  if (!carts.length) {
+    container.innerHTML = `<div class="text-muted text-center fs-13">No saved carts</div>`;
+    return;
+  }
+
+  carts.forEach(c => {
+    const div = document.createElement("div");
+    div.className = "d-flex justify-content-between align-items-center mb-2 p-2 border rounded";
+    div.innerHTML = `
+      <span class="text-truncate">${c.label}</span>
+      <div class="d-flex gap-1">
+        <button class="btn btn-sm btn-success restore-cart-btn" data-id="${c.id}">
+          <i class="ri-folder-check-line"></i>
+        </button>
+        <button class="btn btn-sm btn-danger delete-cart-btn" data-id="${c.id}">
+          <i class="ri-delete-bin-5-line"></i>
+        </button>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+document.getElementById("saveCartBtn").addEventListener("click", async () => {
+  if (!cartState.length) return alert("Inventory is empty!");
+  await saveCartLocally(cartState);
+    if (!cartState.length) return;
+
+    cartState = [];
+    saveCart();
+    renderCart();
+  showNetworkBanner({
+    text: "✅ Inventory saved locally.",
+    bg: "#D1E7DD",
+    color: "#0F5132"
+  });
+});
+
+document.addEventListener("click", async e => {
+  const restoreBtn = e.target.closest(".restore-cart-btn");
+  if (restoreBtn) {
+    const id = Number(restoreBtn.dataset.id);
+    const carts = await getSavedCarts();
+    const saved = carts.find(c => c.id === id);
+    if (!saved) return;
+
+    // 🔹 Step 1: auto-save current Inventory if it has items (prompt user for label)
+    if (cartState.length) {
+      await saveCartLocally(cartState); // prompt will appear here
+    }
+
+    // 🔹 Step 2: replace cartState with saved Inventory
+    cartState = saved.cart;
+    saveCart();
+    renderCart();
+
+    showNetworkBanner({
+      text: "✅ Inventory restored. Previous Inventory auto-saved.",
+      bg: "#D1E7DD",
+      color: "#0F5132"
+    });
+  }
+
+  const deleteBtn = e.target.closest(".delete-cart-btn");
+  if (deleteBtn) {
+    const id = Number(deleteBtn.dataset.id);
+    if (confirm("Delete this saved cart?")) {
+      await removeSavedCart(id);
+      showNetworkBanner({
+        text: "🗑️ Saved Inventory deleted.",
+        bg: "#FFF3CD",
+        color: "#664D03"
+      });
+    }
+  }
+});
+
+renderSavedCarts();

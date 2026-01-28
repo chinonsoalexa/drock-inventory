@@ -2899,3 +2899,124 @@ function collectInventoryData() {
   };
 }
 
+function validateInventoryPayload(payload) {
+  if (!payload.supplier.trim()) {
+    return "Supplier name is required";
+  }
+
+  if (!payload.items.length) {
+    return "At least one inventory item is required";
+  }
+
+  for (let i = 0; i < payload.items.length; i++) {
+    const item = payload.items[i];
+    const row = i + 1;
+
+    if (!item.name.trim()) {
+      return `Row ${row}: Product name is required`;
+    }
+
+    if (!item.category) {
+      return `Row ${row}: Category is required`;
+    }
+
+    if (!item.measurement) {
+      return `Row ${row}: Measurement unit is required`;
+    }
+
+    if (item.quantity <= 0 || isNaN(item.quantity)) {
+      return `Row ${row}: Quantity must be greater than 0`;
+    }
+
+    if (item.price < 0 || isNaN(item.price)) {
+      return `Row ${row}: Price must be 0 or greater`;
+    }
+
+    if (item.lowStock < 0 || isNaN(item.lowStock)) {
+      return `Row ${row}: Low stock must be 0 or greater`;
+    }
+  }
+
+  return null; // ✅ all good
+}
+
+function validateReceiptImage(file) {
+  const allowedTypes = ["image/png", "image/jpeg", "image/jpg"];
+  const maxSize = 3 * 1024 * 1024; // 3MB
+
+  if (!allowedTypes.includes(file.type)) {
+    return "Receipt must be PNG or JPG";
+  }
+
+  if (file.size > maxSize) {
+    return "Receipt image must be less than 3MB";
+  }
+
+  return null;
+}
+
+document.getElementById("saveInventory").addEventListener("click", async (e) => {
+  e.preventDefault();
+
+  const inventoryPayload = collectInventoryData();
+
+  // 🔍 Validate payload
+  const validationError = validateInventoryPayload(inventoryPayload);
+  if (validationError) {
+    alert(validationError);
+    return;
+  }
+
+  // 🔍 Validate receipt (optional)
+  if (receiptInput.files.length > 0) {
+    const imageError = validateReceiptImage(receiptInput.files[0]);
+    if (imageError) {
+      alert(imageError);
+      return;
+    }
+  }
+
+  const formData = new FormData();
+  formData.append("payload", JSON.stringify(inventoryPayload));
+
+  if (receiptInput.files.length > 0) {
+    formData.append("images", receiptInput.files[0]);
+  }
+
+  try {
+    const res = await fetch("http://api.e3restaurant.com/create-inventory", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Upload failed");
+
+    alert("Inventory saved successfully ✅");
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+});
+
+document.getElementById("cancelInventory").addEventListener("click", () => {
+  if (!confirm("Discard inventory changes?")) return;
+
+  // 1️⃣ Clear supplier name
+  const supplierInput = document.getElementById("supplierName");
+  if (supplierInput) supplierInput.value = "";
+
+  // 2️⃣ Remove all inventory rows
+  inventoryRows.innerHTML = "";
+
+  // 3️⃣ Add one fresh row
+  addInventoryRow();
+
+  // 4️⃣ Clear receipt image input + preview
+  receiptInput.value = "";
+  receiptPreview.src = "";
+  receiptPreview.style.display = "none";
+
+  // 5️⃣ Restore placeholder text
+  placeholder.style.display = "block";
+});

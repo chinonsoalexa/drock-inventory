@@ -55,6 +55,21 @@
                color: #98a2b3;
                font-size: 14px;
           }
+
+          .image-upload-box {
+               cursor: pointer;
+               border: 2px dashed #ccc;
+               padding: 20px;
+               text-align: center;
+               position: relative;
+          }
+
+          .image-upload-box img {
+               max-width: 100%;
+               max-height: 200px;
+               display: none;
+               object-fit: contain;
+          }
      </style>
 </head>
 
@@ -82,32 +97,32 @@
                     <ul class="navbar-nav" id="navbar-nav">
 
                          <li class="menu-item">
-  <a class="menu-link" href="index.html">
-    <span class="nav-icon">
-      <i class="ri-inbox-line"></i>
-    </span>
-    <span class="nav-text">Stock Issue</span>
-  </a>
-</li>
+                              <a class="menu-link" href="index.html">
+                                   <span class="nav-icon">
+                                        <i class="ri-inbox-line"></i>
+                                   </span>
+                                   <span class="nav-text">Stock Issue</span>
+                              </a>
+                         </li>
 
                          <li class="menu-item">
-  <a class="menu-link" href="orders.html">
-    <span class="nav-icon">
-      <i class="ri-time-line"></i>
-    </span>
-    <span class="nav-text">Issued Stock</span>
-  </a>
-</li>
+                              <a class="menu-link" href="orders.html">
+                                   <span class="nav-icon">
+                                        <i class="ri-time-line"></i>
+                                   </span>
+                                   <span class="nav-text">Issued Stock</span>
+                              </a>
+                         </li>
 
 
                          <li class="menu-item">
-  <a class="menu-link" href="product-listing.html">
-    <span class="nav-icon">
-      <i class="ri-store-line"></i>
-    </span>
-    <span class="nav-text">Available Stock</span>
-  </a>
-</li>
+                              <a class="menu-link" href="product-listing.html">
+                                   <span class="nav-icon">
+                                        <i class="ri-store-line"></i>
+                                   </span>
+                                   <span class="nav-text">Available Stock</span>
+                              </a>
+                         </li>
 
 
                          <li class="menu-item">
@@ -130,9 +145,9 @@
 
 
 
-                         
 
-                         
+
+
 
                          <li class="menu-item">
                               <a class="menu-link" href="pages-faqs.html">
@@ -294,8 +309,8 @@
 
                               <!-- Page Actions -->
                               <div class="d-flex justify-content-end gap-2 mt-3">
-                                   <button class="btn btn-outline-secondary">Cancel</button>
-                                   <button class="btn btn-primary">Save Inventory</button>
+                                   <button class="btn btn-outline-secondary" id="cancelInventory">Cancel</button>
+                                   <button class="btn btn-primary" id="saveInventory">Save Inventory</button>
                               </div>
 
                          </div>
