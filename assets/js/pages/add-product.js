@@ -3012,6 +3012,25 @@ saveBtn.addEventListener("click", async (e) => {
     if (!res.ok) throw new Error(data.error || "Upload failed");
 
     alert("Inventory saved successfully ✅");
+      
+    // 1️⃣ Clear supplier name
+    const supplierInput = document.getElementById("supplierName");
+    if (supplierInput) supplierInput.value = "";
+
+    // 2️⃣ Remove all inventory rows
+    inventoryRows.innerHTML = "";
+
+    // 3️⃣ Add one fresh row
+    addInventoryRow();
+
+    // 4️⃣ Clear receipt image input + preview
+    receiptInput.value = "";
+    receiptPreview.src = "";
+    receiptPreview.style.display = "none";
+
+    // 5️⃣ Restore placeholder text
+    placeholder.style.display = "block";
+    
   } catch (err) {
     console.error(err);
     alert(err.message);
