@@ -849,7 +849,7 @@ issueStockForm.addEventListener("submit", async e => {
       if (file) formData.append("image", file);
 
       // Call your IssueStock API
-      const res = await fetch("/api/issue-stock", {
+      const res = await fetch("https://api.e3restaurant.com/issue-stock", {
         method: "POST",
         body: formData
       });
