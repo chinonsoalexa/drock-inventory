@@ -3277,11 +3277,11 @@ async function fetchInventory({
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "Failed to fetch inventory");
 
-    products = reset
+    products1 = reset
       ? data.success
-      : [...products, ...data.success];
+      : [...products1, ...data.success];
 
-    renderMenu(products, "all", reset);
+    renderMenu(products1, "all", reset);
 
     currentPage = data.pagination.CurrentPage;
     updateLoadMoreBtn(data.pagination);
@@ -3311,7 +3311,7 @@ function updateLoadMoreBtn(pagination) {
 
 document.getElementById("view-more-btn")?.addEventListener("click", () => {
   fetchInventory({
-    page: currentPage + 1
+    page: currentPage1 + 1
   });
 });
 
