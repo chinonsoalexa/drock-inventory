@@ -46,6 +46,9 @@ const CATEGORY_COLOR_MAP = {
   "Cleaning Supplies": "text-secondary"
 };
 
+const cartContainer = document.getElementById("cartItems");
+const totalItemsEl = document.getElementById("totalItems");
+
 let products1 = [];
 let currentPage1 = 1;
 const pageLimit = 15;
@@ -144,9 +147,6 @@ cartContainer.addEventListener("input", e => {
   saveCart();
   renderSummary();
 });
-
-const cartContainer = document.getElementById("cartItems");
-const totalItemsEl = document.getElementById("totalItems");
 
 const CART_KEY = "e3_cart_inventory";
 
