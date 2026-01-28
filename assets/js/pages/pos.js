@@ -165,32 +165,27 @@ function saveCart() {
 }
 
 async function addToCart(product) {
-  // 1️⃣ Update Inventory state
-  const existing = cartState.find(i => i.id === product.id);
+  // match using ID (uppercase) because that’s what your products use
+  const existing = cartState.find(i => i.ID === product.ID);
 
   if (existing) {
-    existing.qty++;
+    if (existing.qty < existing.quantity_bal) existing.qty++; // enforce stock limit
   } else {
     cartState.push({ ...product, qty: 1 });
   }
 
-  // 2️⃣ Save cart
   saveCart();
 
-  // 3️⃣ Update the “Added: X” badge live
-  updateAddedQty(product.id);
-  updateCartItemPrice(product.id);
+  // Update “Added: X” badge in menu
+  updateAddedQty(product.ID);
+  updateCartItemPrice(product.ID);
 
-  // 4️⃣ Update the cart sidebar UI
   renderCart();
 
-  // 5️⃣ Try server sync
+  // optional: server sync
   try {
     await uploadCartItem(product);
-    // console.log("Uploaded to server");
-  } catch (err) {
-    
-  }
+  } catch {}
 }
 
 document.addEventListener("click", e => {
