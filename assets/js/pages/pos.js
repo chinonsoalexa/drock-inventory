@@ -2739,36 +2739,36 @@ const products = [
 
 const CATEGORY_ICON_MAP = {
   // RAW FOOD
-  "Grains & Cereals": "ri-seedling-line",
-  "Tubers & Roots": "ri-plant-line",
-  "Vegetables (Fresh)": "ri-leaf-line",
-  "Fruits": "ri-apple-line",
-  "Oils & Fats": "ri-oil-line",
-  "Spices & Seasonings": "ri-fire-line",
+  "Grains & Cereals": "fa-solid fa-wheat-awn",   // or fa-seedling
+  "Tubers & Roots": "fa-solid fa-carrot",
+  "Vegetables (Fresh)": "fa-solid fa-leaf",
+  "Fruits": "fa-solid fa-apple-whole",
+  "Oils & Fats": "fa-solid fa-oil-can",
+  "Spices & Seasonings": "fa-solid fa-pepper-hot",
 
   // PROTEINS
-  "Red Meat": "ri-steak-line",
-  "Poultry": "ri-chicken-line",
-  "Fish & Seafood": "ri-fish-line",
+  "Red Meat": "fa-solid fa-drumstick-bite",
+  "Poultry": "fa-solid fa-egg",                  // closest to poultry
+  "Fish & Seafood": "fa-solid fa-fish",
 
   // SEMI / PROCESSED
-  "Soup Bases & Sauces": "ri-bowl-line",
-  "Noodles & Pasta": "ri-ramen-line",
-  "Canned & Packaged Foods": "ri-archive-line",
+  "Soup Bases & Sauces": "fa-solid fa-bowl-food",
+  "Noodles & Pasta": "fa-solid fa-bowl-rice",   // closest
+  "Canned & Packaged Foods": "fa-solid fa-box-open",
 
   // DRINKS
-  "Water": "ri-water-flash-line",
-  "Soft Drinks": "ri-cup-line",
-  "Juices & Smoothies": "ri-goblet-line",
-  "Hot Beverages": "ri-cup-hot-line",
-  "Beer & Stout": "ri-beer-line",
-  "Wine": "ri-wine-line",
-  "Spirits & Liquor": "ri-glass-line",
+  "Water": "fa-solid fa-droplet",
+  "Soft Drinks": "fa-solid fa-cup-straw",
+  "Juices & Smoothies": "fa-solid fa-glass-whiskey", // closest
+  "Hot Beverages": "fa-solid fa-mug-hot",
+  "Beer & Stout": "fa-solid fa-beer-mug-empty",
+  "Wine": "fa-solid fa-wine-bottle",
+  "Spirits & Liquor": "fa-solid fa-wine-glass",
 
   // SUPPLIES
-  "Packaging Materials": "ri-box-3-line",
-  "Cleaning Supplies": "ri-brush-line",
-  "Cooking Gas & Fuel": "ri-fire-fill"
+  "Packaging Materials": "fa-solid fa-box",
+  "Cleaning Supplies": "fa-solid fa-broom",
+  "Cooking Gas & Fuel": "fa-solid fa-fire"
 };
 
 function getCategoryIcon(category) {
