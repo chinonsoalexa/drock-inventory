@@ -2742,16 +2742,37 @@ const products = [
 ];
 
 let inventoryCategories = [
+  // RAW FOOD
   "Grains & Cereals",
-  "Vegetables",
+  "Tubers & Roots",
+  "Vegetables (Fresh)",
   "Fruits",
-  "Meat",
-  "Fish & Seafood",
-  "Drinks",
-  "Alcoholic Beverages",
-  "Spices & Seasonings",
   "Oils & Fats",
-  "Packaged Goods"
+  "Spices & Seasonings",
+
+  // PROTEINS
+  "Red Meat",
+  "Poultry",
+  "Fish & Seafood",
+
+  // SEMI / PROCESSED
+  "Soup Bases & Sauces",
+  "Noodles & Pasta",
+  "Canned & Packaged Foods",
+
+  // DRINKS
+  "Water",
+  "Soft Drinks",
+  "Juices & Smoothies",
+  "Hot Beverages",
+  "Beer & Stout",
+  "Wine",
+  "Spirits & Liquor",
+
+  // SUPPLIES (NON-FOOD)
+  "Packaging Materials",
+  "Cleaning Supplies",
+  "Cooking Gas & Fuel"
 ];
 
 const measurementUnits = [
@@ -3030,7 +3051,7 @@ saveBtn.addEventListener("click", async (e) => {
 
     // 5️⃣ Restore placeholder text
     placeholder.style.display = "block";
-    
+
   } catch (err) {
     console.error(err);
     alert(err.message);

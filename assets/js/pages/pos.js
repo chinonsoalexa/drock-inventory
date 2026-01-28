@@ -2737,6 +2737,62 @@ const products = [
   }
 ]
 
+const CATEGORY_ICON_MAP = {
+  // RAW FOOD
+  "Grains & Cereals": "ri-seedling-line",
+  "Tubers & Roots": "ri-plant-line",
+  "Vegetables (Fresh)": "ri-leaf-line",
+  "Fruits": "ri-apple-line",
+  "Oils & Fats": "ri-oil-line",
+  "Spices & Seasonings": "ri-fire-line",
+
+  // PROTEINS
+  "Red Meat": "ri-steak-line",
+  "Poultry": "ri-chicken-line",
+  "Fish & Seafood": "ri-fish-line",
+
+  // SEMI / PROCESSED
+  "Soup Bases & Sauces": "ri-bowl-line",
+  "Noodles & Pasta": "ri-ramen-line",
+  "Canned & Packaged Foods": "ri-archive-line",
+
+  // DRINKS
+  "Water": "ri-water-flash-line",
+  "Soft Drinks": "ri-cup-line",
+  "Juices & Smoothies": "ri-goblet-line",
+  "Hot Beverages": "ri-cup-hot-line",
+  "Beer & Stout": "ri-beer-line",
+  "Wine": "ri-wine-line",
+  "Spirits & Liquor": "ri-glass-line",
+
+  // SUPPLIES
+  "Packaging Materials": "ri-box-3-line",
+  "Cleaning Supplies": "ri-brush-line",
+  "Cooking Gas & Fuel": "ri-fire-fill"
+};
+
+function getCategoryIcon(category) {
+  return CATEGORY_ICON_MAP[category] || "ri-store-2-line";
+}
+
+const CATEGORY_COLOR_MAP = {
+  "Vegetables (Fresh)": "text-success",
+  "Fruits": "text-warning",
+  "Red Meat": "text-danger",
+  "Fish & Seafood": "text-info",
+  "Beer & Stout": "text-warning",
+  "Spirits & Liquor": "text-dark",
+  "Cleaning Supplies": "text-secondary"
+};
+
+let products1 = [];
+let currentPage1 = 1;
+const pageLimit = 15;
+
+function getCategoryColor(category) {
+  return CATEGORY_COLOR_MAP[category] || "text-primary";
+}
+
 let currentCategory = "all";
 let productsToShow = [];
 let batchSize = 21; // 3 rows of 7 items
@@ -2865,7 +2921,7 @@ function renderCart() {
     cartContainer.innerHTML += `
       <div class="mt-3 border rounded p-2" data-id="${item.id}">
         <div class="d-flex gap-3 align-items-center">
-          <img src="${item.image}" class="avatar-xl rounded bg-light">
+          <i class="${getCategoryIcon(item.category)} fs-2 ${getCategoryColor(item.category)}"></i>
           <div>
             <strong>${item.name}</strong>
             <p class="mb-1">${item.category}</p>
@@ -3071,7 +3127,7 @@ function renderMenu(products, category = "all", reset = false) {
 
               <!-- SMALL IMAGE -->
               <div class="menu-image-wrapper position-relative rounded bg-light flex-shrink-0 add-to-cart" data-id="${item.id}">
-                <img src="${item.image}" alt="${item.name}" loading="lazy">
+                <i class="${getCategoryIcon(item.category)} fs-2 ${getCategoryColor(item.category)}"></i>
               </div>
 
               <!-- CONTENT -->
@@ -3146,7 +3202,77 @@ document.getElementById("view-more-btn").addEventListener("click", () => {
 });
 
 // Initial load
-renderMenu(products, "all", true);
+// renderMenu(products, "all", true);
+async function fetchInventory({
+  category = "",
+  search = "",
+  supplier = "",
+  fromDate = "",
+  toDate = "",
+  page = 1,
+  reset = false
+} = {}) {
+  try {
+    showMenuLoader();
+
+    const params = new URLSearchParams({
+      page,
+      limit: pageLimit
+    });
+
+    if (category) params.append("category", category);
+    if (search) params.append("search", search);
+    if (supplier) params.append("supplier", supplier);
+    if (fromDate) params.append("from_date", fromDate);
+    if (toDate) params.append("to_date", toDate);
+
+    const res = await fetch(
+      `https://api.e3restaurant.com/get-inventory?${params.toString()}`,
+      {
+        credentials: "include" // IMPORTANT since you use middleware
+      }
+    );
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Failed to fetch inventory");
+
+    products = reset
+      ? data.success
+      : [...products, ...data.success];
+
+    renderMenu(products, "all", reset);
+
+    currentPage = data.pagination.CurrentPage;
+    updateLoadMoreBtn(data.pagination);
+
+  } catch (err) {
+    console.error(err);
+    menuContainer.innerHTML = `
+      <div class="col-12 text-center py-5">
+        <i class="ri-error-warning-line fs-1 text-danger"></i>
+        <p class="mt-2 text-muted">${err.message}</p>
+      </div>
+    `;
+  } finally {
+    hideMenuLoader();
+  }
+}
+
+function updateLoadMoreBtn(pagination) {
+  const btn = document.getElementById("view-more-btn");
+  if (!btn) return;
+
+  btn.style.display =
+    pagination.CurrentPage >= pagination.TotalPages
+      ? "none"
+      : "inline-block";
+}
+
+document.getElementById("view-more-btn")?.addEventListener("click", () => {
+  fetchInventory({
+    page: currentPage + 1
+  });
+});
 
 const DB_NAME = "e3_offline_db";
 const DB_VERSION = 1;
