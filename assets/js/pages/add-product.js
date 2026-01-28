@@ -2907,7 +2907,7 @@ function collectInventoryData() {
   const items = [...rows].map(row => ({
     name: row.querySelector(".product-name").value,
     category: row.querySelector(".category").value,
-    price: Number(row.querySelector(".price").value || 0),
+    unit_price: Number(row.querySelector(".price").value || 0),
     quantity_in: Number(row.querySelector(".quantity").value),
     measurement: row.querySelector(".measurement").value,
     lowStock: Number(row.querySelector(".low-stock").value || 0)
@@ -2949,7 +2949,7 @@ function validateInventoryPayload(payload) {
       return `Row ${row}: Quantity must be greater than 0`;
     }
 
-    if (item.price < 0 || isNaN(item.price)) {
+    if (item.unit_price < 0 || isNaN(item.unit_price)) {
       return `Row ${row}: Price must be 0 or greater`;
     }
 
