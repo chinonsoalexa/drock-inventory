@@ -2955,7 +2955,23 @@ function validateReceiptImage(file) {
   return null;
 }
 
-document.getElementById("saveInventory").addEventListener("click", async (e) => {
+const saveBtn = document.getElementById("saveInventory");
+const btnText = saveBtn.querySelector(".btn-text");
+const btnSpinner = saveBtn.querySelector(".spinner-border");
+
+function setLoading(isLoading) {
+  saveBtn.disabled = isLoading;
+
+  if (isLoading) {
+    btnText.textContent = "Saving...";
+    btnSpinner.classList.remove("d-none");
+  } else {
+    btnText.textContent = "Save Inventory";
+    btnSpinner.classList.add("d-none");
+  }
+}
+
+saveBtn.addEventListener("click", async (e) => {
   e.preventDefault();
 
   const inventoryPayload = collectInventoryData();
@@ -2967,7 +2983,7 @@ document.getElementById("saveInventory").addEventListener("click", async (e) => 
     return;
   }
 
-  // 🔍 Validate receipt (optional)
+  // 🔍 Validate receipt image
   if (receiptInput.files.length > 0) {
     const imageError = validateReceiptImage(receiptInput.files[0]);
     if (imageError) {
@@ -2983,8 +2999,10 @@ document.getElementById("saveInventory").addEventListener("click", async (e) => 
     formData.append("images", receiptInput.files[0]);
   }
 
+  setLoading(true); // 🔄 start loader
+
   try {
-    const res = await fetch("http://api.e3restaurant.com/create-inventory", {
+    const res = await fetch("https://api.e3restaurant.com/create-inventory", {
       method: "POST",
       body: formData
     });
@@ -2996,6 +3014,8 @@ document.getElementById("saveInventory").addEventListener("click", async (e) => 
   } catch (err) {
     console.error(err);
     alert(err.message);
+  } finally {
+    setLoading(false); // ✅ stop loader (always)
   }
 });
 
