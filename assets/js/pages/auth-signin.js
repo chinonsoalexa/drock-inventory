@@ -60,7 +60,7 @@ form.addEventListener("submit", async (e) => {
     }
 
     // ✅ Success (example)
-    localStorage.setItem("token", data.token);
+    // localStorage.setItem("token", data.token);
     window.location.href = "/index.html";
 
   } catch (err) {
