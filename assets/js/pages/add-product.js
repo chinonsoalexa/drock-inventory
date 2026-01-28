@@ -3003,6 +3003,7 @@ saveBtn.addEventListener("click", async (e) => {
 
   try {
     const res = await fetch("https://api.e3restaurant.com/create-inventory", {
+      credentials: "include",
       method: "POST",
       body: formData
     });
