@@ -126,6 +126,25 @@ cartContainer.addEventListener("click", e => {
   renderCart();
 });
 
+cartContainer.addEventListener("input", e => {
+  if (!e.target.classList.contains("cart-qty-input")) return;
+
+  const id = parseInt(e.target.dataset.id, 10);
+  const max = parseInt(e.target.dataset.max, 10);
+  const item = cartState.find(i => i.ID === id);
+  if (!item) return;
+
+  let val = parseInt(e.target.value, 10);
+  if (isNaN(val) || val < 1) val = 1;
+  else if (val > max) val = max;
+
+  item.qty = val;
+  e.target.value = val;
+
+  saveCart();
+  renderSummary();
+});
+
 const cartContainer = document.getElementById("cartItems");
 const totalItemsEl = document.getElementById("totalItems");
 
@@ -261,55 +280,6 @@ function renderCart() {
     });
   });
 }
-
-document.addEventListener("click", e => {
-  const id = Number(e.target.dataset.id);
-  if (!id) return;
-
-  const item = cartState.find(i => i.id === id);
-
-  if (e.target.classList.contains("remove-item")) {
-    cartState = cartState.filter(i => i.id !== id);
-    saveCart();
-    renderCart();
-    return;
-  }
-
-  if (!item) return;
-
-  if (e.target.classList.contains("plus")) item.qty++;
-  if (e.target.classList.contains("minus") && item.qty > 1) item.qty--;
-
-  saveCart();
-  updateAddedQty(id);
-  updateCartItemPrice(id);
-
-  // Update input value directly without re-rendering
-  const input = document.querySelector(`.cart-qty-input[data-id="${id}"]`);
-  if (input) input.value = item.qty;
-
-  renderSummary(); // update totals
-});
-
-document.addEventListener("input", e => {
-  const input = e.target.closest(".cart-qty-input");
-  if (!input) return;
-
-  const id = Number(input.dataset.id);
-  let value = parseInt(input.value);
-
-  if (isNaN(value) || value < 1) value = 1;
-
-  const item = cartState.find(i => i.id === id);
-  if (!item) return;
-
-  item.qty = value;
-
-  saveCart();
-  updateAddedQty(id); // update "Added: X" badge
-  renderSummary();    // update total items & totals
-  updateCartItemPrice(id);
-});
 
 const TAX_RATE = 0.125;
 const DELIVERY_FEE = 0;
