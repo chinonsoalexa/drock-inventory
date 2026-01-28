@@ -3021,9 +3021,6 @@ function renderSummary() {
   document.getElementById("summary-delivery").textContent =
     `${formatNumberToNaira(DELIVERY_FEE)}`;
 
-  document.getElementById("summary-tax").textContent =
-    `${formatNumberToNaira(tax)}`;
-
   document.getElementById("summary-total").textContent =
     `${formatNumberToNaira(total)}`;
 }
@@ -3201,6 +3198,50 @@ document.getElementById("view-more-btn").addEventListener("click", () => {
   renderMenu(products, currentCategory, false);
 });
 
+const skeletonContainer = document.getElementById("menuSkeleton");
+
+function showMenuSkeleton(count = 6) {
+  skeletonContainer.innerHTML = "";
+
+  for (let i = 0; i < count; i++) {
+    skeletonContainer.innerHTML += `
+      <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-3">
+        <div class="card cardd">
+          <div class="card-body py-2">
+
+            <div class="d-flex gap-3 align-items-start">
+
+              <!-- Image skeleton -->
+              <div class="skeleton skeleton-image"></div>
+
+              <!-- Content skeleton -->
+              <div class="flex-grow-1">
+                <div class="skeleton skeleton-text lg"></div>
+                <div class="skeleton skeleton-text md"></div>
+
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                  <div class="skeleton skeleton-text sm"></div>
+                  <div class="skeleton skeleton-text sm"></div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  skeletonContainer.style.display = "flex";
+  menuContainer.style.display = "none";
+}
+
+function hideMenuSkeleton() {
+  skeletonContainer.style.display = "none";
+  menuContainer.style.display = "flex";
+}
+
 // Initial load
 // renderMenu(products, "all", true);
 async function fetchInventory({
@@ -3213,7 +3254,7 @@ async function fetchInventory({
   reset = false
 } = {}) {
   try {
-    showMenuLoader();
+    showMenuSkeleton(9);
 
     const params = new URLSearchParams({
       page,
@@ -3254,7 +3295,7 @@ async function fetchInventory({
       </div>
     `;
   } finally {
-    hideMenuLoader();
+    hideMenuSkeleton();
   }
 }
 

@@ -134,6 +134,36 @@
   object-fit: cover;
 }
 
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e6e6e6 37%,
+    #f0f0f0 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+  border-radius: 6px;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 100% 0; }
+  100% { background-position: 0 0; }
+}
+
+.skeleton-text {
+  height: 14px;
+  margin-bottom: 8px;
+}
+
+.skeleton-text.sm { width: 60%; }
+.skeleton-text.md { width: 80%; }
+.skeleton-text.lg { width: 100%; }
+
+.skeleton-image {
+  width: 60px;
+  height: 60px;
+}
      </style>
 </head>
 
@@ -315,6 +345,10 @@
                                         class="form-control"
                                         placeholder="Search inventory..."
                                         >
+                              </div>
+
+                              <div class="row" id="menuSkeleton" style="display:none;">
+                                   <!-- Skeleton loaders will be inserted here -->
                               </div>
 
                               <div class="row" id="menuContainer">
