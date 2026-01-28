@@ -2887,7 +2887,7 @@ function collectInventoryData() {
     name: row.querySelector(".product-name").value,
     category: row.querySelector(".category").value,
     price: Number(row.querySelector(".price").value || 0),
-    quantity: Number(row.querySelector(".quantity").value),
+    quantity_in: Number(row.querySelector(".quantity").value),
     measurement: row.querySelector(".measurement").value,
     lowStock: Number(row.querySelector(".low-stock").value || 0)
   }));
