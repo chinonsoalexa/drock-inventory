@@ -832,36 +832,46 @@ issueStockForm.addEventListener("submit", async e => {
     return;
   }
 
-  setButtonLoading(issueStockForm.querySelector("button[type='submit']"), true);
+  if (!cartState.length) {
+    alert("Inventory Cart is empty.");
+    return;
+  }
+
+  const submitBtn = issueStockForm.querySelector("button[type='submit']");
+  setButtonLoading(submitBtn, true);
 
   try {
-    for (const item of cartState) {
-      const formData = new FormData();
+    // 🔹 Build issued items from cart
+    const items = cartState.map(item => ({
+      item_id: item.ID,
+      quantity: item.qty
+    }));
 
-      const payload = {
-        item_id: item.ID,
-        quantity: item.qty,
-        reason: reason
-      };
+    // 🔹 Build payload
+    const payload = {
+      items,
+      reason,
+      reference: "manual-issue"
+    };
 
-      formData.append("payload", JSON.stringify(payload));
+    // 🔹 Build multipart form
+    const formData = new FormData();
+    formData.append("payload", JSON.stringify(payload));
+    if (file) formData.append("image", file);
 
-      if (file) formData.append("image", file);
+    // 🔹 Single API call
+    const res = await fetch("https://api.e3restaurant.com/issue-stock", {
+      method: "POST",
+      body: formData
+    });
 
-      // Call your IssueStock API
-      const res = await fetch("https://api.e3restaurant.com/issue-stock", {
-        method: "POST",
-        body: formData
-      });
+    const data = await res.json();
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Failed to issue stock");
-      }
+    if (!res.ok) {
+      throw new Error(data.error || "Failed to issue stock");
     }
 
-    // Clear cart after issuing
+    // ✅ Success
     cartState = [];
     saveCart();
     renderCart();
@@ -883,10 +893,9 @@ issueStockForm.addEventListener("submit", async e => {
       color: "#664D03"
     });
   } finally {
-    setButtonLoading(issueStockForm.querySelector("button[type='submit']"), false);
+    setButtonLoading(submitBtn, false);
   }
 });
-
 
 const SAVED_DB_NAME = "e3_offline_inventory_save_db";
 const SAVED_DB_VERSION = 2;
