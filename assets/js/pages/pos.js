@@ -2919,7 +2919,7 @@ function renderCart() {
 
   cartState.forEach(item => {
     cartContainer.innerHTML += `
-      <div class="mt-3 border rounded p-2" data-id="${item.id}">
+      <div class="mt-3 border rounded p-2" data-id="${item.ID}">
         <div class="d-flex gap-3 align-items-center">
           <i class="${getCategoryIcon(item.category)} fs-2 ${getCategoryColor(item.category)}"></i>
           <div>
@@ -2928,19 +2928,19 @@ function renderCart() {
           </div>
 
           <div class="ms-auto input-step d-flex">
-            <button class="minus btn btn-light" data-id="${item.id}">-</button>
-            <input value="${item.qty}" class="form-control text-center mx-1 cart-qty-input" data-id="${item.id}">
-            <button class="plus btn btn-light" data-id="${item.id}">+</button>
+            <button class="minus btn btn-light" data-id="${item.ID}">-</button>
+            <input value="${item.qty}" class="form-control text-center mx-1 cart-qty-input" data-id="${item.ID}">
+            <button class="plus btn btn-light" data-id="${item.ID}">+</button>
           </div>
         </div>
 
         <hr>
 
         <div class="d-flex justify-content-between">
-          <strong class="cart-item-price" data-id="${item.id}">
+          <strong class="cart-item-price" data-id="${item.ID}">
             ${formatNumberToNaira(item.price * item.qty)}
           </strong>
-          <button class="btn btn-soft-danger remove-item" data-id="${item.id}">
+          <button class="btn btn-soft-danger remove-item" data-id="${item.ID}">
             <i class="ri-delete-bin-5-line"></i>
           </button>
         </div>
@@ -3112,40 +3112,40 @@ function renderMenu(products, category = "all", reset = false) {
 
   // 6️⃣ Render items
   nextBatch.forEach(item => {
-    const qtyInCart = cartState.find(c => c.id === item.id)?.qty || 0;
+    const qtyInCart = cartState.find(c => c.id === item.ID)?.qty || 0;
 
     menuContainer.innerHTML += `
       <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-3">
-        <div class="card cardd" data-id="${item.id}">
+        <div class="card cardd" data-id="${item.ID}">
           
           <div class="card-body cardd-body py-2">
 
             <div class="d-flex gap-3 align-items-start">
 
               <!-- SMALL IMAGE -->
-              <div class="menu-image-wrapper position-relative rounded bg-light flex-shrink-0 add-to-cart" data-id="${item.id}">
+              <div class="menu-image-wrapper position-relative rounded bg-light flex-shrink-0 add-to-cart" data-id="${item.ID}">
                 <i class="${getCategoryIcon(item.category)} fs-2 ${getCategoryColor(item.category)}"></i>
               </div>
 
               <!-- CONTENT -->
               <div class="flex-grow-1">
 
-                <a href="#!" class="text-dark fs-15 fw-semibold d-block mb-1 add-to-cart" data-id="${item.id}">
+                <a href="#!" class="text-dark fs-15 fw-semibold d-block mb-1 add-to-cart" data-id="${item.ID}">
                   ${highlightMatch(item.name, searchQuery)}
                 </a>
 
-                <p class="fs-6 mb-1 add-to-cart" data-id="${item.id}">
+                <p class="fs-6 mb-1 add-to-cart" data-id="${item.ID}">
                   ${highlightMatch(item.category, searchQuery)}
                 </p>
 
-                <div class="d-flex justify-content-between align-items-center add-to-cart" data-id="${item.id}">
+                <div class="d-flex justify-content-between align-items-center add-to-cart" data-id="${item.ID}">
                   <span class="fw-bold fs-6">
-                    ${formatNumberToNaira(item.price)}
+                    ${formatNumberToNaira(item.unit_price)}
                   </span>
 
                   <button
                     class="btn btn-soft-primary btn-sm add-to-cart"
-                    data-id="${item.id}">
+                    data-id="${item.ID}">
                     <i class="ri-shopping-basket-2-line"></i>
                   </button>
                 </div>
@@ -3391,8 +3391,8 @@ function startRetryLoop() {
     for (const item of pending) {
       try {
         await uploadCartItem(item.data);
-        await removePendingItem(item.id);
-        console.log("Synced item:", item.id);
+        await removePendingItem(item.ID);
+        console.log("Synced item:", item.ID);
       } catch {
         console.log("Still offline...");
         break; // stop loop early, try again later
