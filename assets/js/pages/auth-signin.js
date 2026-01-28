@@ -47,6 +47,7 @@ form.addEventListener("submit", async (e) => {
   try {
     const res = await fetch("https://api.e3restaurant.com/inventoryperson-login", {
       method: "POST",
+    credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
