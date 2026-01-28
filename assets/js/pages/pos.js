@@ -2898,7 +2898,7 @@ document.addEventListener("click", e => {
   if (!btn) return;
 
   const id = Number(btn.dataset.id);
-  const product = products.find(p => p.id === id);
+  const product = products1.find(p => p.ID === id);
 
   addToCart(product);
 });
@@ -2918,6 +2918,7 @@ function renderCart() {
   }
 
   cartState.forEach(item => {
+    const { priceText, quantityText } = formatInventoryDisplay(item);
     cartContainer.innerHTML += `
       <div class="mt-3 border rounded p-2" data-id="${item.ID}">
         <div class="d-flex gap-3 align-items-center">
@@ -2929,7 +2930,7 @@ function renderCart() {
 
           <div class="ms-auto input-step d-flex">
             <button class="minus btn btn-light" data-id="${item.ID}">-</button>
-            <input value="${item.qty}" class="form-control text-center mx-1 cart-qty-input" data-id="${item.ID}">
+            <input value="${item.quantity_bal}" class="form-control text-center mx-1 cart-qty-input" data-id="${item.ID}">
             <button class="plus btn btn-light" data-id="${item.ID}">+</button>
           </div>
         </div>
@@ -2938,7 +2939,7 @@ function renderCart() {
 
         <div class="d-flex justify-content-between">
           <strong class="cart-item-price" data-id="${item.ID}">
-            ${formatNumberToNaira(item.price * item.qty)}
+            ${quantityText}
           </strong>
           <button class="btn btn-soft-danger remove-item" data-id="${item.ID}">
             <i class="ri-delete-bin-5-line"></i>
