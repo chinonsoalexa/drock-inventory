@@ -2888,8 +2888,7 @@ async function addToCart(product) {
     await uploadCartItem(product);
     // console.log("Uploaded to server");
   } catch (err) {
-    await savePendingItem(product);
-    startRetryLoop();
+    
   }
 }
 
@@ -2919,6 +2918,7 @@ function renderCart() {
 
   cartState.forEach(item => {
     const { priceText, quantityText } = formatInventoryDisplay(item);
+
     cartContainer.innerHTML += `
       <div class="mt-3 border rounded p-2" data-id="${item.ID}">
         <div class="d-flex gap-3 align-items-center">
@@ -2930,7 +2930,7 @@ function renderCart() {
 
           <div class="ms-auto input-step d-flex">
             <button class="minus btn btn-light" data-id="${item.ID}">-</button>
-            <input value="${item.quantity_bal}" class="form-control text-center mx-1 cart-qty-input" data-id="${item.ID}">
+            <input value="1" min="1" max="${item.quantity_bal}" class="form-control text-center mx-1 cart-qty-input" data-id="${item.ID}">
             <button class="plus btn btn-light" data-id="${item.ID}">+</button>
           </div>
         </div>
@@ -3336,98 +3336,6 @@ document.getElementById("view-more-btn")?.addEventListener("click", () => {
 });
 
 fetchInventory({ reset: true });
-
-const DB_NAME = "e3_offline_db";
-const DB_VERSION = 1;
-const STORE_NAME = "pending_cart";
-
-function openDB() {
-  return new Promise((resolve, reject) => {
-    const request = indexedDB.open(DB_NAME, DB_VERSION);
-
-    request.onupgradeneeded = e => {
-      const db = e.target.result;
-      if (!db.objectStoreNames.contains(STORE_NAME)) {
-        db.createObjectStore(STORE_NAME, {
-          keyPath: "id",
-          autoIncrement: true
-        });
-      }
-    };
-
-    request.onsuccess = () => resolve(request.result);
-    request.onerror = () => reject(request.error);
-  });
-}
-
-async function savePendingItem(data) {
-  const db = await openDB();
-  const tx = db.transaction(STORE_NAME, "readwrite");
-  tx.objectStore(STORE_NAME).add({
-    data,
-    createdAt: Date.now()
-  });
-}
-
-async function getPendingItems() {
-  const db = await openDB();
-  return new Promise(resolve => {
-    const tx = db.transaction(STORE_NAME, "readonly");
-    const store = tx.objectStore(STORE_NAME);
-    const req = store.getAll();
-    req.onsuccess = () => resolve(req.result);
-  });
-}
-
-async function removePendingItem(id) {
-  const db = await openDB();
-  const tx = db.transaction(STORE_NAME, "readwrite");
-  tx.objectStore(STORE_NAME).delete(id);
-}
-
-async function uploadCartItem(product) {
-  const res = await fetch("/api/cart", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(product)
-  });
-
-  if (!res.ok) throw new Error("Upload failed");
-}
-
-function startRetryLoop() {
-  if (retryInterval) return; // already running
-
-  retryInterval = setInterval(async () => {
-    const pending = await getPendingItems();
-
-    if (!pending.length) {
-      clearInterval(retryInterval);
-      retryInterval = null;
-      console.log("All pending items synced");
-      return;
-    }
-
-    for (const item of pending) {
-      try {
-        await uploadCartItem(item.data);
-        await removePendingItem(item.ID);
-        console.log("Synced item:", item.ID);
-      } catch {
-        console.log("Still offline...");
-        break; // stop loop early, try again later
-      }
-    }
-  }, 5000);
-}
-
-window.addEventListener("online", () => {
-  startRetryLoop();
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  startRetryLoop();
-});
 
 const NOTIFICATION_KEY = "notification_permission_asked";
 
