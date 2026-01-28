@@ -83,26 +83,47 @@ document.addEventListener("click", e => {
   //   .then(data => console.log(data));
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    var e = document.querySelectorAll(".plus"),
-        n = document.querySelectorAll(".minus");
+// document.addEventListener("DOMContentLoaded", function() {
+//     var e = document.querySelectorAll(".plus"),
+//         n = document.querySelectorAll(".minus");
 
-    function i(e, n) {
-        var i = 1 === n ? e.previousElementSibling : e.nextElementSibling,
-            t = parseInt(i.value),
-            s = parseInt(i.min),
-            e = parseInt(i.max);
-        s <= (n = t + n) && n <= e && (i.value = n)
-    }
-    e.forEach(function(e) {
-        e.addEventListener("click", function() {
-            i(e, 1)
-        })
-    }), n.forEach(function(e) {
-        e.addEventListener("click", function() {
-            i(e, -1)
-        })
-    })
+//     function i(e, n) {
+//         var i = 1 === n ? e.previousElementSibling : e.nextElementSibling,
+//             t = parseInt(i.value),
+//             s = parseInt(i.min),
+//             e = parseInt(i.max);
+//         s <= (n = t + n) && n <= e && (i.value = n)
+//     }
+//     e.forEach(function(e) {
+//         e.addEventListener("click", function() {
+//             i(e, 1)
+//         })
+//     }), n.forEach(function(e) {
+//         e.addEventListener("click", function() {
+//             i(e, -1)
+//         })
+//     })
+// });
+
+// Cart container event delegation
+cartContainer.addEventListener("click", e => {
+  const id = parseInt(e.target.closest("[data-id]")?.dataset.id, 10);
+  if (!id) return;
+
+  const item = cartState.find(i => i.ID === id);
+  if (!item) return;
+
+  // + / - buttons
+  if (e.target.closest(".plus")) {
+    if (item.qty < item.quantity_bal) item.qty++;
+  } else if (e.target.closest(".minus")) {
+    if (item.qty > 1) item.qty--;
+  } else if (e.target.closest(".remove-item")) {
+    cartState = cartState.filter(i => i.ID !== id);
+  }
+
+  saveCart();
+  renderCart();
 });
 
 const cartContainer = document.getElementById("cartItems");
