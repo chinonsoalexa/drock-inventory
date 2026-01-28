@@ -1,0 +1,9 @@
+{
+    "cleanUrls": true,
+        "rewrites": [
+        {
+          "source": "/image/:path*",
+          "destination": "https://f005.backblazeb2.com/file/e3restaurant/:path*"
+        }
+      ]
+}
