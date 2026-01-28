@@ -3274,6 +3274,8 @@ document.getElementById("view-more-btn")?.addEventListener("click", () => {
   });
 });
 
+fetchInventory({ reset: true });
+
 const DB_NAME = "e3_offline_db";
 const DB_VERSION = 1;
 const STORE_NAME = "pending_cart";
