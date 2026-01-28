@@ -447,6 +447,29 @@
           </div>
           <!-- END Wrapper -->
 
+          <div id="issueStockModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); justify-content:center; align-items:center; z-index:10000;">
+               <div class="modal-content" style="background:#fff; padding:20px; border-radius:8px; max-width:400px; width:90%;">
+               <h5 class="mb-3">Issue Stock</h5>
+
+               <form id="issueStockForm">
+                    <div class="mb-3">
+                    <label for="issueReason" class="form-label">Reason</label>
+                    <textarea id="issueReason" class="form-control" placeholder="Enter reason..." required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                    <label for="issueImage" class="form-label">Upload Image (optional)</label>
+                    <input type="file" id="issueImage" accept="image/*" class="form-control">
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                    <button type="button" class="btn btn-secondary" id="issueStockCancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Issue Stock</button>
+                    </div>
+               </form>
+               </div>
+          </div>
+
           <script src="assets/js/vendor.js"></script>
           <script src="assets/js/app.js"></script>
 

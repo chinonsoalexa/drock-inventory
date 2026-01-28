@@ -794,11 +794,14 @@ document.getElementById("cancelCart").addEventListener("click", (e) => {
 });
 
 const placeOrderBtn = document.getElementById("placeOrderBtn");
+const issueStockModal = document.getElementById("issueStockModal");
+const issueStockForm = document.getElementById("issueStockForm");
+const issueStockCancel = document.getElementById("issueStockCancel");
 
-placeOrderBtn.addEventListener("click", async (e) => {
+// 1️⃣ Show modal when place order is clicked
+placeOrderBtn.addEventListener("click", e => {
   e.preventDefault();
 
-  // 1️⃣ Validate cart
   if (!cartState.length) {
     showNetworkBanner({
       text: "⚠️ Your Inventory is empty.",
@@ -808,50 +811,82 @@ placeOrderBtn.addEventListener("click", async (e) => {
     return;
   }
 
-  // 2️⃣ Check network (keep illusion)
-  if (!navigator.onLine) {
-    showNetworkBanner({
-      text: "⚠️ Poor network connection. Please try again.",
-      bg: "#FFF3CD",
-      color: "#664D03"
-    });
+  issueStockModal.style.display = "flex";
+});
+
+// 2️⃣ Close modal
+issueStockCancel.addEventListener("click", () => {
+  issueStockModal.style.display = "none";
+});
+
+// 3️⃣ Handle form submission
+issueStockForm.addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const reason = document.getElementById("issueReason").value.trim();
+  const fileInput = document.getElementById("issueImage");
+  const file = fileInput.files[0];
+
+  if (!reason) {
+    alert("Please provide a reason for issuing stock.");
     return;
   }
 
-  // 3️⃣ Loading state
-  setButtonLoading(placeOrderBtn, true);
+  setButtonLoading(issueStockForm.querySelector("button[type='submit']"), true);
 
   try {
-    // 4️⃣ Simulate API call (replace later)
-    // await fakePlaceOrderRequest(cartData);
+    for (const item of cartState) {
+      const formData = new FormData();
 
-    // 5️⃣ Success
+      const payload = {
+        item_id: item.ID,
+        quantity: item.qty,
+        reason: reason
+      };
+
+      formData.append("payload", JSON.stringify(payload));
+
+      if (file) formData.append("image", file);
+
+      // Call your IssueStock API
+      const res = await fetch("/api/issue-stock", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to issue stock");
+      }
+    }
+
+    // Clear cart after issuing
     cartState = [];
     saveCart();
     renderCart();
 
-    showDesktopNotification(
-      "✅ Order placed",
-      "Your order was placed successfully."
-    );
-
+    showDesktopNotification("✅ Stock Issued", "Stock issued successfully.");
     showNetworkBanner({
-      text: "✅ Order placed successfully.",
+      text: "✅ Stock issued successfully.",
       bg: "#D1E7DD",
       color: "#0F5132"
     });
 
+    issueStockModal.style.display = "none";
+    issueStockForm.reset();
+
   } catch (err) {
-    // 6️⃣ Failure (looks like network issue)
     showNetworkBanner({
-      text: "⚠️ Unable to place order. Please check your network.",
+      text: `⚠️ ${err.message}`,
       bg: "#FFF3CD",
       color: "#664D03"
     });
   } finally {
-    setButtonLoading(placeOrderBtn, false);
+    setButtonLoading(issueStockForm.querySelector("button[type='submit']"), false);
   }
 });
+
 
 const SAVED_DB_NAME = "e3_offline_inventory_save_db";
 const SAVED_DB_VERSION = 2;
