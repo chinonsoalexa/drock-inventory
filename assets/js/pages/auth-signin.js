@@ -61,8 +61,8 @@ form.addEventListener("submit", async (e) => {
     }
 
     // ✅ Success (example)
-    // localStorage.setItem("token", data.token);
-    window.location.href = "/index.html";
+    localStorage.setItem('auth', 'true');
+    window.location.href = "index.html";
 
   } catch (err) {
     showError(err.message);
