@@ -3,7 +3,7 @@ function formatCurrency(amount) {
 }
 
 function renderIssuedInventory(issues) {
-  const tbody = document.getElementById("issuedInventoryBody");
+  const tbody = document.getElementById("issuedInventoryContainer");
 
   if (!tbody) {
     console.error("issuedInventoryBody not found in DOM");
