@@ -1,16 +1,16 @@
 
 // Listen for the DOMContentLoaded event
 function check_auth() {
-    var analyticsData = sessionStorage.getItem('analyticsData');
+    // var analyticsData = sessionStorage.getItem('analyticsData');
 
-    if (analyticsData === null) {
-        // Key does not exist in localStorage
-        sessionStorage.setItem('analyticsData', 'true');
+    // if (analyticsData === null) {
+    //     // Key does not exist in localStorage
+    //     sessionStorage.setItem('analyticsData', 'true');
 
-        fetch('https://api.businessconnectt.com/business-connect-analytics', {
-            method: 'GET'
-        });
-    }
+    //     fetch('https://api.businessconnectt.com/business-connect-analytics', {
+    //         method: 'GET'
+    //     });
+    // }
 
     // Run the authentication status check function
     get_auth_status();
@@ -31,11 +31,10 @@ check_auth()
 // this is for authenticated pages
 function get_auth_status() {
   if (localStorage.getItem('auth') !== 'true') {
-    const currentPath = getCurrentPath();
     localStorage.removeItem('auth');
 
     window.location.href =
-      `../sign-in.html?redirect=${encodeURIComponent(currentPath)}`;
+      `auth-signin.html`;
     return;
   }
 
@@ -67,7 +66,7 @@ document.getElementById('logout-button').addEventListener('click', async functio
 
 async function logout() {
     // also send a request to the logout api endpoint
-    const apiUrl = "https://api.businessconnectt.com/log-out";
+    const apiUrl = "https://api.e3restaurant.com/log-out";
 
     const requestOptions = {
     method: "GET",
@@ -90,7 +89,7 @@ try {
       }
         const data = await response.json();
         localStorage.removeItem('auth')
-        window.location.href = '../sign-in.html';
+        window.location.href = 'auth-signin.html';
     } finally{
         // do nothing
     }

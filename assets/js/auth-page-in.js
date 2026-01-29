@@ -1,16 +1,16 @@
 
 // Listen for the DOMContentLoaded event
 function check_auth() {
-    var analyticsData = sessionStorage.getItem('analyticsData');
+    // var analyticsData = sessionStorage.getItem('analyticsData');
 
-    if (analyticsData === null) {
-        // Key does not exist in localStorage
-        sessionStorage.setItem('analyticsData', 'true');
+    // if (analyticsData === null) {
+    //     // Key does not exist in localStorage
+    //     sessionStorage.setItem('analyticsData', 'true');
 
-        fetch('https://api.businessconnectt.com/business-connect-analytics', {
-            method: 'GET'
-        });
-    }
+    //     fetch('https://api.businessconnectt.com/business-connect-analytics', {
+    //         method: 'GET'
+    //     });
+    // }
     
     // Run your authentication status check function
     get_auth_status();
@@ -33,7 +33,7 @@ check_auth()
 function get_auth_status() {
     if (localStorage.getItem('auth') === 'true') {
         // let's redirect to a authenticated page cause the user is not authenticated
-        window.location.href = 'app/home.html';
+        window.location.href = 'index.html';
     }
 }
 
