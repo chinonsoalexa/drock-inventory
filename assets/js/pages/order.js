@@ -80,8 +80,8 @@ function renderIssuedInventory(issues) {
         </td>
 
         <td>
-          ${issue.url
-            ? `<a href="${issue.url}" target="_blank" class="link-primary">View</a>`
+          ${"https://invetory.e3restaurant.com/image/" + issue.url
+            ? `<a href="https://invetory.e3restaurant.com/image/${issue.url}" target="_blank" class="link-primary">View</a>`
             : "-"}
         </td>
 
