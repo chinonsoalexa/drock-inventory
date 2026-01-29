@@ -55,28 +55,23 @@ function renderIssuedInventory(issues) {
 let networkBanner = null;
 
 function showNetworkBanner({ text, bg, color }) {
-  if (networkBanner) networkBanner.remove();
+  const banner = document.createElement("div");
+  banner.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: ${bg};
+    color: ${color};
+    padding: 12px 16px;
+    border-radius: 6px;
+    z-index: 9999;
+    font-size: 14px;
+  `;
+  banner.innerText = text;
 
-  networkBanner = document.createElement("div");
-  networkBanner.textContent = text;
+  document.body.appendChild(banner);
 
-  Object.assign(networkBanner.style, {
-    position: "fixed",
-    top: "20px",
-    right: "20px",
-    padding: "10px 14px",
-    background: bg,
-    color,
-    borderRadius: "8px",
-    fontSize: "14px",
-    fontWeight: "500",
-    boxShadow: "0 6px 16px rgba(0,0,0,.15)",
-    cursor: "pointer",
-    zIndex: 9999
-  });
-
-  networkBanner.onclick = () => networkBanner.remove();
-  document.body.appendChild(networkBanner);
+  setTimeout(() => banner.remove(), 3000);
 }
 
 let issuedInventoryState = {
