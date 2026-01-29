@@ -3,13 +3,19 @@ function formatCurrency(amount) {
 }
 
 function renderIssuedInventory(issues) {
-  const tbody = document.querySelector("table tbody");
+  const tbody = document.getElementById("issuedInventoryBody");
+
+  if (!tbody) {
+    console.error("issuedInventoryBody not found in DOM");
+    return;
+  }
+
   tbody.innerHTML = "";
 
-  if (!issues.length) {
+  if (!issues || !issues.length) {
     tbody.innerHTML = `
       <tr>
-        <td colspan="11" class="text-center text-muted py-4">
+        <td colspan="8" class="text-center text-muted py-4">
           No issued inventory found
         </td>
       </tr>
@@ -18,85 +24,28 @@ function renderIssuedInventory(issues) {
   }
 
   issues.forEach(issue => {
-    const items = issue.items || [];
+    const itemsHTML = issue.items.map((item, i) => `
+      <div class="mb-1">
+        <strong>${i + 1}.</strong> ${item.name}
+        <span class="text-muted">(${item.quantity_issued} ${item.measurement})</span>
+      </div>
+    `).join("");
 
-    // 🧾 Item names
-    const itemsHTML = items.length
-      ? items.map((item, i) => `
-          <p class="${i === items.length - 1 ? "mb-0" : "mb-1"}">
-            <span class="fw-semibold me-1">${i + 1}.</span>${item.name}
-          </p>
-        `).join("")
-      : `<span class="text-muted">No items</span>`;
-
-    // 🔢 Quantities
-    const qtyHTML = items.length
-      ? items.map((item, i) => `
-          <p class="${i === items.length - 1 ? "mb-0" : "mb-1"}">
-            ${item.quantity_issued}
-          </p>
-        `).join("")
-      : "-";
-
-    // 💰 Unit prices
-    const priceHTML = items.length
-      ? items.map((item, i) => `
-          <p class="${i === items.length - 1 ? "mb-0" : "mb-1"}">
-            ${formatCurrency(item.unit_price)}
-          </p>
-        `).join("")
-      : "-";
-
-    // 🧮 Total value
-    const totalValue = items.reduce(
-      (sum, item) => sum + item.quantity_issued * item.unit_price,
+    const totalValue = issue.items.reduce(
+      (sum, i) => sum + (i.quantity_issued * i.unit_price),
       0
     );
 
     tbody.innerHTML += `
       <tr>
-        <td>#${issue.reference || issue.ID}</td>
-
-        <td>
-          <span class="fw-medium">${issue.issued_by_name}</span>
-        </td>
-
+        <td>#${issue.ID}</td>
+        <td>${issue.issued_by_name}</td>
+        <td>${issue.reason}</td>
         <td>${itemsHTML}</td>
-
-        <td>${qtyHTML}</td>
-
-        <td>${priceHTML}</td>
-
-        <td class="fw-semibold">
-          ${formatCurrency(totalValue)}
-        </td>
-
+        <td>₦${totalValue.toLocaleString()}</td>
+        <td>${new Date(issue.CreatedAt).toLocaleString()}</td>
         <td>
-          ${issue.reason}
-        </td>
-
-        <td>
-          ${new Date(issue.CreatedAt).toLocaleDateString()}
-        </td>
-
-        <td>
-          ${"https://invetory.e3restaurant.com/image/" + issue.url
-            ? `<a href="https://invetory.e3restaurant.com/image/${issue.url}" target="_blank" class="link-primary">View</a>`
-            : "-"}
-        </td>
-
-        <td>
-          <span class="badge bg-success-subtle text-success">
-            Issued
-          </span>
-        </td>
-
-        <td>
-          <div class="d-flex gap-3">
-            <a href="#!" class="text-muted view-issue" data-id="${issue.ID}">
-              <i class="ri-eye-line fs-20"></i>
-            </a>
-          </div>
+          ${issue.url ? `<a href="${issue.url}" target="_blank">View</a>` : "-"}
         </td>
       </tr>
     `;
