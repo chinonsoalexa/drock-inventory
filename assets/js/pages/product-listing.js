@@ -199,32 +199,80 @@ document.addEventListener("click", e => {
     fetchInventory();
 });
 
-function fetchInventory() {
+function fetchInventory(page = 1) {
   const params = new URLSearchParams({
-    from_date: fromDate || "",
-    to_date: toDate || "",
-    category: selectedCategory || "",
-    sort_order: sortOrder || ""
+    from_date: fromDate,
+    to_date: toDate,
+    category: selectedCategory,
+    sort_order: sortOrder,
+    page,
+    limit: 15
   });
 
-  fetch(`https://api.e3restaurant.com/search-inventory?${params.toString()}`, {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      "Accept": "application/json"
-    }
+  fetch(`https://api.e3restaurant.com/get-inventory?${params.toString()}`, {
+    credentials: "include"
   })
     .then(res => res.json())
     .then(data => {
-      if (data.error) {
-        throw new Error(data.error);
-      }
-
-      // ✅ pass the actual data
       renderProductsTable(data.success);
+      renderInventoryPagination(data.pagination);
     })
-    .catch(err => {
-      console.error(err);
-      alert(err.message || "Failed to load inventory");
-    });
+    .catch(err => console.error(err));
 }
+
+
+function renderInventoryPagination(pagination) {
+  const ul = document.getElementById("inventoryPagination");
+  ul.innerHTML = "";
+
+  const {
+    CurrentPage,
+    TotalPages,
+    PreviousPage,
+    NextPage
+  } = pagination;
+
+  // ⬅ Previous
+  ul.innerHTML += `
+    <li class="page-item ${CurrentPage <= 1 ? "disabled" : ""}">
+      <a class="page-link" href="javascript:void(0);" data-page="${PreviousPage}">
+        <i class="ri-arrow-left-s-line"></i>
+      </a>
+    </li>
+  `;
+
+  // Page numbers (max 5 visible)
+  const start = Math.max(1, CurrentPage - 2);
+  const end = Math.min(TotalPages, CurrentPage + 2);
+
+  for (let i = start; i <= end; i++) {
+    ul.innerHTML += `
+      <li class="page-item ${i === CurrentPage ? "active" : ""}">
+        <a class="page-link" href="javascript:void(0);" data-page="${i}">
+          ${i}
+        </a>
+      </li>
+    `;
+  }
+
+  // ➡ Next
+  ul.innerHTML += `
+    <li class="page-item ${CurrentPage >= TotalPages ? "disabled" : ""}">
+      <a class="page-link" href="javascript:void(0);" data-page="${NextPage}">
+        <i class="ri-arrow-right-s-line"></i>
+      </a>
+    </li>
+  `;
+}
+
+document.addEventListener("click", e => {
+  const link = e.target.closest(".page-link");
+  if (!link) return;
+
+  const page = Number(link.dataset.page);
+  if (!page || page < 1) return;
+
+  fetchInventory(page);
+});
+
+
