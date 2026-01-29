@@ -197,7 +197,7 @@ function fetchInventory() {
     sort_order: sortOrder || ""
   });
 
-  fetch(`https://api.e3restaurant.com/get-inventory?${params.toString()}`, {
+  fetch(`https://api.e3restaurant.com/search-inventory?${params.toString()}`, {
     method: "GET",
     credentials: "include",
     headers: {
