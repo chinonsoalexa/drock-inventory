@@ -19,6 +19,26 @@ const products = [
   }
 ];
 
+function renderInventorySkeleton(rows = 6) {
+  const tbody = document.getElementById("productsTableBody");
+  tbody.innerHTML = "";
+
+  for (let i = 0; i < rows; i++) {
+    tbody.innerHTML += `
+      <tr class="skeleton-row">
+        <td><div class="skeleton skeleton-text"></div></td>
+        <td><div class="skeleton skeleton-text"></div></td>
+        <td><div class="skeleton skeleton-text"></div></td>
+        <td><div class="skeleton skeleton-text"></div></td>
+        <td><div class="skeleton skeleton-text"></div></td>
+        <td><div class="skeleton skeleton-text"></div></td>
+        <td><div class="skeleton skeleton-text"></div></td>
+        <td><div class="skeleton skeleton-badge"></div></td>
+      </tr>
+    `;
+  }
+}
+
 function renderProductsTable(products) {
   const tbody = document.getElementById("productsTableBody");
   tbody.innerHTML = "";
@@ -200,6 +220,8 @@ document.addEventListener("click", e => {
 });
 
 function fetchInventory(page = 1) {
+  renderInventorySkeleton(); // 👈 show loader immediately
+
   const params = new URLSearchParams({
     from_date: fromDate,
     to_date: toDate,

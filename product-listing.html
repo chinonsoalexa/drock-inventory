@@ -16,6 +16,39 @@
      <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
      <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
      <script src="assets/js/config.min.js"></script>
+
+     <style>
+          .skeleton {
+               background: linear-gradient(90deg,
+                         #e9ecef 25%,
+                         #f8f9fa 37%,
+                         #e9ecef 63%);
+               background-size: 400% 100%;
+               animation: skeleton-loading 1.4s ease infinite;
+               border-radius: 4px;
+          }
+
+          .skeleton-text {
+               height: 14px;
+               width: 100%;
+          }
+
+          .skeleton-badge {
+               height: 20px;
+               width: 50px;
+               border-radius: 12px;
+          }
+
+          @keyframes skeleton-loading {
+               0% {
+                    background-position: 100% 50%;
+               }
+
+               100% {
+                    background-position: 0 50%;
+               }
+          }
+     </style>
 </head>
 
 <body>
