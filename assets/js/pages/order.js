@@ -103,6 +103,33 @@ function renderIssuedInventory(issues) {
   });
 }
 
+let networkBanner = null;
+
+function showNetworkBanner({ text, bg, color }) {
+  if (networkBanner) networkBanner.remove();
+
+  networkBanner = document.createElement("div");
+  networkBanner.textContent = text;
+
+  Object.assign(networkBanner.style, {
+    position: "fixed",
+    top: "20px",
+    right: "20px",
+    padding: "10px 14px",
+    background: bg,
+    color,
+    borderRadius: "8px",
+    fontSize: "14px",
+    fontWeight: "500",
+    boxShadow: "0 6px 16px rgba(0,0,0,.15)",
+    cursor: "pointer",
+    zIndex: 9999
+  });
+
+  networkBanner.onclick = () => networkBanner.remove();
+  document.body.appendChild(networkBanner);
+}
+
 let issuedInventoryState = {
   page: 1,
   limit: 15,
@@ -118,7 +145,7 @@ let issuedInventoryState = {
 
 async function fetchIssuedInventory(page = 1) {
   issuedInventoryState.page = page;
-
+  const query = buildIssuedInventoryQuery(page);
   const params = new URLSearchParams({
     page,
     limit: issuedInventoryState.limit,
@@ -127,7 +154,7 @@ async function fetchIssuedInventory(page = 1) {
 
   try {
     const res = await fetch(
-      `https://api.e3restaurant.com/get-issued-inventory-history?${params.toString()}`,
+      `https://api.e3restaurant.com/get-issued-inventory-history?${query}`,
       {
         method: "GET",
         credentials: "include", // 🔐 required for auth middleware
@@ -243,5 +270,41 @@ document.addEventListener("click", e => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  fetchIssuedInventory(1);
+});
+
+
+function buildIssuedInventoryQuery(page = 1) {
+  const params = new URLSearchParams();
+
+  const issuedBy = document.getElementById("filterIssuedBy").value;
+  const reference = document.getElementById("filterReference").value.trim();
+  const search = document.getElementById("filterSearch").value.trim();
+  const fromDate = document.getElementById("filterFromDate").value;
+  const toDate = document.getElementById("filterToDate").value;
+
+  if (issuedBy) params.append("issued_by", issuedBy);
+  if (reference) params.append("reference", reference);
+  if (search) params.append("search", search);
+  if (fromDate) params.append("from_date", fromDate);
+  if (toDate) params.append("to_date", toDate);
+
+  params.append("page", page);
+  params.append("limit", 15);
+
+  return params.toString();
+}
+
+document.getElementById("applyFilters").addEventListener("click", () => {
+  fetchIssuedInventory(1);
+});
+
+document.getElementById("resetFilters").addEventListener("click", () => {
+  document.getElementById("filterIssuedBy").value = "";
+  document.getElementById("filterReference").value = "";
+  document.getElementById("filterSearch").value = "";
+  document.getElementById("filterFromDate").value = "";
+  document.getElementById("filterToDate").value = "";
+
   fetchIssuedInventory(1);
 });
