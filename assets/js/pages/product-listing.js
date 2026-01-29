@@ -23,34 +23,44 @@ function renderProductsTable(products) {
   const tbody = document.getElementById("productsTableBody");
   tbody.innerHTML = "";
 
+  if (!products || !products.length) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="8" class="text-center text-muted py-4">
+          No inventory records found
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
   products.forEach(product => {
+    const lowStockBadge = product.low_stock
+      ? `<span class="badge bg-danger">Low</span>`
+      : `<span class="badge bg-success">OK</span>`;
+
     const row = document.createElement("tr");
 
     row.innerHTML = `
-      <td>
-        <img src="${product.image}" class="avatar-lg" alt="${product.name}">
+      <td class="fw-semibold">${product.name}</td>
+
+      <td>${product.category}</td>
+
+      <td class="fw-semibold">
+        ₦${Number(product.unit_price).toLocaleString()}
       </td>
 
-      <td>
-        <div>
-          <p class="fw-semibold mb-0">${product.name}</p>
-          <small class="text-muted">${product.size || ""}</small>
-        </div>
+      <td>${product.quantity_in}</td>
+
+      <td>${product.quantity_out}</td>
+
+      <td class="fw-semibold">
+        ${product.quantity_bal}
       </td>
 
-      <td>${product.description}</td>
+      <td>${product.measurement}</td>
 
-      <td>${product.ingredients}</td>
-
-      <td class="fw-semibold">$${product.price.toFixed(2)}</td>
-
-      <td>
-        <button 
-          class="btn btn-sm btn-primary add-to-cart-btn"
-          data-id="${product.id}">
-          Add to Cart
-        </button>
-      </td>
+      <td>${lowStockBadge}</td>
     `;
 
     tbody.appendChild(row);
