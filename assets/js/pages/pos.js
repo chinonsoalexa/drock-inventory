@@ -861,6 +861,7 @@ issueStockForm.addEventListener("submit", async e => {
 
     // 🔹 Single API call
     const res = await fetch("https://api.e3restaurant.com/issue-stock", {
+      credentials: "include",
       method: "POST",
       body: formData
     });
