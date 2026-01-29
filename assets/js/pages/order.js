@@ -2,26 +2,20 @@ function formatCurrency(amount) {
   return `₦${Number(amount).toLocaleString()}`;
 }
 
+function viewIssueImage(url) {
+  const img = document.getElementById("imagePreview");
+
+  img.src = url;
+
+  const modal = new bootstrap.Modal(
+    document.getElementById("imagePreviewModal")
+  );
+  modal.show();
+}
+
 function renderIssuedInventory(issues) {
   const tbody = document.getElementById("issuedInventoryContainer");
-
-  if (!tbody) {
-    console.error("issuedInventoryBody not found in DOM");
-    return;
-  }
-
   tbody.innerHTML = "";
-
-  if (!issues || !issues.length) {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="8" class="text-center text-muted py-4">
-          No issued inventory found
-        </td>
-      </tr>
-    `;
-    return;
-  }
 
   issues.forEach(issue => {
     const itemsHTML = issue.items.map((item, i) => `
@@ -36,6 +30,10 @@ function renderIssuedInventory(issues) {
       0
     );
 
+    const imageUrl = issue.url
+      ? `https://invetory.e3restaurant.com/image/${issue.url}`
+      : null;
+
     tbody.innerHTML += `
       <tr>
         <td>#${issue.ID}</td>
@@ -45,7 +43,15 @@ function renderIssuedInventory(issues) {
         <td>₦${totalValue.toLocaleString()}</td>
         <td>${new Date(issue.CreatedAt).toLocaleString()}</td>
         <td>
-          ${issue.url ? `<a href="${issue.url}" target="_blank">View</a>` : "-"}
+          ${
+            imageUrl
+              ? `<a href="javascript:void(0)"
+                    class="text-primary fw-medium"
+                    onclick="viewIssueImage('${imageUrl}')">
+                    View
+                </a>`
+              : "-"
+          }
         </td>
       </tr>
     `;
