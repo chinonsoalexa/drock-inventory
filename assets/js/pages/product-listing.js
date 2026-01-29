@@ -57,8 +57,6 @@ function renderProductsTable(products) {
   });
 }
 
-renderProductsTable(products);
-
 document.addEventListener("click", e => {
   if (e.target.classList.contains("add-to-cart-btn")) {
     const productId = e.target.dataset.id;
@@ -191,24 +189,32 @@ document.addEventListener("click", e => {
     fetchInventory();
 });
 
-// Fetch inventory with filters
 function fetchInventory() {
-    const params = new URLSearchParams({
-        from_date: fromDate,
-        to_date: toDate,
-        category: selectedCategory,
-        sort_order: sortOrder
+  const params = new URLSearchParams({
+    from_date: fromDate || "",
+    to_date: toDate || "",
+    category: selectedCategory || "",
+    sort_order: sortOrder || ""
+  });
+
+  fetch(`https://api.e3restaurant.com/get-inventory?${params.toString()}`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Accept": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      // ✅ pass the actual data
+      renderProductsTable(data.success);
+    })
+    .catch(err => {
+      console.error(err);
+      alert(err.message || "Failed to load inventory");
     });
-
-    fetch(`/api/inventory?${params.toString()}`)
-        .then(res => res.json())
-        .then(data => renderInventoryTable(data.success))
-        .catch(err => console.error(err));
 }
-
-// Example: function to render inventory table
-function renderInventoryTable(items) {
-    // your existing logic to render table rows
-    console.log(items);
-}
-
