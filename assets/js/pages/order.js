@@ -1,85 +1,64 @@
-const orders = [
-  {
-    orderNo: "ORD-001",
-    customer: "Erma D. Rumph",
-    items: [
-      { name: "Margherita Pizza", qty: 1, price: 16 },
-      { name: "Cheeseburger", qty: 2, price: 10 }
-    ],
-    paymentMethod: "Online POS",
-    paymentStatus: "success", // success | pending | failed
-    orderDate: "15-02-2024, 04:27 pm",
-    address: "44 Hide A Way Orlando.",
-    status: "Ready To Pick"
-  }
-];
-
 function formatCurrency(amount) {
-  return `$${amount.toFixed(2)}`;
+  return `₦${Number(amount).toLocaleString()}`;
 }
 
-function paymentIcon(status) {
-  if (status === "success") return `<i class="ri-check-double-line text-success"></i>`;
-  if (status === "pending") return `<i class="ri-restart-line text-warning"></i>`;
-  return `<i class="ri-close-line text-danger"></i>`;
-}
-
-function statusBadge(status) {
-  const map = {
-    "Ready To Pick": "warning",
-    "Out Of Delivery": "primary",
-    "Delivered": "success",
-    "Cancel": "danger",
-    "Progress": "info"
-  };
-
-  const color = map[status] || "secondary";
-  return `<span class="badge border border-${color} text-${color} px-2 py-1 fs-11">${status}</span>`;
-}
-
-function renderIssuedInventory(orders) {
+function renderIssuedInventory(issues) {
   const tbody = document.querySelector("table tbody");
   tbody.innerHTML = "";
 
-  if (!orders.length) {
+  if (!issues.length) {
     tbody.innerHTML = `
       <tr>
         <td colspan="11" class="text-center text-muted py-4">
-          No orders found
+          No issued inventory found
         </td>
       </tr>
     `;
     return;
   }
 
-  orders.forEach(order => {
-    const itemsHTML = order.items.map((item, i) => `
-      <p class="${i === order.items.length - 1 ? "mb-0" : "mb-1"}">
-        <span class="fw-semibold text-dark me-1">${i + 1}.</span>${item.name}
-      </p>
-    `).join("");
+  issues.forEach(issue => {
+    const items = issue.items || [];
 
-    const qtyHTML = order.items.map((item, i) => `
-      <p class="${i === order.items.length - 1 ? "mb-0" : "mb-1"}">${item.qty}</p>
-    `).join("");
+    // 🧾 Item names
+    const itemsHTML = items.length
+      ? items.map((item, i) => `
+          <p class="${i === items.length - 1 ? "mb-0" : "mb-1"}">
+            <span class="fw-semibold me-1">${i + 1}.</span>${item.name}
+          </p>
+        `).join("")
+      : `<span class="text-muted">No items</span>`;
 
-    const priceHTML = order.items.map((item, i) => `
-      <p class="${i === order.items.length - 1 ? "mb-0" : "mb-1"}">
-        ${formatCurrency(item.price)}
-      </p>
-    `).join("");
+    // 🔢 Quantities
+    const qtyHTML = items.length
+      ? items.map((item, i) => `
+          <p class="${i === items.length - 1 ? "mb-0" : "mb-1"}">
+            ${item.quantity_issued}
+          </p>
+        `).join("")
+      : "-";
 
-    const totalPrice = order.items.reduce(
-      (sum, item) => sum + item.qty * item.price,
+    // 💰 Unit prices
+    const priceHTML = items.length
+      ? items.map((item, i) => `
+          <p class="${i === items.length - 1 ? "mb-0" : "mb-1"}">
+            ${formatCurrency(item.unit_price)}
+          </p>
+        `).join("")
+      : "-";
+
+    // 🧮 Total value
+    const totalValue = items.reduce(
+      (sum, item) => sum + item.quantity_issued * item.unit_price,
       0
     );
 
     tbody.innerHTML += `
       <tr>
-        <td>#${order.orderNo}</td>
+        <td>#${issue.reference || issue.ID}</td>
 
         <td>
-          <a href="#!" class="link-primary fw-medium">${order.customer}</a>
+          <span class="fw-medium">${issue.issued_by_name}</span>
         </td>
 
         <td>${itemsHTML}</td>
@@ -88,29 +67,34 @@ function renderIssuedInventory(orders) {
 
         <td>${priceHTML}</td>
 
-        <td>${formatCurrency(totalPrice)}</td>
-
-        <td>
-          ${order.paymentMethod}
-          ${paymentIcon(order.paymentStatus)}
+        <td class="fw-semibold">
+          ${formatCurrency(totalValue)}
         </td>
 
-        <td>${order.orderDate}</td>
+        <td>
+          ${issue.reason}
+        </td>
 
-        <td>${order.address || "-"}</td>
+        <td>
+          ${new Date(issue.CreatedAt).toLocaleDateString()}
+        </td>
 
-        <td>${statusBadge(order.status)}</td>
+        <td>
+          ${issue.url
+            ? `<a href="${issue.url}" target="_blank" class="link-primary">View</a>`
+            : "-"}
+        </td>
+
+        <td>
+          <span class="badge bg-success-subtle text-success">
+            Issued
+          </span>
+        </td>
 
         <td>
           <div class="d-flex gap-3">
-            <a href="#!" class="text-muted view-order" data-id="${order.orderNo}">
+            <a href="#!" class="text-muted view-issue" data-id="${issue.ID}">
               <i class="ri-eye-line fs-20"></i>
-            </a>
-            <a href="#!" class="link-dark edit-order" data-id="${order.orderNo}">
-              <i class="ri-edit-line fs-20"></i>
-            </a>
-            <a href="#!" class="link-danger delete-order" data-id="${order.orderNo}">
-              <i class="ri-delete-bin-5-line fs-20"></i>
             </a>
           </div>
         </td>
