@@ -37,7 +37,7 @@ function statusBadge(status) {
   return `<span class="badge border border-${color} text-${color} px-2 py-1 fs-11">${status}</span>`;
 }
 
-function renderOrdersTable(orders) {
+function renderIssuedInventory(orders) {
   const tbody = document.querySelector("table tbody");
   tbody.innerHTML = "";
 
@@ -119,4 +119,145 @@ function renderOrdersTable(orders) {
   });
 }
 
-renderOrdersTable(orders);
+let issuedInventoryState = {
+  page: 1,
+  limit: 15,
+  totalPages: 1,
+  filters: {
+    search: "",
+    reference: "",
+    issued_by: "",
+    from_date: "",
+    to_date: ""
+  }
+};
+
+async function fetchIssuedInventory(page = 1) {
+  issuedInventoryState.page = page;
+
+  const params = new URLSearchParams({
+    page,
+    limit: issuedInventoryState.limit,
+    ...issuedInventoryState.filters
+  });
+
+  try {
+    const res = await fetch(
+      `https://api.e3restaurant.com/get-issued-inventory-history?${params.toString()}`,
+      {
+        method: "GET",
+        credentials: "include", // 🔐 required for auth middleware
+        headers: {
+          "Accept": "application/json"
+        }
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error || "Failed to load issued inventory");
+    }
+
+    issuedInventoryState.totalPages = data.pagination.TotalPages;
+
+    renderIssuedInventory(data.success);
+    renderIssuedPagination(data.pagination);
+
+  } catch (err) {
+    console.error(err);
+    showNetworkBanner({
+      text: `⚠️ ${err.message}`,
+      bg: "#FFF3CD",
+      color: "#664D03"
+    });
+  }
+}
+
+function renderIssuedInventory(issues) {
+  const container = document.getElementById("issuedInventoryContainer");
+  container.innerHTML = "";
+
+  if (!issues.length) {
+    container.innerHTML = `<p class="text-muted">No issued inventory found.</p>`;
+    return;
+  }
+
+  issues.forEach(issue => {
+    const itemsHtml = issue.items.map(item => `
+      <li>
+        ${item.name} — <strong>${item.quantity_issued}</strong> ${item.measurement}
+      </li>
+    `).join("");
+
+    container.innerHTML += `
+      <div class="card mb-3">
+        <div class="card-body">
+          <h6 class="mb-1">${issue.reason}</h6>
+          <small class="text-muted">
+            Issued by ${issue.issued_by_name} • ${new Date(issue.created_at).toLocaleDateString()}
+          </small>
+
+          <ul class="mt-2">
+            ${itemsHtml}
+          </ul>
+
+          ${issue.url ? `<a href="${issue.url}" target="_blank">View attachment</a>` : ""}
+        </div>
+      </div>
+    `;
+  });
+}
+
+function renderIssuedPagination(pagination) {
+  const ul = document.getElementById("issuedPagination");
+  ul.innerHTML = "";
+
+  const { CurrentPage, TotalPages } = pagination;
+
+  // ⬅ Previous
+  ul.innerHTML += `
+    <li class="page-item ${CurrentPage <= 1 ? "disabled" : ""}">
+      <a class="page-link" href="javascript:void(0);" data-page="${CurrentPage - 1}">
+        <i class="ri-arrow-left-s-line"></i>
+      </a>
+    </li>
+  `;
+
+  // Page numbers (max 5)
+  const start = Math.max(1, CurrentPage - 2);
+  const end = Math.min(TotalPages, CurrentPage + 2);
+
+  for (let i = start; i <= end; i++) {
+    ul.innerHTML += `
+      <li class="page-item ${i === CurrentPage ? "active" : ""}">
+        <a class="page-link" href="javascript:void(0);" data-page="${i}">
+          ${i}
+        </a>
+      </li>
+    `;
+  }
+
+  // ➡ Next
+  ul.innerHTML += `
+    <li class="page-item ${CurrentPage >= TotalPages ? "disabled" : ""}">
+      <a class="page-link" href="javascript:void(0);" data-page="${CurrentPage + 1}">
+        <i class="ri-arrow-right-s-line"></i>
+      </a>
+    </li>
+  `;
+}
+
+document.addEventListener("click", e => {
+  const link = e.target.closest(".page-link");
+  if (!link || !link.dataset.page) return;
+
+  const page = Number(link.dataset.page);
+  if (page < 1 || page > issuedInventoryState.totalPages) return;
+
+  fetchIssuedInventory(page);
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  fetchIssuedInventory(1);
+});
