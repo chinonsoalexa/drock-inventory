@@ -48,9 +48,6 @@ function renderMenuCategoriesGrid() {
               <p class="mb-0">${cat.name}</p>
             </div>
             <div class="ms-auto">
-              <a href="#!" class="btn btn-primary avatar-sm rounded-circle d-flex align-items-center justify-content-center">
-                <i class="ri-eye-line align-middle fs-16 text-white"></i>
-              </a>
             </div>
           </div>
         </div>
