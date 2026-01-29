@@ -155,7 +155,7 @@ try {
 	// })();
 
 async function check_auth_status() {
-    const apiUrl = "https://api.businessconnectt.com/auth-status";
+    const apiUrl = "https://api.businessconnectt.com/user-auth-status";
 
     const requestOptions = {
         method: "GET",
@@ -189,6 +189,11 @@ async function check_auth_status() {
             }
             return;
         }
+
+        const responseData = await response.json();
+
+        document.getElementById("inventoryTitle").textContent = responseData.name;
+
         localStorage.setItem('auth', 'true');
     } finally {
         if (localStorage.getItem('auth') !== 'true') {
