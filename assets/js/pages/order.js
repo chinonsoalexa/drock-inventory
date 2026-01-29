@@ -13,6 +13,29 @@ function viewIssueImage(url) {
   modal.show();
 }
 
+function renderIssuedInventorySkeleton(rows = 5) {
+  const tbody = document.getElementById("issuedInventoryContainer");
+  tbody.innerHTML = "";
+
+  for (let i = 0; i < rows; i++) {
+    tbody.innerHTML += `
+      <tr>
+        <td><div class="skeleton skeleton-md"></div></td>
+        <td><div class="skeleton skeleton-md"></div></td>
+        <td><div class="skeleton skeleton-md"></div></td>
+        <td>
+          <div class="skeleton skeleton-sm skeleton-mb"></div>
+          <div class="skeleton skeleton-sm skeleton-mb"></div>
+          <div class="skeleton skeleton-sm"></div>
+        </td>
+        <td><div class="skeleton skeleton-md"></div></td>
+        <td><div class="skeleton skeleton-md"></div></td>
+        <td><div class="skeleton skeleton-sm" style="width:60px"></div></td>
+      </tr>
+    `;
+  }
+}
+
 function renderIssuedInventory(issues) {
   const tbody = document.getElementById("issuedInventoryContainer");
   tbody.innerHTML = "";
@@ -95,6 +118,10 @@ let issuedInventoryState = {
 
 async function fetchIssuedInventory(page = 1) {
   issuedInventoryState.page = page;
+    
+  // 👇 SHOW LOADER
+  renderIssuedInventorySkeleton(5);
+
   const query = buildIssuedInventoryQuery(page);
   const params = new URLSearchParams({
     page,
