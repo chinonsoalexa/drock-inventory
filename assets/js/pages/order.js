@@ -129,41 +129,6 @@ async function fetchIssuedInventory(page = 1) {
   }
 }
 
-function renderIssuedInventory(issues) {
-  const container = document.getElementById("issuedInventoryContainer");
-  container.innerHTML = "";
-
-  if (!issues.length) {
-    container.innerHTML = `<p class="text-muted">No issued inventory found.</p>`;
-    return;
-  }
-
-  issues.forEach(issue => {
-    const itemsHtml = issue.items.map(item => `
-      <li>
-        ${item.name} — <strong>${item.quantity_issued}</strong> ${item.measurement}
-      </li>
-    `).join("");
-
-    container.innerHTML += `
-      <div class="card mb-3">
-        <div class="card-body">
-          <h6 class="mb-1">${issue.reason}</h6>
-          <small class="text-muted">
-            Issued by ${issue.issued_by_name} • ${new Date(issue.created_at).toLocaleDateString()}
-          </small>
-
-          <ul class="mt-2">
-            ${itemsHtml}
-          </ul>
-
-          ${issue.url ? `<a href="${issue.url}" target="_blank">View attachment</a>` : ""}
-        </div>
-      </div>
-    `;
-  });
-}
-
 function renderIssuedPagination(pagination) {
   const ul = document.getElementById("issuedPagination");
   ul.innerHTML = "";
