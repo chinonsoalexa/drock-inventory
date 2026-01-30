@@ -7,7 +7,7 @@ function check_auth() {
     //     // Key does not exist in localStorage
     //     sessionStorage.setItem('analyticsData', 'true');
 
-    //     fetch('https://api.businessconnectt.com/business-connect-analytics', {
+    //     fetch('https://api.e3restaurant.com/business-connect-analytics', {
     //         method: 'GET'
     //     });
     // }

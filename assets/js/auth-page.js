@@ -7,7 +7,7 @@ function check_auth() {
     //     // Key does not exist in localStorage
     //     sessionStorage.setItem('analyticsData', 'true');
 
-    //     fetch('https://api.businessconnectt.com/business-connect-analytics', {
+    //     fetch('https://api.e3restaurant.com/business-connect-analytics', {
     //         method: 'GET'
     //     });
     // }
@@ -120,7 +120,7 @@ try {
 	// 	// Override the fetch function with our own custom implementation
 	// 	window.fetch = function() {
     //         // Check if the request URL matches the specific URL to exclude
-    //         if (arguments[0] === "https://api.businessconnectt.com/auth-status") {
+    //         if (arguments[0] === "https://api.e3restaurant.com/auth-status") {
     //             // Call the original fetch function without triggering event handling
     //             return originalFetch.apply(this, arguments);
     //         }
@@ -155,7 +155,7 @@ try {
 	// })();
 
 async function check_auth_status() {
-    const apiUrl = "https://api.businessconnectt.com/user-auth-status";
+    const apiUrl = "https://api.e3restaurant.com/user-auth-status";
 
     const requestOptions = {
         method: "GET",
