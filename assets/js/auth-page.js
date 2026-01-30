@@ -1,30 +1,9 @@
-
 // Listen for the DOMContentLoaded event
 function check_auth() {
-    // var analyticsData = sessionStorage.getItem('analyticsData');
-
-    // if (analyticsData === null) {
-    //     // Key does not exist in localStorage
-    //     sessionStorage.setItem('analyticsData', 'true');
-
-    //     fetch('https://api.e3restaurant.com/business-connect-analytics', {
-    //         method: 'GET'
-    //     });
-    // }
 
     // Run the authentication status check function
     get_auth_status();
 
-    // Register the service worker
-    // if ('serviceWorker' in navigator) {
-    //     navigator.serviceWorker.register('service-worker.js')
-    //         .then(registration => {
-    //               console.log('Service Worker registered with scope:', registration.scope);
-    //         })
-    //         .catch(error => {
-    //               console.error('Service Worker registration failed:', error);
-    //         });
-    // }
 }
 check_auth()
 
@@ -57,13 +36,6 @@ document.getElementById('logout-button').addEventListener('click', async functio
 })
 });
 
-// document.addEventListener('DOMContentLoaded', function () {
-// document.getElementById('logout-button2').addEventListener('click', async function (event) {
-//     event.preventDefault()
-//     await logout()
-// })
-// });
-
 async function logout() {
     // also send a request to the logout api endpoint
     const apiUrl = "https://api.e3restaurant.com/log-out";
@@ -95,65 +67,6 @@ try {
     }
 }
 
-	// //--Preloader--//
-	// setTimeout(function(){
-	// 	$('.preloader__wrap').fadeToggle();
-	// }, 1000);
-	// //--Preloader--//
-	
-	// function onRequestSent() {
-	// 	// Code to execute when a request is sent
-	// 	// Trigger the preloader fadeToggle 
-	// 		$('.preloader__wrap').fadeToggle();
-	// }
-	
-	// function onRequestComplete() {
-	// 	// Code to execute when a request is complete
-	// 	// Trigger the preloader fadeToggle 
-	// 		$('.preloader__wrap').fadeToggle();
-	// }
-	
-	// (function() {
-	// 	// Save reference to the original fetch function
-	// 	const originalFetch = window.fetch;
-	
-	// 	// Override the fetch function with our own custom implementation
-	// 	window.fetch = function() {
-    //         // Check if the request URL matches the specific URL to exclude
-    //         if (arguments[0] === "https://api.e3restaurant.com/auth-status") {
-    //             // Call the original fetch function without triggering event handling
-    //             return originalFetch.apply(this, arguments);
-    //         }
-	// 		if (!navigator.onLine) {
-	// 			// Handle the case when there's no internet connection
-    //             onRequestComplete();
-    //             Swal.fire({
-	// 				title: "No Internet?",
-	// 				text: "Please Connect to the Internet!!!",
-	// 				icon: "question",
-	// 				confirmButtonColor: "#556ee6"
-	// 			  })
-	// 			return Promise.reject(new Error("No internet connection."));
-	// 		}
-	
-	// 		// Trigger onRequestSent when a request is sent
-	// 		onRequestSent();
-	
-	// 		// Call the original fetch function
-	// 		const fetchPromise = originalFetch.apply(this, arguments);
-	
-    //     // When the fetch request is complete, trigger onRequestComplete
-    //     fetchPromise.then(() => {
-    //         onRequestComplete();
-    //     }).catch(error => {
-    //         onRequestComplete();
-    //     });
-	
-	// 		// Return the fetch promise
-	// 		return fetchPromise;
-	// 	};
-	// })();
-
 async function check_auth_status() {
     const apiUrl = "https://api.e3restaurant.com/user-auth-status";
 
@@ -172,18 +85,9 @@ async function check_auth_status() {
             const errorData = await response.json();
 
             if  (errorData.error === 'No Authentication cookie found' || errorData.error === "Unauthorized attempt! JWT's not valid!" || errorData.error === "No Refresh cookie found") {
-                // Swal.fire({
-                //     title: "Session Expired",
-                //     text: "Please Try To Logging Again Your Session Has Expired!!!",
-                //     icon: "info",
-                //     confirmButtonColor: "#556ee6"
-                // }).then((result) => {
-                //     if (result.isConfirmed) {
-                        logout();
-                    // } else {
-                        logout();
-                //     }
-                // });
+
+                logout();
+
             } else {
                 logout();
             }
@@ -197,7 +101,7 @@ async function check_auth_status() {
         localStorage.setItem('auth', 'true');
     } finally {
         if (localStorage.getItem('auth') !== 'true') {
-            window.location.href = '../sign-in.html';
+            window.location.href = 'auth-signin.html';
         }
     }
 }
