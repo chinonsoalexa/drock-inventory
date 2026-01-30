@@ -1,24 +1,3 @@
-const products = [
-  {
-    id: 1,
-    name: "Italian Burrata Pizza",
-    size: "12-Inch",
-    image: "assets/images/food-icon/pic12.png",
-    description: "Traditional Italian pizza with fresh burrata.",
-    ingredients: "Mushrooms, Bell Peppers, Onions, Basil",
-    price: 12
-  },
-  {
-    id: 2,
-    name: "Shanghai Noodles",
-    size: "Large Bowl",
-    image: "assets/images/food-icon/pic13.png",
-    description: "Wheat noodles tossed in classic sauce.",
-    ingredients: "Green onions, Soy sauce, Sesame oil",
-    price: 13
-  }
-];
-
 function renderInventorySkeleton(rows = 6) {
   const tbody = document.getElementById("productsTableBody");
   tbody.innerHTML = "";
