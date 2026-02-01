@@ -17,10 +17,7 @@
      <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
      <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
      <script src="assets/js/config.min.js"></script>
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-  rel="stylesheet"
-/>
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
 
      <style>
           .menu-slider {
@@ -48,128 +45,143 @@
           }
 
           #view-more-btn {
-            padding: 12px 28px;
-            font-size: 16px;
-            font-weight: 600;
-            background: #2b55ff;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.2s ease, transform 0.2s ease;
-        }
+               padding: 12px 28px;
+               font-size: 16px;
+               font-weight: 600;
+               background: #2b55ff;
+               color: #fff;
+               border: none;
+               border-radius: 6px;
+               cursor: pointer;
+               transition: background 0.2s ease, transform 0.2s ease;
+          }
 
-        #view-more-btn:hover {
-            background: #b2925b;
-            transform: translateY(-2px);
-        }
+          #view-more-btn:hover {
+               background: #b2925b;
+               transform: translateY(-2px);
+          }
 
-        mark {
-  background-color: rgba(255, 193, 7, 0.35); /* soft yellow */
-  color: inherit;
-  border-radius: 4px;
-}
+          mark {
+               background-color: rgba(255, 193, 7, 0.35);
+               /* soft yellow */
+               color: inherit;
+               border-radius: 4px;
+          }
 
-/* Menu image container */
-.menu-image-wrapper {
-  width: 100%;
-  height: 180px;              /* 🔥 consistent height */
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+          /* Menu image container */
+          .menu-image-wrapper {
+               width: 100%;
+               height: 180px;
+               /* 🔥 consistent height */
+               overflow: hidden;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+          }
 
-/* Image behavior */
-.menu-image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;          /* 🔥 magic */
-  border-radius: 0.5rem;
-}
+          /* Image behavior */
+          .menu-image-wrapper img {
+               width: 100%;
+               height: 100%;
+               object-fit: cover;
+               /* 🔥 magic */
+               border-radius: 0.5rem;
+          }
 
-.card:hover .menu-image-wrapper img {
-  transform: scale(1.05);
-  transition: transform 0.25s ease;
-}
+          .card:hover .menu-image-wrapper img {
+               transform: scale(1.05);
+               transition: transform 0.25s ease;
+          }
 
-.menu-image-wrapper {
-  background: #f8f9fa;
-}
+          .menu-image-wrapper {
+               background: #f8f9fa;
+          }
 
 
-.menu-image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+          .menu-image-wrapper img {
+               width: 100%;
+               height: 100%;
+               object-fit: cover;
+          }
 
-.card {
-  border-radius: 10px;
-}
+          .card {
+               border-radius: 10px;
+          }
 
-.card-body {
-  padding: 0.5rem 0.75rem;
-}
+          .card-body {
+               padding: 0.5rem 0.75rem;
+          }
 
-/* Give cards a little more vertical room */
-.cardd {
-  height: 135px; /* was 120px */
-}
+          /* Give cards a little more vertical room */
+          .cardd {
+               height: 135px;
+               /* was 120px */
+          }
 
-/* Reserve more space for Added text */
-.added-qty {
-  min-height: 20px;
-  line-height: 20px;
-}
+          /* Reserve more space for Added text */
+          .added-qty {
+               min-height: 20px;
+               line-height: 20px;
+          }
 
-/* Optional: tighten title spacing so it doesn't explode */
-.cardd-body a {
-  line-height: 1.2;
-}
+          /* Optional: tighten title spacing so it doesn't explode */
+          .cardd-body a {
+               line-height: 1.2;
+          }
 
-/* Image stays consistent */
-.menu-image-wrapper {
-  width: 60px;
-  height: 60px;
-}
+          /* Image stays consistent */
+          .menu-image-wrapper {
+               width: 60px;
+               height: 60px;
+          }
 
-.menu-image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+          .menu-image-wrapper img {
+               width: 100%;
+               height: 100%;
+               object-fit: cover;
+          }
 
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    #f0f0f0 25%,
-    #e6e6e6 37%,
-    #f0f0f0 63%
-  );
-  background-size: 400% 100%;
-  animation: skeleton-loading 1.4s ease infinite;
-  border-radius: 6px;
-}
+          .skeleton {
+               background: linear-gradient(90deg,
+                         #f0f0f0 25%,
+                         #e6e6e6 37%,
+                         #f0f0f0 63%);
+               background-size: 400% 100%;
+               animation: skeleton-loading 1.4s ease infinite;
+               border-radius: 6px;
+          }
 
-@keyframes skeleton-loading {
-  0% { background-position: 100% 0; }
-  100% { background-position: 0 0; }
-}
+          @keyframes skeleton-loading {
+               0% {
+                    background-position: 100% 0;
+               }
 
-.skeleton-text {
-  height: 14px;
-  margin-bottom: 8px;
-}
+               100% {
+                    background-position: 0 0;
+               }
+          }
 
-.skeleton-text.sm { width: 60%; }
-.skeleton-text.md { width: 80%; }
-.skeleton-text.lg { width: 100%; }
+          .skeleton-text {
+               height: 14px;
+               margin-bottom: 8px;
+          }
 
-.skeleton-image {
-  width: 60px;
-  height: 60px;
-}
+          .skeleton-text.sm {
+               width: 60%;
+          }
+
+          .skeleton-text.md {
+               width: 80%;
+          }
+
+          .skeleton-text.lg {
+               width: 100%;
+          }
+
+          .skeleton-image {
+               width: 60px;
+               height: 60px;
+          }
      </style>
 </head>
 
@@ -197,32 +209,32 @@
                     <ul class="navbar-nav" id="navbar-nav">
 
                          <li class="menu-item">
-  <a class="menu-link" href="index.html">
-    <span class="nav-icon">
-      <i class="ri-inbox-line"></i>
-    </span>
-    <span class="nav-text">Stock Issue</span>
-  </a>
-</li>
+                              <a class="menu-link" href="index.html">
+                                   <span class="nav-icon">
+                                        <i class="ri-inbox-line"></i>
+                                   </span>
+                                   <span class="nav-text">Stock Issue</span>
+                              </a>
+                         </li>
 
                          <li class="menu-item">
-  <a class="menu-link" href="orders.html">
-    <span class="nav-icon">
-      <i class="ri-time-line"></i>
-    </span>
-    <span class="nav-text">Issued Stock</span>
-  </a>
-</li>
+                              <a class="menu-link" href="orders.html">
+                                   <span class="nav-icon">
+                                        <i class="ri-time-line"></i>
+                                   </span>
+                                   <span class="nav-text">Issued Stock</span>
+                              </a>
+                         </li>
 
 
                          <li class="menu-item">
-  <a class="menu-link" href="product-listing.html">
-    <span class="nav-icon">
-      <i class="ri-store-line"></i>
-    </span>
-    <span class="nav-text">Available Stock</span>
-  </a>
-</li>
+                              <a class="menu-link" href="product-listing.html">
+                                   <span class="nav-icon">
+                                        <i class="ri-store-line"></i>
+                                   </span>
+                                   <span class="nav-text">Available Stock</span>
+                              </a>
+                         </li>
 
 
                          <li class="menu-item">
@@ -243,11 +255,11 @@
                               </a>
                          </li>
 
-                         
 
-                         
 
-                         
+
+
+
 
                          <li class="menu-item">
                               <a class="menu-link" href="pages-faqs.html">
@@ -279,12 +291,14 @@
                     <div class="navbar-header">
 
                          <div class="dropdown topbar-item ms-3">
-                              <button class="topbar-button" type="button" id="savedCartsDropdown" data-bs-toggle="dropdown">
-                              <i class="ri-folder-2-line fs-20"></i> Saved Inventory
+                              <button class="topbar-button" type="button" id="savedCartsDropdown"
+                                   data-bs-toggle="dropdown">
+                                   <i class="ri-folder-2-line fs-20"></i> Saved Inventory
                               </button>
-                              <div class="dropdown-menu dropdown-menu-end p-2" style="min-width:250px;" id="savedCartsMenu">
-                              <!-- Saved carts will be injected here -->
-                              <div class="text-muted text-center fs-13">No saved inventory</div>
+                              <div class="dropdown-menu dropdown-menu-end p-2" style="min-width:250px;"
+                                   id="savedCartsMenu">
+                                   <!-- Saved carts will be injected here -->
+                                   <div class="text-muted text-center fs-13">No saved inventory</div>
                               </div>
                          </div>
 
@@ -311,7 +325,8 @@
                                              <img class="rounded-circle" width="32"
                                                   src="assets/images/users/avatar-1.jpg" alt="user-image">
                                              <span class="d-lg-flex flex-column gap-1 d-none">
-                                                  <h5 id="inventoryTitle" class="my-0 fs-13 text-uppercase text-reset fw-bold">E3 Inventory
+                                                  <h5 id="inventoryTitle"
+                                                       class="my-0 fs-13 text-uppercase text-reset fw-bold">E3 Inventory
                                                   </h5>
                                              </span>
                                         </span>
@@ -345,12 +360,8 @@
 
                               <div class="mb-3 d-flex flex-wrap align-items-center gap-2">
                                    <!-- Search input -->
-                                   <input
-                                        type="text"
-                                        id="menuSearch"
-                                        class="form-control"
-                                        placeholder="Search inventory..."
-                                        >
+                                   <input type="text" id="menuSearch" class="form-control"
+                                        placeholder="Search inventory...">
                               </div>
 
                               <div class="row" id="menuSkeleton" style="display:none;">
@@ -374,40 +385,44 @@
                                    </div>
                                    <div class="card-body">
                                         <h5 class="fw-semibold">
-                                        Total <span class="text-muted" id="totalItems">(0)</span>
+                                             Total <span class="text-muted" id="totalItems">(0)</span>
                                         </h5>
 
                                         <!-- ITEMS WILL RENDER HERE -->
                                         <div id="cartItems"></div>
 
                                         <div class="mt-3">
-                                        <div class="table-responsive">
-                                        <table class="table table-bordered bg-light-subtle">
-                                             <tbody>
-                                             <tr>
-                                                  <td>
-                                                  <p class="d-flex mb-0 align-items-center gap-1">
-                                                  Total Items Issued :</p>
-                                                  </td>
-                                                  <td class="text-end text-dark fw-medium" id="summary-items">0</td>
-                                             </tr>
-                                             <tr>
-                                                  <td>
-                                                  <p class="d-flex mb-0 align-items-center gap-1">
-                                                  Total Quantity :</p>
-                                                  </td>
-                                                  <td class="text-end text-dark fw-medium" id="summary-quantity">0</td>
-                                             </tr>
-                                             <tr>
-                                                  <td>
-                                                  <p class="d-flex mb-0 align-items-center gap-1 fw-semibold text-danger">
-                                                  Low Stock Alerts :</p>
-                                                  </td>
-                                                  <td class="text-end text-warning fw-semibold" id="summary-lowstock">0</td>
-                                             </tr>
-                                             </tbody>
-                                        </table>
-                                        </div>
+                                             <div class="table-responsive">
+                                                  <table class="table table-bordered bg-light-subtle">
+                                                       <tbody>
+                                                            <tr>
+                                                                 <td>
+                                                                      <p class="d-flex mb-0 align-items-center gap-1">
+                                                                           Total Items Issued :</p>
+                                                                 </td>
+                                                                 <td class="text-end text-dark fw-medium"
+                                                                      id="summary-items">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                 <td>
+                                                                      <p class="d-flex mb-0 align-items-center gap-1">
+                                                                           Total Quantity :</p>
+                                                                 </td>
+                                                                 <td class="text-end text-dark fw-medium"
+                                                                      id="summary-quantity">0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                 <td>
+                                                                      <p
+                                                                           class="d-flex mb-0 align-items-center gap-1 fw-semibold text-danger">
+                                                                           Low Stock Alerts :</p>
+                                                                 </td>
+                                                                 <td class="text-end text-warning fw-semibold"
+                                                                      id="summary-lowstock">0</td>
+                                                            </tr>
+                                                       </tbody>
+                                                  </table>
+                                             </div>
                                         </div>
 
 
@@ -415,15 +430,15 @@
 
                                         <div class="gap-1 hstack mt-3">
                                              <a href="#!" id="cancelCart" class="btn btn-danger w-100">
-                                             <i class="ri-close-circle-line"></i> Clear Cart
+                                                  <i class="ri-close-circle-line"></i> Clear Cart
                                              </a>
 
                                              <a href="#!" id="saveCartBtn" class="btn btn-warning w-100">
-                                             <i class="ri-save-line"></i> Save Inventory
+                                                  <i class="ri-save-line"></i> Save Inventory
                                              </a>
 
                                              <a href="#!" id="placeOrderBtn" class="btn btn-primary w-100">
-                                             <i class="ri-shopping-basket-2-line"></i> Issue Stocks
+                                                  <i class="ri-shopping-basket-2-line"></i> Issue Stocks
                                              </a>
                                         </div>
                                    </div>
@@ -448,26 +463,29 @@
           </div>
           <!-- END Wrapper -->
 
-          <div id="issueStockModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); justify-content:center; align-items:center; z-index:10000;">
-               <div class="modal-content" style="background:#fff; padding:20px; border-radius:8px; max-width:400px; width:90%;">
-               <h5 class="mb-3">Issue Stock</h5>
+          <div id="issueStockModal" class="modal"
+               style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); justify-content:center; align-items:center; z-index:10000;">
+               <div class="modal-content"
+                    style="background:#fff; padding:20px; border-radius:8px; max-width:400px; width:90%;">
+                    <h5 class="mb-3">Issue Stock</h5>
 
-               <form id="issueStockForm">
-                    <div class="mb-3">
-                    <label for="issueReason" class="form-label">Reason</label>
-                    <textarea id="issueReason" class="form-control" placeholder="Enter reason..." required></textarea>
-                    </div>
+                    <form id="issueStockForm">
+                         <div class="mb-3">
+                              <label for="issueReason" class="form-label">Reason</label>
+                              <textarea id="issueReason" class="form-control" placeholder="Enter reason..."
+                                   required></textarea>
+                         </div>
 
-                    <div class="mb-3">
-                    <label for="issueImage" class="form-label">Upload Image</label>
-                    <input type="file" id="issueImage" accept="image/*" class="form-control">
-                    </div>
+                         <div class="mb-3">
+                              <label for="issueImage" class="form-label">Upload Image</label>
+                              <input type="file" id="issueImage" accept="image/*" class="form-control">
+                         </div>
 
-                    <div class="d-flex justify-content-end gap-2">
-                    <button type="button" class="btn btn-secondary" id="issueStockCancel">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Issue Stock</button>
-                    </div>
-               </form>
+                         <div class="d-flex justify-content-end gap-2">
+                              <button type="button" class="btn btn-secondary" id="issueStockCancel">Cancel</button>
+                              <button type="submit" class="btn btn-primary">Issue Stock</button>
+                         </div>
+                    </form>
                </div>
           </div>
 

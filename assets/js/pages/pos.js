@@ -73,18 +73,18 @@ function updateSlide() {
 }
 
 // Eye click event
-document.addEventListener("click", e => {
-  const eye = e.target.closest(".menu-eye");
-  if (!eye) return;
+// document.addEventListener("click", e => {
+//   const eye = e.target.closest(".menu-eye");
+//   if (!eye) return;
 
-  const name = eye.dataset.name;
-  renderMenu(products, name, true);
+//   const name = eye.dataset.name;
+//   renderMenu(products, name, true);
 
-  // Example API call
-  // fetch(`/api/menu?category=${encodeURIComponent(name)}`)
-  //   .then(res => res.json())
-  //   .then(data => console.log(data));
-});
+//   // Example API call
+//   // fetch(`/api/menu?category=${encodeURIComponent(name)}`)
+//   //   .then(res => res.json())
+//   //   .then(data => console.log(data));
+// });
 
 // document.addEventListener("DOMContentLoaded", function() {
 //     var e = document.querySelectorAll(".plus"),
@@ -561,7 +561,7 @@ async function fetchInventory({
     if (toDate) params.append("to_date", toDate);
 
     const res = await fetch(
-      `https://api.e3restaurant.com/get-inventory?${params.toString()}`,
+      `https://api.e3restaurant.com/get-available-inventory?${params.toString()}`,
       {
         credentials: "include" // IMPORTANT since you use middleware
       }
