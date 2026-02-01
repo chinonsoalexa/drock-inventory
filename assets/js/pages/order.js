@@ -105,7 +105,7 @@ function showNetworkBanner({ text, bg, color }) {
 
 let issuedInventoryState = {
   page: 1,
-  limit: 15,
+  limit: 30,
   totalPages: 1,
   filters: {
     search: "",
