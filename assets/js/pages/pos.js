@@ -78,7 +78,7 @@ function updateSlide() {
 //   if (!eye) return;
 
 //   const name = eye.dataset.name;
-//   renderMenu(products, name, true);
+//   renderMenu(products1, name, true);
 
 //   // Example API call
 //   // fetch(`/api/menu?category=${encodeURIComponent(name)}`)
@@ -467,7 +467,7 @@ function renderMenu(products, category = "all", reset = false) {
 
 document.getElementById("menuSearch").addEventListener("input", e => {
   searchQuery = e.target.value;
-  renderMenu(products, currentCategory, true);
+  renderMenu(products1, currentCategory, true);
 });
 
 let searchTimer;
@@ -475,7 +475,7 @@ menuSearch.addEventListener("input", e => {
   clearTimeout(searchTimer);
   searchTimer = setTimeout(() => {
     searchQuery = e.target.value;
-    renderMenu(products, currentCategory, true);
+    renderMenu(products1, currentCategory, true);
   }, 300);
 });
 
@@ -488,7 +488,7 @@ function highlightMatch(text, query) {
 
 // Handle View More button click
 document.getElementById("view-more-btn").addEventListener("click", () => {
-  renderMenu(products, currentCategory, false);
+  renderMenu(products1, currentCategory, false);
 });
 
 const skeletonContainer = document.getElementById("menuSkeleton");
