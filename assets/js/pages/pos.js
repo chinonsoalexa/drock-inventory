@@ -59,8 +59,8 @@ function getCategoryColor(category) {
 
 let currentCategory = "all";
 let productsToShow = [];
-// let batchSize = 21; // 3 rows of 7 items
-// let lastIndex = 0;
+let batchSize = 21; // 3 rows of 7 items
+let lastIndex = 0;
 let searchQuery = "";
 let retryInterval = null;
 
@@ -386,7 +386,7 @@ function renderMenu(products, category = "all", reset = false) {
   }
 
   // 4️⃣ Pagination
-  // const nextBatch = productsToShow.slice(lastIndex, lastIndex + batchSize);
+  const nextBatch = productsToShow.slice(lastIndex, lastIndex + batchSize);
 
   // 5️⃣ Empty state
   if (!nextBatch.length && reset) {
@@ -574,8 +574,8 @@ async function fetchInventory({
       ? data.success
       : [...products1, ...data.success];
 
-    // renderMenu(products1, "all", reset);
-    renderMenu(products1, currentCategory, true);
+    renderMenu(products1, "all", reset);
+    // renderMenu(products1, currentCategory, true);
 
     currentPage = data.pagination.CurrentPage;
     updateLoadMoreBtn(data.pagination);
