@@ -49,7 +49,6 @@ const CATEGORY_COLOR_MAP = {
 const cartContainer = document.getElementById("cartItems");
 const totalItemsEl = document.getElementById("totalItems");
 
-let products1 = [];
 // let currentPage1 = 1;
 const pageLimit = 15;
 
@@ -58,14 +57,15 @@ function getCategoryColor(category) {
 }
 
 let currentCategory = "all";
-let productsToShow = [];
-let batchSize = 21; // 3 rows of 7 items
-let lastIndex = 0;
+// let productsToShow = [];
+// let batchSize = 21; // 3 rows of 7 items
+// let lastIndex = 0;
 let searchQuery = "";
-let retryInterval = null;
+// let retryInterval = null;
+let products1 = [];
 
 // Slider logic
-let currentPage = 0;
+let currentPage = 1;
 const pages = document.querySelectorAll(".menu-page");
 
 function updateSlide() {
@@ -194,6 +194,7 @@ document.addEventListener("click", e => {
 
   const id = Number(btn.dataset.id);
   const product = products1.find(p => p.ID === id);
+  if (!product) return;
 
   addToCart(product);
 });
@@ -323,7 +324,7 @@ function formatInventoryDisplay(item) {
 }
 
 function updateCartItemPrice(id) {
-  const item = cartState.find(i => i.id === id);
+  const item = cartState.find(i => i.ID === id);
   if (!item) return;
 
   const priceEl = document.querySelector(
@@ -331,7 +332,7 @@ function updateCartItemPrice(id) {
   );
 
   if (priceEl) {
-    priceEl.textContent = formatNumberToNaira(item.price * item.qty);
+    priceEl.textContent = formatNumberToNaira(item.unit_price * item.qty);
   }
 }
 
@@ -342,12 +343,11 @@ function updateAddedQty(productId) {
     if (id !== productId) return;
 
     const qtyEl = card.querySelector('.added-qty');
-    const cartItem = cartState.find(c => c.id === id);
+    const cartItem = cartState.find(c => c.ID === id);
 
     if (cartItem) {
       qtyEl.textContent = `Added: ${cartItem.qty}`;
-      // 🔥 update item price
-      updateCartItemPrice(cartItem.id);
+      updateCartItemPrice(cartItem.ID);
     } else {
       qtyEl.textContent = ''; // hide if removed
     }
@@ -361,35 +361,12 @@ function getStockClass(item) {
   return "text-success";
 }
 
-function renderMenu(products, category = "all", reset = false) {
-  // 1️⃣ Filter by category
-  let filtered =
-    category === "all"
-      ? products
-      : products.filter(p => p.category === category);
-
-  // 2️⃣ Filter by search query
-  if (searchQuery.trim()) {
-    const q = searchQuery.toLowerCase();
-    filtered = filtered.filter(p =>
-      p.name.toLowerCase().includes(q) ||
-      p.category.toLowerCase().includes(q)
-    );
-  }
-
-  productsToShow = filtered;
-
-  // 3️⃣ Reset state
+function renderMenu(products, reset = false) {
   if (reset) {
-    lastIndex = 0;
     menuContainer.innerHTML = "";
   }
 
-  // 4️⃣ Pagination
-  const nextBatch = productsToShow.slice(lastIndex, lastIndex + batchSize);
-
-  // 5️⃣ Empty state
-  if (!nextBatch.length && reset) {
+  if (!products.length && reset) {
     menuContainer.innerHTML = `
       <div class="col-12 text-center py-5">
         <i class="ri-search-line fs-1 text-muted"></i>
@@ -402,10 +379,9 @@ function renderMenu(products, category = "all", reset = false) {
     return;
   }
 
-  // 6️⃣ Render items
-  nextBatch.forEach(item => {
-    const qtyInCart = cartState.find(c => c.id === item.ID)?.qty || 0;
-    const { priceText, quantityText } = formatInventoryDisplay(item);
+  products.forEach(item => {
+    const qtyInCart = cartState.find(c => c.ID === item.ID)?.qty || 0;
+    const { quantityText } = formatInventoryDisplay(item);
 
     menuContainer.innerHTML += `
       <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-3">
@@ -415,12 +391,10 @@ function renderMenu(products, category = "all", reset = false) {
 
             <div class="d-flex gap-3 align-items-start">
 
-              <!-- SMALL IMAGE -->
               <div class="menu-image-wrapper position-relative rounded bg-light flex-shrink-0 add-to-cart" data-id="${item.ID}">
                 <i class="${getCategoryIcon(item.category)} fs-2 ${getCategoryColor(item.category)}"></i>
               </div>
 
-              <!-- CONTENT -->
               <div class="flex-grow-1">
 
                 <a href="#!" class="text-dark fs-15 fw-semibold d-block mb-1 add-to-cart" data-id="${item.ID}">
@@ -431,14 +405,12 @@ function renderMenu(products, category = "all", reset = false) {
                   ${highlightMatch(item.category, searchQuery)}
                 </p>
 
-                <div class="d-flex justify-content-between align-items-center ${getStockClass(item)} add-to-cart" data-id="${item.ID}">
+                <div class="d-flex justify-content-between align-items-center ${getStockClass(item)}">
                   <span class="fw-bold fs-6">
                     ${quantityText}
                   </span>
 
-                  <button
-                    class="btn btn-soft-primary btn-sm add-to-cart"
-                    data-id="${item.ID}">
+                  <button class="btn btn-soft-primary btn-sm add-to-cart" data-id="${item.ID}">
                     <i class="ri-shopping-basket-2-line"></i>
                   </button>
                 </div>
@@ -455,27 +427,21 @@ function renderMenu(products, category = "all", reset = false) {
       </div>
     `;
   });
-
-
-  lastIndex += batchSize;
-
-  // 7️⃣ Toggle Load More button
-  const btn = document.getElementById("view-more-btn");
-  btn.style.display =
-    lastIndex >= productsToShow.length ? "none" : "inline-block";
 }
 
-document.getElementById("menuSearch").addEventListener("input", e => {
-  searchQuery = e.target.value;
-  renderMenu(products1, currentCategory, true);
-});
-
 let searchTimer;
-menuSearch.addEventListener("input", e => {
+
+document.getElementById("menuSearch").addEventListener("input", e => {
   clearTimeout(searchTimer);
+
   searchTimer = setTimeout(() => {
     searchQuery = e.target.value;
-    renderMenu(products1, currentCategory, true);
+
+    fetchInventory({
+      search: searchQuery,
+      page: 1,
+      reset: true
+    });
   }, 300);
 });
 
@@ -485,11 +451,6 @@ function highlightMatch(text, query) {
   const regex = new RegExp(`(${query})`, "gi");
   return text.replace(regex, `<mark class="px-1">$1</mark>`);
 }
-
-// Handle View More button click
-document.getElementById("view-more-btn").addEventListener("click", () => {
-  renderMenu(products1, currentCategory, false);
-});
 
 const skeletonContainer = document.getElementById("menuSkeleton");
 
@@ -562,22 +523,24 @@ async function fetchInventory({
 
     const res = await fetch(
       `https://api.e3restaurant.com/get-available-inventory?${params.toString()}`,
-      {
-        credentials: "include" // IMPORTANT since you use middleware
-      }
+      { credentials: "include" }
     );
 
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "Failed to fetch inventory");
 
-    products1 = reset
-      ? data.success
-      : [...products1, ...data.success];
-
-    renderMenu(products1, "all", reset);
-    // renderMenu(products1, currentCategory, true);
+    // ✅ Reset or append
+    if (reset) {
+      products1 = data.success;
+      currentPage = 1;
+      renderMenu(products1, true);
+    } else {
+      products1 = [...products1, ...data.success];
+      renderMenu(data.success, false); // 🔥 ONLY render new items
+    }
 
     currentPage = data.pagination.CurrentPage;
+
     updateLoadMoreBtn(data.pagination);
 
   } catch (err) {
