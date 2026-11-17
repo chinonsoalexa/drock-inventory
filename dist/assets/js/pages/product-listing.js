@@ -210,7 +210,7 @@ function fetchInventory(page = 1) {
     limit: 15
   });
 
-  fetch(`https://api.e3restaurant.com/get-inventory?${params.toString()}`, {
+  fetch(`https://api.drockbar.com/get-inventory?${params.toString()}`, {
     credentials: "include"
   })
     .then(res => res.json())

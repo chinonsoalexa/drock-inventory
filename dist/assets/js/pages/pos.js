@@ -522,7 +522,7 @@ async function fetchInventory({
     if (toDate) params.append("to_date", toDate);
 
     const res = await fetch(
-      `https://api.e3restaurant.com/get-available-inventory?${params.toString()}`,
+      `https://api.drockbar.com/get-available-inventory?${params.toString()}`,
       { credentials: "include" }
     );
 
@@ -824,7 +824,7 @@ issueStockForm.addEventListener("submit", async e => {
     if (file) formData.append("image", file);
 
     // 🔹 Single API call
-    const res = await fetch("https://api.e3restaurant.com/issue-stock", {
+    const res = await fetch("https://api.drockbar.com/issue-stock", {
       credentials: "include",
       method: "POST",
       body: formData

@@ -131,7 +131,7 @@ async function fetchIssuedInventory(page = 1) {
 
   try {
     const res = await fetch(
-      `https://api.e3restaurant.com/get-issued-inventory-history?${query}`,
+      `https://api.drockbar.com/get-issued-inventory-history?${query}`,
       {
         method: "GET",
         credentials: "include", // 🔐 required for auth middleware

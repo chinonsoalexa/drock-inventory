@@ -3023,7 +3023,7 @@ saveBtn.addEventListener("click", async (e) => {
   setLoading(true); // 🔄 start loader
 
   try {
-    const res = await fetch("https://api.e3restaurant.com/create-inventory", {
+    const res = await fetch("https://api.drockbar.com/create-inventory", {
       credentials: "include",
       method: "POST",
       body: formData

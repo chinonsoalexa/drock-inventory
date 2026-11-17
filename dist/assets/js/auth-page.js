@@ -38,7 +38,7 @@ document.getElementById('logout-button').addEventListener('click', async functio
 
 async function logout() {
     // also send a request to the logout api endpoint
-    const apiUrl = "https://api.e3restaurant.com/log-out";
+    const apiUrl = "https://api.drockbar.com/log-out";
 
     const requestOptions = {
     method: "GET",
@@ -68,7 +68,7 @@ try {
 }
 
 async function check_auth_status() {
-    const apiUrl = "https://api.e3restaurant.com/user-auth-status";
+    const apiUrl = "https://api.drockbar.com/user-auth-status";
 
     const requestOptions = {
         method: "GET",
