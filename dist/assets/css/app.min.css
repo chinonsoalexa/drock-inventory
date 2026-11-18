@@ -23646,4 +23646,17 @@ p.no-span::after {
     }
 }
 
+.brand {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.brand-logo {
+    display: block;
+    width: 180px;
+    height: auto;
+    object-fit: contain;
+}
+
 /*# sourceMappingURL=app.min.css.map */
